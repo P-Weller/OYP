@@ -12,7 +12,7 @@
         android:layout_width="412dp"
         android:layout_height="85dp"
         android:background="@color/colorAccent"
-        android:text="Log In"
+        android:text="Login"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
@@ -48,7 +48,7 @@
         android:id="@+id/logIn2Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="Log in"
         tools:layout_editor_absoluteX="161dp"
         tools:layout_editor_absoluteY="387dp"
         tools:ignore="MissingConstraints" />
