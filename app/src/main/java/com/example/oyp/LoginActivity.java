@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +38,15 @@ public class LoginActivity extends AppCompatActivity {
         connectionClass = new ConnectionClass();
 
         progressDialog=new ProgressDialog(this);
+
+
+        logIn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dologin dologin=new Dologin();
+                dologin.execute();
+            }
+        });
     }
 
     private class Dologin extends AsyncTask<String,String,String> {
@@ -77,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
                         Statement stmt = con.createStatement();
-                        // stmt.executeUpdate(query);
+                            stmt.executeUpdate(query);
 
 
                         ResultSet rs=stmt.executeQuery(query);
