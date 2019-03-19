@@ -9,8 +9,8 @@ import android.widget.EditText;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText mNameEditText, passwordEditText;
-    Button logIn2Btn;
+    EditText mName, mPassword;
+    Button logIn2;
     ProgressDialog progressDialog;
     ConnectionClass connectionClass;
 
@@ -23,16 +23,14 @@ public class LoginActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        mNameEditText = (EditText) findViewById(R.id.name);
-        passwordEditText = (EditText) findViewById(R.id.pass);
-        logIn2Btn = (Button) findViewById(R.id.login);
+        mName = (EditText) findViewById(R.id.mNameEditText);
+        mPassword = (EditText) findViewById(R.id.passwordEditText);
+        logIn2 = (Button) findViewById(R.id.logIn2Btn);
 
         connectionClass = new ConnectionClass();
 
         progressDialog=new ProgressDialog(this);
-
-        BackgroundActivity bg = new BackgroundActivity();
-        bg.execute(MName, MPassword);
-
     }
+
+
 }
