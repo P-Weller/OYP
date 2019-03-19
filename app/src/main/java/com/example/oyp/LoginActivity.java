@@ -11,6 +11,8 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mNameEditText, passwordEditText;
     Button logIn2Btn;
+    ProgressDialog progressDialog;
+    ConnectionClass connectionClass;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
