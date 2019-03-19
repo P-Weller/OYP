@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ListView
+        android:layout_width="395dp"
+        android:layout_height="473dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <TextView
+        android:id="@+id/taskTextView"
+        android:layout_width="412dp"
+        android:layout_height="85dp"
+        android:background="@color/colorAccent"
+        android:text="Open Tasks"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/NavBar"
+        android:layout_width="412dp"
+        android:layout_height="85dp"
+        android:background="@color/colorAccent"
+        android:text="Users   Tasks   Activity   More"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="642dp" />
+
+</android.support.constraint.ConstraintLayout>

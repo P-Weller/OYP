@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/chooseUser2TextView"
+        android:layout_width="412dp"
+        android:layout_height="85dp"
+        android:background="@color/colorAccent"
+        android:text="Choose your user"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <ListView
+        android:layout_width="395dp"
+        android:layout_height="473dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <Button
+        android:id="@+id/chooseUserBtn"
+        android:layout_width="385dp"
+        android:layout_height="wrap_content"
+        android:text="Choose"
+        android:textAlignment="textEnd"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <Button
+        android:id="@+id/addUserBtn"
+        android:layout_width="415dp"
+        android:layout_height="58dp"
+        android:text="Add User"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="576dp" />
+
+</android.support.constraint.ConstraintLayout>
