@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="#1e9c9b9b"
-        android:textColorHint="#ffffff"
+        android:textColorHint="#000000"
         tools:ignore="MissingConstraints">
 
     <EditText
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="#1e9c9b9b"
-        android:textColorHint="#ffffff">
+        android:textColorHint="#000000">
 
     <EditText
         android:id="@+id/passwordEditText"
