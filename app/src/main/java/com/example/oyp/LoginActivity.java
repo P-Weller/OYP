@@ -79,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
             {
                 try {
                     Connection con = connectionClass.CONN();
+                    z = "Connection successful";
                     if (con == null) {
                         z = "Please check your internet connection";
                     } else {
