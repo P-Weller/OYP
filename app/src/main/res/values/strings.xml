@@ -7,4 +7,10 @@
     <string name="title_tasks">Tasks</string>
     <string name="title_activity">Activity</string>
     <string name="title_more">More</string>
+    <string name="login">Login</string>
+    <string name="household_name">Household name</string>
+    <string name="log_in">Log in</string>
+    <string name="password">Password</string>
+    <string name="title_activity_reportusers">reportusers</string>
+    <string name="report">Report</string>
 </resources>
