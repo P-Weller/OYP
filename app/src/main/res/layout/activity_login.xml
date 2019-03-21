@@ -1,80 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background1"
     android:orientation="vertical">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_margin="20dp"
-        >
+        android:background="@color/background1"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorAccent"
-            android:text="Login"
+            android:gravity="start"
+            android:text="@string/login"
             android:textAlignment="textStart"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:gravity="start" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="#1e9c9b9b"
-        android:textColorHint="#000000"
-        tools:ignore="MissingConstraints">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#1e9c9b9b"
+            android:textColorHint="#000000"
+            tools:ignore="MissingConstraints">
 
-    <EditText
-        android:id="@+id/mNameEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Household name"
-        android:singleLine="true"
-        android:inputType="textEmailAddress"
-        tools:ignore="MissingConstraints" />
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/mNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/household_name"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                tools:ignore="MissingConstraints"
+                tools:targetApi="o" />
+        </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:background="#1e9c9b9b"
-        android:textColorHint="#000000">
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#1e9c9b9b"
+            android:textColorHint="#000000">
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:singleLine="true" />
-    </android.support.design.widget.TextInputLayout>
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/passwordlogin"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                tools:targetApi="o" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/logIn2Btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Log in"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="387dp"
-        android:layout_marginTop="30dp"
-        android:background="#24c4b9"
-        tools:ignore="MissingConstraints" />
+        <Button
+            android:id="@+id/logIn2Btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#24c4b9"
+            android:text="@string/log_in"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="161dp"
+            tools:layout_editor_absoluteY="387dp" />
     </LinearLayout>
 </LinearLayout>
