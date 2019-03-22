@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorAccent"
+            android:fontFamily="monospace"
             android:gravity="start"
             android:text="@string/login"
             android:textAlignment="textStart"
@@ -34,35 +35,33 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#1e9c9b9b"
-            android:textColorHint="#000000"
-            tools:ignore="MissingConstraints">
+            style="@style/EditText">
 
             <EditText
                 android:id="@+id/mNameEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/household_name"
                 android:inputType="textEmailAddress"
-                android:singleLine="true"
                 tools:ignore="MissingConstraints"
                 tools:targetApi="o" />
+
         </android.support.design.widget.TextInputLayout>
+
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="#1e9c9b9b"
-            android:textColorHint="#000000">
+            style="@style/EditText">
 
             <EditText
                 android:id="@+id/passwordEditText"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/passwordlogin"
@@ -73,13 +72,17 @@
 
         <Button
             android:id="@+id/logIn2Btn"
+            style="@style/ButtonTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="#24c4b9"
+            android:clickable="true"
             android:text="@string/log_in"
+            android:textColor="@color/default_Button_Text"
+            android:textSize="18sp"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="161dp"
             tools:layout_editor_absoluteY="387dp" />
+
     </LinearLayout>
 </LinearLayout>
