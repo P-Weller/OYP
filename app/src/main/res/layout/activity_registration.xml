@@ -7,6 +7,22 @@
     android:background="@color/background1"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/registrationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:background="@color/colorAccent"
+        android:fontFamily="casual"
+        android:text="@string/new_registration"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,47 +31,33 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/registrationTextView"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorAccent"
-            android:text="@string/new_registration"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorPrimary"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_gravity="start"
-            />
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
 
             <RadioButton
                 android:id="@+id/male2RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:text="@string/male"
                 android:textSize="18sp"
+                style="@style/CheckboxTheme"
                 />
 
             <RadioButton
                 android:id="@+id/female2RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
                 android:text="@string/female"
                 android:textSize="18sp"
+                android:layout_marginLeft="50dp"
                 android:layout_toRightOf="@+id/male2RadioBtn"
                 tools:ignore="NotSibling"
                 android:layout_toEndOf="@+id/male2RadioBtn"
+                style="@style/CheckboxTheme"
                 />
 
         </RelativeLayout>
@@ -156,40 +158,16 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <RelativeLayout
+        <CheckBox
+            style="@style/CheckboxTheme"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <CheckBox
-                android:id="@+id/tAndCCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_toRightOf="@+id/tAndc2TextView"
-                android:layout_alignBaseline="@+id/tAndc2TextView"
-                android:layout_alignBottom="@+id/tAndc2TextView"
-                tools:ignore="InvalidId,UnknownId"
-                android:layout_toEndOf="@+id/tAndc2TextView" />
-
-            <TextView
+            android:layout_height="wrap_content"
+            android:text="I accept the terms and conditions"
 
 
-                android:id="@+id/tAndc2TextView"
-                android:layout_width="306dp"
-                android:layout_height="31dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/tandctextview"
-                android:textSize="18sp"
-                android:layout_marginLeft="25dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="I accept the Terms and Conditions"
-                tools:ignore="UnknownId"
-                 />
+            />
 
 
-        </RelativeLayout>
 
         <Button
             android:id="@+id/createAccountBtn"
