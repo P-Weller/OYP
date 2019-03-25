@@ -174,7 +174,7 @@ public class LoginActivity extends AppCompatActivity {
 
         try
         {
-            Class.forName("net.sorceforge.jtds.jdbc.Driver");
+            Class.forName("net.sourceforge.jtds.jdbc.Driver");
             ConnectionURL = "jdbc:jtds:sqlserver://"+server+"/"+database+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             connection = DriverManager.getConnection(ConnectionURL, user, password);
         }
