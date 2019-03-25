@@ -7,8 +7,22 @@
     <string name="title_tasks">Tasks</string>
     <string name="title_activity">Activity</string>
     <string name="title_more">More</string>
+    <string name="tandctextview">tAndCTextView</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="username">username</string>
+    <string name="household">household</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="new_registration">New Registration</string>
+    <string name="create_household">Create Household</string>
+    <string name="email">eMail</string>
+    <string name="login">Login</string>
+    <string name="household_name">Household name</string>
+    <string name="passwordlogin">Password</string>
+    <string name="log_in">Log in</string>
 
-// UserAnsicht Daten hinzufügen
+    // UserAnsicht Daten hinzufügen
     <string-array name="uNames">
         <item>Patricia</item>
         <item>Paul</item>

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#0DD4BF</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="background1">#E5F0F5F7</color>
+    <color name="default_Button_Background">#11C2DE</color>
+    <color name="default_white">#FFFFFF</color>
+    <color name="default_Button_Text">#3B4142</color>
+    <color name="default_EditText_Background">#1E9C9B9B</color>
+    <color name="default_black">#000000</color>
+    <color name="default_Hint_Color">#ABA8A8</color>
 </resources>

@@ -1,111 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/tAndC2TextView"
-        android:layout_width="306dp"
-        android:layout_height="31dp"
-        android:text="tAndCTextView"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="533dp"
-        tools:text="I accept the Terms and Conditions" />
-
-    <CheckBox
-        android:id="@+id/tAndC2CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="57dp"
-        tools:layout_editor_absoluteY="532dp" />
-
-    <EditText
-        android:id="@+id/password2EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="390dp" />
-
-    <EditText
-        android:id="@+id/password3EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="confirm password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="450dp" />
-
-    <EditText
-        android:id="@+id/addUser2EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="username"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="194dp" />
-
-    <EditText
-        android:id="@+id/householdnameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="household"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="262dp" />
-
-    <EditText
-        android:id="@+id/eMail2EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="eMail"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="99dp"
-        tools:layout_editor_absoluteY="324dp" />
-
-    <RadioButton
-        android:id="@+id/male2RadioBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Male"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="107dp" />
-
-    <RadioButton
-        android:id="@+id/female2RadioBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Female"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="212dp"
-        tools:layout_editor_absoluteY="107dp" />
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/registrationTextView"
-        android:layout_width="412dp"
-        android:layout_height="85dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
         android:background="@color/colorAccent"
-        android:text="New Registration"
+        android:fontFamily="casual"
+        android:text="@string/new_registration"
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/createAccountBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Household Motherfucker"
-        tools:layout_editor_absoluteX="70dp"
-        tools:layout_editor_absoluteY="607dp" />
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/background1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <RadioButton
+                android:id="@+id/male2RadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/male"
+                android:textSize="18sp"
+                style="@style/CheckboxTheme"
+                />
+
+            <RadioButton
+                android:id="@+id/female2RadioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female"
+                android:textSize="18sp"
+                android:layout_marginLeft="50dp"
+                android:layout_toRightOf="@+id/male2RadioBtn"
+                tools:ignore="NotSibling"
+                android:layout_toEndOf="@+id/male2RadioBtn"
+                style="@style/CheckboxTheme"
+                />
+
+        </RelativeLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/uNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/username"
+                android:inputType="textPersonName"
+                tools:targetApi="o" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/mName2EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/household"
+                android:inputType="textPersonName"
+                tools:targetApi="o" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/eMailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                tools:targetApi="o" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/password2EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                tools:targetApi="o" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/password3EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/confirm_password"
+                android:inputType="textPassword"
+                tools:targetApi="o" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <CheckBox
+            style="@style/CheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="I accept the terms and conditions"
+
+
+            />
+
+
+
+        <Button
+            android:id="@+id/createAccountBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:background="#24c4b9"
+            android:text="@string/create_household"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tAndc2TextView" />
+
+
+    </LinearLayout>
+</LinearLayout>

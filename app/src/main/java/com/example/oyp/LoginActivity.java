@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -12,7 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,6 +25,9 @@ public class LoginActivity extends AppCompatActivity {
     Button logIn2;
     ProgressDialog progressDialog;
     ConnectionClass connectionClass;
+
+    Connection conn;
+    String un,pass,db,ip;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +42,16 @@ public class LoginActivity extends AppCompatActivity {
         mPassword = (EditText) findViewById(R.id.passwordEditText);
         logIn2 = (Button) findViewById(R.id.logIn2Btn);
 
+
+
         connectionClass = new ConnectionClass();
 
         progressDialog=new ProgressDialog(this);
+
+        ip = "192.168.1.164";
+        db = "oyp_database";
+        un = "root";
+        pass = "pass";
 
 
         logIn2.setOnClickListener(new View.OnClickListener() {
@@ -78,16 +92,16 @@ public class LoginActivity extends AppCompatActivity {
             else
             {
                 try {
-                    Connection con = connectionClass.CONN();
+                    conn = connectionclass(un, pass, db, ip);
                     z = "Connection successful";
-                    if (con == null) {
+                    if (conn == null) {
                         z = "Please check your internet connection";
                     } else {
 
                         String query=" select * from master where mName='"+namestr+"' and mPassword = '"+passstr+"'";
 
 
-                        Statement stmt = con.createStatement();
+                        Statement stmt = conn.createStatement();
                             stmt.executeUpdate(query);
 
 
@@ -150,5 +164,27 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.hide();
 
         }
+    }
+
+    public Connection connectionclass(String user, String password, String database, String server){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String ConnectionURL = null;
+
+        try
+        {
+            Class.forName("net.sorceforge.jtds.jdbc.Driver");
+            ConnectionURL = "jdbc:jtds:sqlserver://"+server+"/"+database+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            connection = DriverManager.getConnection(ConnectionURL, user, password);
+        }
+        catch (SQLException se){
+            Log.e("error here 1 : ", se.getMessage());
+        } catch (ClassNotFoundException e){
+            Log.e("error here 2 : ", e.getMessage());
+        } catch (Exception e){
+            Log.e("error here 3 : ", e.getMessage());
+        }
+        return connection;
     }
 }
