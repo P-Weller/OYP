@@ -77,10 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-
             progressDialog.setMessage("Loading...");
             progressDialog.show();
-
 
             super.onPreExecute();
         }
@@ -92,6 +90,10 @@ public class LoginActivity extends AppCompatActivity {
             else
             {
                 try {
+                    System.out.println(un);
+                    System.out.println(pass);
+                    System.out.println(db);
+                    System.out.println(ip);
                     conn = connectionclass(un, pass, db, ip);
                     z = "Connection successful";
                     if (conn == null) {
@@ -175,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
         try
         {
             Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnectionURL = "jdbc:jtds:sqlserver://"+server+"/"+database+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            ConnectionURL = "jdbc:jtds:sqlserver://"+server+":3306/"+database+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
             connection = DriverManager.getConnection(ConnectionURL, user, password);
         }
         catch (SQLException se){
