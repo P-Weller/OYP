@@ -12,8 +12,6 @@
     <string name="confirm_password">confirm password</string>
     <string name="username">username</string>
     <string name="household">household</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
     <string name="new_registration">New Registration</string>
     <string name="create_household">Create Household</string>
     <string name="email">eMail</string>
@@ -21,6 +19,15 @@
     <string name="household_name">Household name</string>
     <string name="passwordlogin">Password</string>
     <string name="log_in">Log in</string>
+    <string name="add_new_user">Add new user</string>
+    <string name="create_user">Create User</string>
+    <string name="female">Female</string>
+    <string name="add_user">add user</string>
+    <string name="choose_your_user">Choose your user</string>
+    <string name="create_new_user">Create new user</string>
+    <string name="welcome_home">Welcome Home</string>
+    <string name="open_tasks">Open tasks</string>
+    <string name="show_me_closed_tasks">Show me closed tasks</string>
 
     // UserAnsicht Daten hinzufügen
     <string-array name="uNames">
