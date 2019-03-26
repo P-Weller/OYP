@@ -11,9 +11,9 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="50dp"
         android:background="@color/colorAccent"
-        android:fontFamily="monospace"
+        android:fontFamily="casual"
         android:gravity="start"
         android:text="@string/login"
         android:textAlignment="textStart"
@@ -37,6 +37,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             style="@style/EditText">
 
             <EditText
@@ -57,6 +58,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             style="@style/EditText">
 
             <EditText
@@ -75,16 +77,15 @@
         <Button
             android:id="@+id/logIn2Btn"
             style="@style/ButtonTheme"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:clickable="true"
             android:text="@string/log_in"
             android:textColor="@color/default_Button_Text"
             android:textSize="18sp"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="161dp"
-            tools:layout_editor_absoluteY="387dp" />
+
+            />
 
     </LinearLayout>
 </LinearLayout>

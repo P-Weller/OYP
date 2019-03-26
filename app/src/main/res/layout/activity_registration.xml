@@ -42,9 +42,11 @@
                 android:id="@+id/male2RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/male"
+                android:text="male"
+                android:fontFamily="casual"
                 android:textSize="18sp"
-                style="@style/CheckboxTheme"
+
+
                 />
 
             <RadioButton
@@ -52,12 +54,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
-                android:textSize="18sp"
                 android:layout_marginLeft="50dp"
                 android:layout_toRightOf="@+id/male2RadioBtn"
                 tools:ignore="NotSibling"
                 android:layout_toEndOf="@+id/male2RadioBtn"
-                style="@style/CheckboxTheme"
+                android:fontFamily="casual"
+                android:textSize="18sp"
+
+
                 />
 
         </RelativeLayout>
@@ -158,15 +162,15 @@
 
         </android.support.design.widget.TextInputLayout>
 
+
         <CheckBox
-            style="@style/CheckboxTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="casual"
+            android:textSize="14sp"
             android:text="I accept the terms and conditions"
-
-
             />
-
 
 
         <Button
@@ -175,11 +179,10 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
-            android:background="#24c4b9"
             android:text="@string/create_household"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tAndc2TextView" />
+             />
 
 
     </LinearLayout>
