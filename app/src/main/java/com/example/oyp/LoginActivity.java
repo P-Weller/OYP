@@ -1,6 +1,5 @@
 package com.example.oyp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mName, mPassword;
     Button logIn2;
-    ProgressDialog progressDialog;
+    ProgressBar progressBar;
     ConnectionClass connectionClass;
 
     Connection conn;
@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
         connectionClass = new ConnectionClass();
 
-        progressDialog=new ProgressDialog(this);
+        progressBar=new ProgressBar(this);
 
         ip = "192.168.1.164";
         db = "oyp_database";
@@ -77,8 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-            progressDialog.setMessage("Loading...");
-            progressDialog.show();
+            progressBar.setVisibility(View.VISIBLE);
 
             super.onPreExecute();
         }
@@ -95,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         z = "Please check your internet connection";
                     } else {
 
-                        String query=" select * from household where hName='"+namestr+"' and hPassword = '"+passstr+"'";
+                        String query=" select * from household where HName='"+namestr+"' and HPassword = '"+passstr+"'";
 
 
                         Statement stmt = conn.createStatement();
@@ -157,9 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-
-            progressDialog.hide();
-
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 
