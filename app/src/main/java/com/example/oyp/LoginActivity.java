@@ -90,17 +90,12 @@ public class LoginActivity extends AppCompatActivity {
             else
             {
                 try {
-                    System.out.println(un);
-                    System.out.println(pass);
-                    System.out.println(db);
-                    System.out.println(ip);
                     conn = connectionclass(un, pass, db, ip);
-                    z = "Connection successful";
                     if (conn == null) {
                         z = "Please check your internet connection";
                     } else {
 
-                        String query=" select * from master where mName='"+namestr+"' and mPassword = '"+passstr+"'";
+                        String query=" select * from household where hName='"+namestr+"' and hPassword = '"+passstr+"'";
 
 
                         Statement stmt = conn.createStatement();
