@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         z = "Please check your internet connection";
                     } else {
 
-                        String query=" insert into testi values ('"+namestr+"', '"+passstr+"')";
+                        String query=" SELECT HName, HPassword FROM household WHERE HName = '"+namestr+"' AND HPassword = '"+passstr+"'";
 
 
                         Statement stmt = conn.createStatement();
@@ -106,8 +106,8 @@ public class LoginActivity extends AppCompatActivity {
                         while (rs.next())
 
                         {
-                            nm= rs.getString(2);
-                            password=rs.getString(3);
+                            nm= rs.getString(1);
+                            password=rs.getString(2);
 
 
 
