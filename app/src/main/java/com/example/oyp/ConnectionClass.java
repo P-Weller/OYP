@@ -9,9 +9,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionClass {
-    String classs = "com.mysql.jdbc.Driver";
+    String classs = "org.mariadb.jdbc.Driver";
 
-    String url = "jdbc:mysql://192.168.1.164/oyp_database";
+    String url = "jdbc:mariadb://localhost:3306/oyp_database";
     String user = "root";
     String password = "pass";
 

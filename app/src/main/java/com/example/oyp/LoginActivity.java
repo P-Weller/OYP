@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                         z = "Please check your internet connection";
                     } else {
 
-                        String query=" select * from household where HName='"+namestr+"' and HPassword = '"+passstr+"'";
+                        String query=" insert into testi values ('"+namestr+"', '"+passstr+"')";
 
 
                         Statement stmt = conn.createStatement();
@@ -168,8 +168,8 @@ public class LoginActivity extends AppCompatActivity {
 
         try
         {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnectionURL = "jdbc:jtds:sqlserver://"+server+":3306/"+database+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            Class.forName("org.mariadb.jdbc.Driver");
+            ConnectionURL = "jdbc:mariadb://"+server+"/"+database;
             connection = DriverManager.getConnection(ConnectionURL, user, password);
         }
         catch (SQLException se){
