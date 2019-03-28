@@ -53,7 +53,7 @@
                 android:id="@+id/female2RadioBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/female"
+                android:text="female"
                 android:layout_marginLeft="50dp"
                 android:layout_toRightOf="@+id/male2RadioBtn"
                 tools:ignore="NotSibling"
