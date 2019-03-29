@@ -92,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
                     conn = connectionclass(un, pass, db, ip);
                     if (conn == null) {
                         z = "Please check your internet connection";
-                    } else {
+                    }
+                    else {
 
                         String query=" SELECT HName, HPassword FROM household WHERE HName = '"+namestr+"' AND HPassword = '"+passstr+"'";
 
@@ -120,12 +121,12 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
 
-                            else
+                            else {
+                                isSuccess = false;
+                                z = "nöööööö";
 
-                                isSuccess=false;
 
-
-
+                            }
                         }
 
 
