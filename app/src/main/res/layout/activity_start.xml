@@ -8,30 +8,10 @@
     android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/StartTextView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorAccent"
-        android:fontFamily="casual"
-        android:gravity="start"
-        android:text="Let's get started"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingStart="15dp"
-        />
-
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="264dp"
-
-
         android:background="@drawable/living" />
 
     <LinearLayout

@@ -35,58 +35,7 @@
 
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp">
 
-            <RadioButton
-                android:id="@+id/male2RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="male"
-                android:fontFamily="casual"
-                android:textSize="18sp"
-
-
-                />
-
-            <RadioButton
-                android:id="@+id/female2RadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="female"
-                android:layout_marginLeft="50dp"
-                android:layout_toRightOf="@+id/male2RadioBtn"
-                tools:ignore="NotSibling"
-                android:layout_toEndOf="@+id/male2RadioBtn"
-                android:fontFamily="casual"
-                android:textSize="18sp"
-
-
-                />
-
-        </RelativeLayout>
-
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            style="@style/EditText">
-
-            <EditText
-                android:id="@+id/uNameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/username"
-                android:inputType="textPersonName"
-                tools:targetApi="o" />
-
-
-        </android.support.design.widget.TextInputLayout>
 
 
         <android.support.design.widget.TextInputLayout
