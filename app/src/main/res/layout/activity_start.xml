@@ -1,22 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/StartTextView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorAccent"
+        android:fontFamily="casual"
+        android:gravity="start"
+        android:text="Let's get started"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingStart="15dp"
+        />
+
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
 
 
-        />
+        android:background="@drawable/living" />
 
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:background="@color/background1"
+        android:gravity="center"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/appstartTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="casual"
+            android:text="Organise your place"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
 
+        <Button
+            android:id="@+id/StartsignupBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            android:text="Sign up"
+            android:textColor="@color/default_Button_Text"
+            android:textSize="18sp"
 
-        />
+            />
 
+        <Button
+            android:id="@+id/StartloginBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:clickable="true"
+            android:text="@string/log_in"
+            android:textColor="@color/default_Button_Text"
+            android:textSize="18sp"
+
+            />
+
+    </LinearLayout>
 </LinearLayout>

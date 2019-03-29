@@ -25,7 +25,10 @@
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:paddingStart="15dp"
+
+            />
 
         <ListView
             android:layout_width="match_parent"
@@ -43,6 +46,8 @@
             android:textSize="18sp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/ShowclosedtaskBtn"
 
             />
 
