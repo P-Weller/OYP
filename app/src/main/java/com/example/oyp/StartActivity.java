@@ -62,8 +62,19 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+        });
+
+        signupbtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (StartActivity.this, RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
+
+            }
 
 
             /*
@@ -81,7 +92,6 @@ public class StartActivity extends AppCompatActivity {
 
 
 
-        });
 
     }
 
@@ -90,4 +100,4 @@ public class StartActivity extends AppCompatActivity {
 
 
 
-}
+
