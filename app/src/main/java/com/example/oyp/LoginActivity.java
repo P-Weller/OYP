@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
 
-                        String query=" SELECT HName, HPassword FROM household WHERE HName = '"+namestr+"' AND HPassword = '"+passstr+"'";
+                        String query= "SELECT HName, HPassword FROM household WHERE HName = '"+namestr+"' AND HPassword = '"+passstr+"'";
 
 
                         Statement stmt = conn.createStatement();
@@ -111,28 +111,17 @@ public class LoginActivity extends AppCompatActivity {
                             password=rs.getString(2);
 
 
-
-
                             if(nm.equals(namestr)&&password.equals(passstr))
-                            {
 
+                            {
                                 isSuccess=true;
                                 z = "Login successful";
 
                             }
-
                             else {
                                 isSuccess = false;
-                                z = "nöööööö";
-
-
                             }
                         }
-
-
-
-
-
                     }
                 }
                 catch (Exception ex)
