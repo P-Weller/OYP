@@ -12,11 +12,10 @@
         android:id="@+id/chooseUser2TextView2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorAccent"
+        style="@style/TextviewTheme"
         android:text="@string/add_new_user"
         android:fontFamily="casual"
         android:textAlignment="textStart"
-        android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
         android:paddingStart="15dp"
@@ -83,10 +82,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:clickable="true"
-            android:text="@string/add_user"
+            android:text="Add user"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/cancelcreateUserBtn"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/cancel_background"
+            android:fontFamily="casual"
+            android:textColor="@color/default_white"
+            android:textStyle="bold"
+            android:clickable="true"
+            android:text="Cancel"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 

@@ -14,32 +14,7 @@ public class StartActivity extends AppCompatActivity {
     Button signupbtn;
     Button loginbtn;
 
-    /*
 
-    public void onCreate(Bundle savedInstanceState){
-
-        super.onCreate(savedInstanceState);
-
-        //Get the view from activity_start.xml
-        setContentView(R.layout.activity_start);
-
-        //Locate the button in activity_start.xml
-        signupbtn = (Button) findViewById(R.id.StartsignupBtn);
-
-        //Capture button clicks
-        signupbtn.setOnClickListener(new View.OnClickListener(){
-
-            public void onClick(View v){
-
-                //Start LoginActivity.class
-                Intent intent = new Intent(StartActivity.this,RegistrationActivity.class);
-                startActivity(intent);
-
-            }
-        });
-    }
-
-    */
 
     public void onCreate(Bundle savedInstanceState){
 
@@ -62,36 +37,17 @@ public class StartActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
+
+
+
+
+
+
+
+
+
         });
-
-        signupbtn.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (StartActivity.this, RegistrationActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-            }
-
-
-            /*
-            signupbtn.setOnClickListener(new View.OnClickListener(){
-
-                public void OnClick(View v2){
-                    //Start blablabla
-                    Intent intent = new Intent(StartActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                }
-            }*/
-
-
-
-
-
-
 
     }
 
@@ -100,4 +56,4 @@ public class StartActivity extends AppCompatActivity {
 
 
 
-
+}

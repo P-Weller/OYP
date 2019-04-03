@@ -5,25 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background1"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
 
     <TextView
         android:id="@+id/textView"
+        style="@style/TextviewTheme"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/colorAccent"
         android:fontFamily="casual"
         android:gravity="start"
         android:text="@string/login"
         android:textAlignment="textStart"
-        android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingStart="15dp"
         />
 
     <LinearLayout
@@ -79,12 +78,10 @@
         <Button
             android:id="@+id/logIn2Btn"
             style="@style/ButtonTheme"
-            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:clickable="true"
             android:text="@string/log_in"
-            android:textColor="@color/default_Button_Text"
             android:textSize="18sp"
 
             />

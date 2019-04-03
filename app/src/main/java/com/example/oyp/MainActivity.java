@@ -9,13 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemReselectedListener {
+import com.example.oyp.Fragments.ActivityFragment;
+import com.example.oyp.Fragments.MoreFragment;
+import com.example.oyp.Fragments.TasksFragment;
+import com.example.oyp.Fragments.UsersFragment;
 
-    // ListView variablen erstellen
-        ListView userListView;
-        String[] uNames;
-        String[] uPoints;
-
+public class MainActivity extends AppCompatActivity {
 
 
     @Override
@@ -23,77 +22,47 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loadFragment(new TasksFragment());
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.setSelectedItemId(R.id.navigation);
+        BottomNavigationView bottomNav = findViewById(R.id.navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        bottomNav.setSelectedItemId(R.id.navigation);
 
-        /*
-         * Test Kommentar
-
-         */
-
-
-        // ListView UserAnsicht
-
-        Resources res = getResources();
-        userListView = (ListView) findViewById(R.id.userListView);
-        uNames = res.getStringArray(R.array.uNames);
-        uPoints = res.getStringArray(R.array.uPoints);
-
-        uNamesAdapter uNamesAdapter = new uNamesAdapter(this, uNames, uPoints);
-        userListView.setAdapter(uNamesAdapter);
-
-
-        // userListView.setAdapter(new ArrayAdapter<String>(this, R.layout.user_list_view_detail, uNames));
-
-
-
-
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                new TasksFragment()).commit();
 
     }
 
-    private boolean loadFragment(Fragment fragment){
-        if(fragment != null){
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
 
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
+                    switch (item.getItemId()) {
+                        case R.id.navigation_tasks:
+                            selectedFragment = new TasksFragment();
+                            break;
+                        case R.id.navigation_activity:
+                            selectedFragment = new ActivityFragment();
+                            break;
+                        case R.id.navigation_more:
+                            selectedFragment = new MoreFragment();
+                            break;
+                        case R.id.navigation_users:
+                            selectedFragment = new UsersFragment();
+                            break;
+                    }
 
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            selectedFragment).commit();
 
-            return true;
-        }
-        return false;
-    }
+                    return true;
+                }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        Fragment fragment = null;
-
-        switch(item.getItemId()) {
-
-            case R.id.navigation_tasks:
-                fragment = new TasksFragment();
-                break;
-            case R.id.navigation_activity:
-                fragment = new ActivityFragment();
-                break;
-            case R.id.navigation_more:
-                fragment = new MoreFragment();
-                break;
-            case R.id.navigation_users:
-                fragment = new UsersFragment();
-                break;
-
-        }
-
-        return loadFragment(fragment);
-    }
-
-
-    public void onNavigationItemReselected(@NonNull MenuItem item) {
-    }
+            };
 }
+
+
+
+
+

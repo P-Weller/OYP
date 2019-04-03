@@ -9,20 +9,18 @@
 
     <TextView
         android:id="@+id/registrationTextView"
+        style="@style/TextviewTheme"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_gravity="start"
-        android:background="@color/colorAccent"
         android:fontFamily="casual"
         android:text="@string/new_registration"
         android:textAlignment="textStart"
-        android:textColor="@color/colorPrimary"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:paddingStart="15dp"
         />
 
     <LinearLayout
