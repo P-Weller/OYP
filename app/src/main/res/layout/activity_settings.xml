@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/settings"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:text="Settings"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditText"
+            >
+
+            <EditText
+                android:id="@+id/householdEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:targetApi="o"
+                android:hint="household"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="change householdname"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/changehouseholdname"
+
+
+            />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditText"
+            >
+
+            <EditText
+                android:id="@+id/changeeMailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:targetApi="o"
+                android:hint="email"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="change email"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/changeemail"
+
+
+            />
+
+
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="change password"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/changepassword"
+
+
+            />
+
+        <Button
+            android:layout_height="wrap_content"
+            android:layout_width="280dp"
+            android:text="Logout and change household"
+            android:fontFamily="casual"
+            android:background="@color/cancel_background"
+            android:textColor="@color/default_white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/logoutBtn"
+            android:textAllCaps="false"
+
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/default_Button_Background"
+        app:itemIconTint="#ffffff"
+        app:itemTextColor="#ffffff"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/navigation" />
+
+
+
+</android.support.constraint.ConstraintLayout>

@@ -30,6 +30,8 @@
     <string name="welcome_home">Welcome Home</string>
     <string name="open_tasks">Open tasks</string>
     <string name="show_me_closed_tasks">Show me closed tasks</string>
+    <string name="create_task">Create task</string>
+    <string name="create_task2">Create Task</string>
 
     // UserAnsicht Daten hinzufügen
     <string-array name="uNames">

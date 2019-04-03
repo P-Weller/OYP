@@ -15,38 +15,41 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/closedtask"
+            android:id="@+id/help"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
-            android:text="Closed tasks"
+            android:text="Help"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold"
             android:paddingStart="15dp"
             />
 
-        <ListView
+
+
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="550dp"
-            android:background="@color/default_white"
-
-            />
-
-        <Button
-            android:layout_height="wrap_content"
-            style="@style/ButtonTheme"
-            android:text="show me open tasks"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
+            android:layout_height="250dp"
+            style="@style/TextviewTheme"
+            android:id="@+id/helpTextView"
+            android:layout_marginTop="100dp"
+            android:text="Zu Risiken und Nebenwirkungen lesen Sie die Packungsbeilage oder fragen Sie Ihren Arzt oder Apotheker!"
             android:layout_gravity="center"
-            android:clickable="true"
-            android:id="@+id/ShowopentaskBtn"
-
+            android:fontFamily="casual"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
             />
+
+
+
+
+
+
 
     </LinearLayout>
 

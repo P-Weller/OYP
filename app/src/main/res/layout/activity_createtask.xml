@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/createTaskTextView"
+        style="@style/TextviewTheme"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="start"
+        android:fontFamily="casual"
+        android:text="Create Task"
+        android:textAlignment="textStart"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@color/background1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/createTaskEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_help_outline_black_24dp"
+                android:drawableLeft="@drawable/ic_help_outline_black_24dp"
+                android:drawablePadding="10dp"
+
+                android:ems="10"
+                android:hint="What?"
+                android:inputType="textPersonName"
+                tools:targetApi="o" />
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/personEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Person?"
+                android:inputType="number"
+                tools:targetApi="o"
+
+                android:drawableStart="@drawable/ic_person_add_black_24dp"
+                android:drawableLeft="@drawable/ic_person_add_black_24dp"
+                android:drawablePadding="10dp"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/dateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="When?"
+                android:inputType="date"
+                tools:targetApi="o"
+
+                android:drawableStart="@drawable/ic_access_time_black_32dp"
+                android:drawableLeft="@drawable/ic_access_time_black_32dp"
+                android:drawablePadding="10dp"/>
+
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/repeatEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Repeat?"
+                android:inputType="number"
+                tools:targetApi="o"
+
+                android:drawableStart="@drawable/ic_loop_black_32dp"
+                android:drawableLeft="@drawable/ic_loop_black_32dp"
+                android:drawablePadding="10dp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/taskpointsEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Points?"
+                android:inputType="number"
+                tools:targetApi="o"
+
+                android:drawableStart="@drawable/ic_attach_money_black_32dp"
+                android:drawableLeft="@drawable/ic_attach_money_black_32dp"
+                android:drawablePadding="10dp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            style="@style/EditText">
+
+            <EditText
+                android:id="@+id/colorEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="Color?"
+                android:inputType="number"
+                tools:targetApi="o"
+
+                android:drawableStart="@drawable/ic_color_lens_black_32dp"
+                android:drawableLeft="@drawable/ic_color_lens_black_32dp"
+                android:drawablePadding="10dp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/createTaskBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="Create Task"
+            android:clickable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            />
+
+        <Button
+            android:id="@+id/cancelcreateTaskBtn"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/cancel_background"
+            android:clickable="true"
+            android:fontFamily="casual"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/default_white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

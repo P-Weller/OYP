@@ -23,7 +23,19 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/appstartTextView"
+            android:id="@+id/appstart1TextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="casual"
+            android:text="Welcome to"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/appstart2TextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:fontFamily="casual"
@@ -37,12 +49,10 @@
         <Button
             android:id="@+id/StartsignupBtn"
             style="@style/ButtonTheme"
-            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:clickable="true"
             android:text="Sign up"
-            android:textColor="@color/default_Button_Text"
             android:textSize="18sp"
 
             />
@@ -50,12 +60,10 @@
         <Button
             android:id="@+id/StartloginBtn"
             style="@style/ButtonTheme"
-            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:clickable="true"
             android:text="@string/log_in"
-            android:textColor="@color/default_Button_Text"
             android:textSize="18sp"
 
             />

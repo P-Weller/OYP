@@ -15,37 +15,77 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/closedtask"
+            android:id="@+id/more"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
-            android:text="Closed tasks"
+            android:text="More"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold"
             android:paddingStart="15dp"
             />
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="550dp"
-            android:background="@color/default_white"
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="Settings"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/settingsBtn"
+
+            android:drawableStart="@drawable/ic_settings_black_32dp"
 
             />
 
         <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
-            android:text="show me open tasks"
+            android:text="Notifications"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:clickable="true"
-            android:id="@+id/ShowopentaskBtn"
+            android:id="@+id/notificationsBtn"
 
+            android:drawableStart="@drawable/ic_notifications_white_32dp"
+
+            />
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="Help"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/helpBtn"
+
+            android:drawableStart="@drawable/ic_help_white_32dp"
+
+            />
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="Logout"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/logoutBtn"
+
+            android:drawableStart="@drawable/ic_exit_to_app_white_32dp"
             />
 
     </LinearLayout>
