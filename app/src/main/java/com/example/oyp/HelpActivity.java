@@ -10,7 +10,7 @@ public class HelpActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        //Get the view from activity_createtask.xml
+        //Get the view from activity_help.xml
         setContentView(R.layout.activity_help);
 
 
