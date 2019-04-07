@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.example.oyp.Fragments.ActivityFragment;
+import com.example.oyp.Fragments.CreateTaskFragment;
 import com.example.oyp.Fragments.MoreFragment;
 import com.example.oyp.Fragments.TasksFragment;
 import com.example.oyp.Fragments.UsersFragment;
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                             break;
                         case R.id.navigation_activity:
                             selectedFragment = new ActivityFragment();
+                            break;
+                        case R.id.navigation_createTask:
+                            selectedFragment = new CreateTaskFragment();
                             break;
                         case R.id.navigation_more:
                             selectedFragment = new MoreFragment();
