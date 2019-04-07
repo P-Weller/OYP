@@ -1,6 +1,5 @@
 package com.example.oyp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mName, mPassword;
     Button logIn2;
-    ProgressDialog progressDialog;
+    ProgressBar progressBar;
     ConnectionClass connectionClass;
 
     Connection conn;
@@ -39,14 +39,14 @@ public class LoginActivity extends AppCompatActivity {
 
 
         mName = (EditText) findViewById(R.id.mNameEditText);
-        mPassword = (EditText) findViewById(R.id.passwordEditText);
+        mPassword = (EditText) findViewById(R.id.mPasswordEditText);
         logIn2 = (Button) findViewById(R.id.logIn2Btn);
 
 
 
         connectionClass = new ConnectionClass();
 
-        progressDialog=new ProgressDialog(this);
+        progressBar=new ProgressBar(this);
 
         ip = "192.168.1.164";
         db = "oyp_database";
@@ -77,8 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-            progressDialog.setMessage("Loading...");
-            progressDialog.show();
+            progressBar.setVisibility(View.VISIBLE);
 
             super.onPreExecute();
         }
@@ -90,17 +89,13 @@ public class LoginActivity extends AppCompatActivity {
             else
             {
                 try {
-                    System.out.println(un);
-                    System.out.println(pass);
-                    System.out.println(db);
-                    System.out.println(ip);
                     conn = connectionclass(un, pass, db, ip);
-                    z = "Connection successful";
                     if (conn == null) {
                         z = "Please check your internet connection";
-                    } else {
+                    }
+                    else {
 
-                        String query=" select * from master where mName='"+namestr+"' and mPassword = '"+passstr+"'";
+                        String query= "SELECT HName, HPassword FROM household WHERE HName = '"+namestr+"' AND HPassword = '"+passstr+"'";
 
 
                         Statement stmt = conn.createStatement();
@@ -112,32 +107,21 @@ public class LoginActivity extends AppCompatActivity {
                         while (rs.next())
 
                         {
-                            nm= rs.getString(2);
-                            password=rs.getString(3);
-
-
+                            nm= rs.getString(1);
+                            password=rs.getString(2);
 
 
                             if(nm.equals(namestr)&&password.equals(passstr))
-                            {
 
+                            {
                                 isSuccess=true;
                                 z = "Login successful";
 
                             }
-
-                            else
-
-                                isSuccess=false;
-
-
-
+                            else {
+                                isSuccess = false;
+                            }
                         }
-
-
-
-
-
                     }
                 }
                 catch (Exception ex)
@@ -162,9 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
 
-
-            progressDialog.hide();
-
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -176,8 +158,8 @@ public class LoginActivity extends AppCompatActivity {
 
         try
         {
-            Class.forName("net.sourceforge.jtds.jdbc.Driver");
-            ConnectionURL = "jdbc:jtds:sqlserver://"+server+":3306/"+database+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+            Class.forName("org.mariadb.jdbc.Driver");
+            ConnectionURL = "jdbc:mariadb://"+server+"/"+database;
             connection = DriverManager.getConnection(ConnectionURL, user, password);
         }
         catch (SQLException se){

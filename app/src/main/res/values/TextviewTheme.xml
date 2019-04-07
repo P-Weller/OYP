@@ -6,6 +6,10 @@
 
         <item name="android:fontFamily">casual></item>
         <item name="android:textSize">18sp</item>
+        <item name="android:background">@color/default_Button_Background</item>
+        <item name="android:textColor">@color/default_white</item>
+        <item name="android:paddingStart">15dp</item>
+
 
     </style>
 

@@ -18,7 +18,9 @@
         android:textAlignment="textStart"
         android:textColor="@color/colorPrimary"
         android:textSize="30sp"
-        android:textStyle="bold">
+        android:textStyle="bold"
+        android:paddingStart="15dp"
+        >
 
     </TextView>
 

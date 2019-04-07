@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+
+
     <item
         android:id="@+id/navigation_users"
         android:icon="@drawable/ic_baseline_people_24px"
-        android:title="@string/title_users" />
+        android:title="@string/title_users"
+        android:actionLayout="@layout/fragment_users"
+
+        />
 
     <item
         android:id="@+id/navigation_tasks"
         android:icon="@drawable/ic_baseline_event_note_24px"
-        android:title="@string/title_tasks" />
+        android:title="@string/title_tasks"
+        android:actionLayout="@layout/fragment_tasks"/>
 
     <item
         android:id="@+id/navigation_activity"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_activity" />
+        android:title="@string/title_activity"
+        android:actionLayout="@layout/fragment_activity"/>
 
     <item
         android:id="@+id/navigation_more"
         android:icon="@drawable/ic_baseline_more_horiz_24px_1"
-        android:title="@string/title_more" />
+        android:title="@string/title_more"
+        android:actionLayout="@layout/fragment_more"/>
+
+
 
 </menu>
 

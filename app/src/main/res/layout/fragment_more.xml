@@ -10,6 +10,8 @@
     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
     android:text = "More"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
+    android:layout_height="wrap_content"
+    android:fontFamily="casual"
+    />
 
 </RelativeLayout>

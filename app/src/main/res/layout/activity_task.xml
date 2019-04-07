@@ -15,34 +15,36 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-        android:id="@+id/opentask"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        android:background="@color/colorAccent"
-        android:fontFamily="casual"
-        android:text="@string/open_tasks"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
-        android:textStyle="bold"/>
+            android:id="@+id/opentask"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:text="Open tasks"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="550dp"
-            android:layout_marginStart="@id/chooseUserTextView"
             android:background="@color/default_white"
 
-         />
+            />
 
         <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
-            android:text="@string/show_me_closed_tasks"
+            android:text="show me closed tasks"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/ShowopentaskBtn"
 
             />
 
