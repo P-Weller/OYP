@@ -7,18 +7,24 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class uNamesAdapter extends BaseAdapter {
+public class UnamesAdapter extends BaseAdapter {
 
-    LayoutInflater mInflater;
+    LayoutInflater mInflator;
     String[] uNames;
     String[] uPoints;
+    String[] count;
 
-    public uNamesAdapter(Context c, String[] u, String[] p){
-        uNames = u;
-        uPoints = p;
-        mInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    public UnamesAdapter(){
+
     }
 
+    public UnamesAdapter(Context c, String[] u, String [] p, String[] zahl){
+        uNames = u;
+        uPoints = p;
+        count = zahl;
+        mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+    }
 
     @Override
     public int getCount() {
@@ -36,17 +42,22 @@ public class uNamesAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        View v = mInflater.inflate(R.layout.user_list_view_detail, null);
-        TextView nameTextView = (TextView) v.findViewById(R.id.nameTextView);
-        TextView pointTextView = (TextView) v.findViewById(R.id.pointTextView);
+    public View getView(int i, View convertView, ViewGroup parent) {
+        View v = mInflator.inflate(R.layout.my_listview_detail, null);
+        TextView unamesTextView = (TextView) v.findViewById(R.id. unamesTextView);
+        TextView upointsTextView = (TextView) v.findViewById(R.id. upointsTextView);
+        TextView countTextView = (TextView) v.findViewById(R.id.countTextView);
 
-        String name = uNames[i];
-        String points = uPoints[i];
+        String uname = uNames[i];
+        String upoint = uPoints[i];
+        String zahl = count[i];
 
-        nameTextView.setText(name);
-        pointTextView.setText(points);
+
+        unamesTextView.setText(uname);
+        upointsTextView.setText(upoint);
+        countTextView.setText(zahl);
 
         return v;
     }
 }
+
