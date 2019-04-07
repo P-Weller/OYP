@@ -34,18 +34,4 @@
     <string name="create_task2">Create Task</string>
     <string name="title_createtask">Create Task</string>
 
-    // UserAnsicht Daten hinzufügen
-    <string-array name="uNames">
-        <item>Patricia</item>
-        <item>Paul</item>
-        <item>Julia</item>
-    </string-array>
-
-    <string-array name="uPoints">
-        <item>85</item>
-        <item>50</item>
-        <item>30</item>
-    </string-array>
-
-
 </resources>

@@ -1,13 +1,11 @@
 package com.example.oyp;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.example.oyp.Fragments.ActivityFragment;
 import com.example.oyp.Fragments.CreateTaskFragment;
@@ -16,7 +14,6 @@ import com.example.oyp.Fragments.TasksFragment;
 import com.example.oyp.Fragments.UsersFragment;
 
 public class MainActivity extends AppCompatActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 new TasksFragment()).commit();
 
     }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -64,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             };
+
+
 }
 
 
