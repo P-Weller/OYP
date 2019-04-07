@@ -21,7 +21,6 @@ public class UsersFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
-
         String[] uNames = {"Patricia", "paul", "lenio"};
         String[] uPoints = {"43", "44", "hi"};
 
