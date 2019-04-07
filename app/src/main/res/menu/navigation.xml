@@ -5,18 +5,23 @@
 
 
     <item
-        android:id="@+id/navigation_users"
-        android:icon="@drawable/ic_baseline_people_24px"
-        android:title="@string/title_users"
-        android:actionLayout="@layout/fragment_users"
-
-        />
-
-    <item
         android:id="@+id/navigation_tasks"
         android:icon="@drawable/ic_baseline_event_note_24px"
         android:title="@string/title_tasks"
         android:actionLayout="@layout/fragment_tasks"/>
+
+    <item
+        android:id="@+id/navigation_users"
+        android:icon="@drawable/ic_baseline_people_24px"
+        android:title="@string/title_users"
+        android:actionLayout="@layout/fragment_users" />
+
+    <item
+        android:id="@+id/navigation_createTask"
+        android:icon="@drawable/ic_add_circle_black_24dp"
+        android:title="@string/title_createtask"
+        android:actionLayout="@layout/fragment_createtask" />
+
 
     <item
         android:id="@+id/navigation_activity"
