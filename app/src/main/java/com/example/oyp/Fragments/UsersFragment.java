@@ -21,8 +21,8 @@ public class UsersFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
-        String[] uNames = {"Patricia", "Paul", "Lenio"};
-        String[] uPoints = {"43", "44", "45"};
+        String[] uNames = {"Patricia", "Paul", "Lenio", "Lukas", "Lena", "Patricia", "Paul", "Lenio", "Lukas", "Lena"};
+        String[] uPoints = {"43", "44", "45", "3", "2","43", "44", "45", "3", "2"};
 
         int j = uNames.length;
         String[] count = new String[j];
