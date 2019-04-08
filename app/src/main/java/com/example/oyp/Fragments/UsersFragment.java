@@ -34,10 +34,9 @@ public class UsersFragment extends Fragment {
 
         UnamesAdapter unamesAdapter = new UnamesAdapter(this.getContext(), uNames, uPoints, count);
         myListView.setAdapter(unamesAdapter);
-
         return view;
-
 
     }
 }
+
 
