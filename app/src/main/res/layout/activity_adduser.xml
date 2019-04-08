@@ -34,25 +34,60 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp">
 
-            <RadioButton
-                android:id="@+id/maleRadioBtn"
+            <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="casual"
-                android:text="male"
-                android:textSize="18sp" />
+                android:id="@+id/radiogroup"
+                >
 
-            <RadioButton
-                android:id="@+id/femaleRadioBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_toEndOf="@+id/maleRadioBtn"
-                android:fontFamily="casual"
-                android:text="@string/female"
-                android:textSize="18sp"
+                <RadioButton
+                    android:id="@+id/maleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="0"
+                    android:textSize="0sp"
+                    android:checked="true"
+                    />
 
-                />
+                <TextView
+                    android:id="@+id/maleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="male"
+                    android:fontFamily="casual"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+
+                <RadioButton
+                    android:id="@+id/femaleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_toEndOf="@+id/maleRadioBtn"
+                    android:fontFamily="casual"
+                    android:text="1"
+                    android:textSize="0sp"
+
+                    />
+
+                <TextView
+                    android:id="@+id/femaleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="female"
+                    android:fontFamily="casual"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    />
+
+            </RadioGroup>
+
+
 
         </RelativeLayout>
 
@@ -71,6 +106,44 @@
                 android:inputType="textPersonName"
                 tools:targetApi="o"
                 android:hint="@string/username"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditText"
+            >
+
+            <EditText
+                android:id="@+id/household2EditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:targetApi="o"
+                android:hint="household"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditText"
+            >
+
+            <EditText
+                android:id="@+id/usercolorEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:targetApi="o"
+                android:hint="usercolor"
 
                 />
         </android.support.design.widget.TextInputLayout>

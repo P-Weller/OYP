@@ -63,7 +63,12 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private class Dologin extends AsyncTask<String,String,String> {
+
+
+
+
+    protected class Dologin extends AsyncTask<String,String,String> {
+
 
 
         String namestr=mName.getText().toString();
@@ -72,6 +77,14 @@ public class LoginActivity extends AppCompatActivity {
         boolean isSuccess=false;
 
         String nm,password;
+
+        public String getNamestr() {
+            return namestr;
+        }
+
+        public void setNamestr(String namestr) {
+            this.namestr = namestr;
+        }
 
 
         @Override
@@ -139,7 +152,7 @@ public class LoginActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(LoginActivity.this,Login2Activity.class);
+                Intent intent=new Intent(LoginActivity.this,ChooseUserActivity.class);
 
                 intent.putExtra("name",namestr);
 

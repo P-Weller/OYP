@@ -9,6 +9,8 @@ public class Login2Activity extends AppCompatActivity {
 
 
     TextView nametext;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

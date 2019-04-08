@@ -27,7 +27,7 @@ public class StartActivity extends AppCompatActivity {
         loginbtn = (Button) findViewById(R.id.StartloginBtn);
         signupbtn = (Button) findViewById(R.id.StartsignupBtn);
 
-        //Capture button clicks
+        //Capture login button clicks
         loginbtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
@@ -38,14 +38,18 @@ public class StartActivity extends AppCompatActivity {
 
             }
 
+        });
 
+        //Capture signup button clicks
+        signupbtn.setOnClickListener(new View.OnClickListener(){
 
+            public void onClick(View v){
 
+                //Start LoginActivity.class
+                Intent intent = new Intent(StartActivity.this,RegistrationActivity.class);
+                startActivity(intent);
 
-
-
-
-
+            }
 
         });
 
