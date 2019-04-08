@@ -7,24 +7,103 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/userlistTextView"
-        style="@style/TextviewTheme"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        android:fontFamily="casual"
-        android:paddingStart="15dp"
-        android:text="User List"
-        android:textAlignment="textStart"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
-    <ListView
-        android:id="@+id/myListView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        <TextView
+            android:id="@+id/changepasswordTextView"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:text="Scoreboard"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:height="40dip"
+                android:textAlignment="center"
+                android:text="Place"
+                android:textSize="30sp"
+                android:textColor="@color/default_white"
+                android:gravity="center"
+                android:background="@color/default_Button_Background"
+                android:id="@+id/placeTextView"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                style="@style/TextviewTheme"
+
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:height="40dip"
+                android:textAlignment="center"
+                android:text="User"
+                android:textSize="30sp"
+                android:textColor="@color/default_white"
+                android:gravity="center"
+                android:background="@color/default_Button_Background"
+                android:id="@+id/usernameTextView"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                style="@style/TextviewTheme"
+
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:fontFamily="casual"
+                android:height="40dip"
+                android:textAlignment="center"
+                android:text="Points"
+                android:textSize="30sp"
+                android:textColor="@color/default_white"
+                android:gravity="center"
+                android:background="@color/default_Button_Background"
+                android:id="@+id/pointsTextView"
+                android:layout_weight="1.5"
+                android:textStyle="bold"
+                style="@style/TextviewTheme"
+
+                />
+
+
+        </LinearLayout>
+
+
+
+        <ListView
+            android:id="@+id/myListView"
+            android:layout_width="match_parent"
+            android:layout_height="315dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+
+
+            />
+
+
+
+    </LinearLayout>
+
+
+    
 </android.support.constraint.ConstraintLayout>
