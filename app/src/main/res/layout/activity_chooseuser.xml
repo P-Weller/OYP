@@ -1,61 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@color/background1"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/chooseUserTextView"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="start"
-        android:background="@color/colorAccent"
-        android:fontFamily="casual"
-        android:text="@string/choose_your_user"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorPrimary"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:paddingStart="15dp"
-        >
-
-    </TextView>
+    tools:context=".MainActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:background="@color/background1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/changepasswordTextView"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:text="Choose your user"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
+
+
+
+
 
         <ListView
+            android:id="@+id/myListView"
             android:layout_width="match_parent"
-            android:layout_height="600dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/default_white"
-            >
+            android:layout_height="315dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
 
 
-        </ListView>
+            />
 
         <Button
-            style="@style/ButtonTheme"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:strokeColor="@color/default_black"
-            android:text="@string/create_new_user"
+            style="@style/ButtonTheme"
+            android:text="Create User"
             android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/createuserBtn"
 
 
             />
 
 
+
     </LinearLayout>
 
 
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
