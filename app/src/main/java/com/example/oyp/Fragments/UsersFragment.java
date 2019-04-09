@@ -18,7 +18,6 @@ public class UsersFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
         String[] uNames = {"Patricia", "Paul", "Lenio", "Lukas", "Lena", "Patricia", "Paul", "Lenio", "Lukas", "Lena"};
