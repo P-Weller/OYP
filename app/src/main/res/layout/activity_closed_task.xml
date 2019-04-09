@@ -29,22 +29,22 @@
             />
 
         <ListView
+            android:id="@+id/ctasksListView"
             android:layout_width="match_parent"
             android:layout_height="550dp"
-            android:background="@color/default_white"
 
-            />
+            android:background="@color/default_white" />
 
         <Button
-            android:layout_height="wrap_content"
-            style="@style/ButtonTheme"
-            android:text="show me open tasks"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:clickable="true"
             android:id="@+id/ShowopentaskBtn"
+            style="@style/ButtonTheme"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:text="show me open tasks"
+            android:textSize="18sp"
+            android:textStyle="bold"
 
             />
 
