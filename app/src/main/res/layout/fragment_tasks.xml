@@ -35,7 +35,8 @@
             android:dividerHeight="3dp"
             android:textAlignment="gravity"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            tools:layout_editor_absoluteY="8dp"
+            />
 
         <Button
             android:id="@+id/closedTaskBtn"
@@ -46,7 +47,7 @@
             android:clickable="true"
             android:text="show me closed tasks"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="" />
 
 
     </LinearLayout>
