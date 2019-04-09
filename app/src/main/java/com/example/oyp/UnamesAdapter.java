@@ -7,18 +7,20 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class UnamesAdapter extends BaseAdapter {
 
     LayoutInflater mInflator;
-    String[] uNames;
-    String[] uPoints;
-    String[] count;
+    ArrayList<String> uNames;
+    ArrayList<String> uPoints;
+    ArrayList<String> count;
 
     public UnamesAdapter(){
 
     }
 
-    public UnamesAdapter(Context c, String[] u, String [] p, String[] zahl){
+    public UnamesAdapter(Context c, ArrayList<String> u, ArrayList<String> p, ArrayList<String> zahl){
         uNames = u;
         uPoints = p;
         count = zahl;
@@ -28,12 +30,12 @@ public class UnamesAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return uNames.length;
+        return uNames.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return uNames[i];
+        return uNames.get(i);
     }
 
     @Override
@@ -48,9 +50,9 @@ public class UnamesAdapter extends BaseAdapter {
         TextView upointsTextView = (TextView) v.findViewById(R.id. upointsTextView);
         TextView countTextView = (TextView) v.findViewById(R.id.countTextView);
 
-        String uname = uNames[i];
-        String upoint = uPoints[i];
-        String zahl = count[i];
+        String uname = uNames.get(i);
+        String upoint = uPoints.get(i);
+        String zahl = count.get(i);
 
 
         unamesTextView.setText(uname);

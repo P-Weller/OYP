@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="673dp"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
@@ -21,12 +21,11 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
+            android:paddingStart="15dp"
             android:text="Open tasks"
             android:textAlignment="textStart"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:paddingStart="15dp"
-            />
+            android:textStyle="bold" />
 
         <ListView
             android:layout_width="match_parent"
@@ -36,15 +35,15 @@
             />
 
         <Button
-            android:layout_height="wrap_content"
-            style="@style/ButtonTheme"
-            android:text="show me closed tasks"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center"
-            android:clickable="true"
             android:id="@+id/ShowopentaskBtn"
+            style="@style/ButtonTheme"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:text="show me closed tasks"
+            android:textSize="18sp"
+            android:textStyle="bold"
 
             />
 
