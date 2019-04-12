@@ -47,8 +47,6 @@ public class TasksFragment extends Fragment {
         Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
 
 
-
-
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
