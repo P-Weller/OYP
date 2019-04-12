@@ -31,6 +31,14 @@
         <activity android:name=".CreateUserActivity"/>
         <activity android:name=".RegistrationActivity"/>
 
+        <receiver android:name=".PushNotification.AlertReceiver" />
+
+
+
+
+
+
+
 
     </application>
 
