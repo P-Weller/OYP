@@ -55,21 +55,21 @@ public class TasksFragment extends Fragment {
                 tImage = new ArrayList<>();
                 tName = new ArrayList<>();
                 if(i == 0) {
-                    GetClosedData retrieveClosedData = new GetClosedData();
-                    retrieveClosedData.execute("");
+                    GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
+                    retrieveClosedTaskData.execute("");
                     closedTaskBtn.setText("Show me open tasks");
                     i = 1;
                 } else if(i == 1){
-                    GetData retrieveData = new GetData();
-                    retrieveData.execute("");
+                    GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
+                    retrieveOpenTaskData.execute("");
                     closedTaskBtn.setText("Show me closed tasks");
                     i = 0;
                 }
             }
         });
         if(i == 0) {
-            GetData retrieveData = new GetData();
-            retrieveData.execute("");
+            GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
+            retrieveOpenTaskData.execute("");
             System.out.println("Open");
         }
 
@@ -97,7 +97,7 @@ public class TasksFragment extends Fragment {
     }
 
 
-    private class GetData extends AsyncTask<String, String, String> {
+    private class GetOpenTaskData extends AsyncTask<String, String, String> {
         String msg = "";
 
 
@@ -180,7 +180,7 @@ public class TasksFragment extends Fragment {
         }
     }
 
-    private class GetClosedData extends AsyncTask<String, String, String> {
+    private class GetClosedTaskData extends AsyncTask<String, String, String> {
         String msg = "";
 
 

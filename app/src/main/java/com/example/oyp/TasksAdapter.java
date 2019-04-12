@@ -43,7 +43,7 @@ public class TasksAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        View v = mInflator.inflate(R.layout.opentasks_detail, null);
+        View v = mInflator.inflate(R.layout.tasks_detail, null);
         ImageView imageView = (ImageView) v.findViewById(R.id. imageView);
         TextView opentasksTextView = (TextView) v.findViewById(R.id. opentasksTextView);
 
