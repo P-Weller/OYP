@@ -38,8 +38,6 @@ public class UsersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
         thisContext = this.getContext();
 
-
-
         myListView = view.findViewById(R.id.myListView);
 
         GetData retrieveData = new GetData();
@@ -134,22 +132,14 @@ public class UsersFragment extends Fragment {
                 }
             }
 
-
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
 
-            /*int j = 0;
-            while(uNames[j]!= null){
-                j++;
-                System.out.println(j);
-            }*/
-
-
             ArrayList<String> count = new ArrayList<String>();
-            for (int k = 0; k < 22; k++) {
+            for (int k = 0; k < uNames.size(); k++) {
                 String str = k + 1 + ".";
                 count.add(k,str);
             }
@@ -159,6 +149,3 @@ public class UsersFragment extends Fragment {
         }
     }
 }
-
-
-
