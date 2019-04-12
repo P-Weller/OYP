@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/more"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:text="Details of the task"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
+
+        <TextView
+            android:id="@+id/taskdetailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawableStart="@drawable/ic_help_outline_black_24dp"
+            android:drawableLeft="@drawable/ic_help_outline_black_24dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+
+            />
+
+        <TextView
+            android:id="@+id/persontetailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawableStart="@drawable/ic_person_add_black_24dp"
+            android:drawableLeft="@drawable/ic_person_add_black_24dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/datedetailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawableStart="@drawable/ic_date_range_32dp"
+            android:drawableLeft="@drawable/ic_date_range_32dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/repeatdetailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawableStart="@drawable/ic_loop_black_32dp"
+            android:drawableLeft="@drawable/ic_loop_black_32dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pointsdetailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawableStart="@drawable/ic_attach_money_black_32dp"
+            android:drawableLeft="@drawable/ic_attach_money_black_32dp"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+
+        <Button
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:text="Close task"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:id="@+id/logoutBtn"
+            android:drawableStart="@drawable/ic_exit_to_app_white_32dp"
+            android:layout_width="280dp"
+            android:fontFamily="casual"
+            android:background="@color/cancel_background"
+            android:textColor="@color/default_white"
+            android:textAllCaps="false"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
