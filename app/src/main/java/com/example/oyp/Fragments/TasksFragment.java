@@ -32,6 +32,7 @@ public class TasksFragment extends Fragment {
     ArrayList<Integer> tImage = new ArrayList();
     ArrayList<String> tName = new ArrayList();
     ListView otasksListView;
+    int i = 0;
 
 
     public TasksFragment(){
@@ -43,20 +44,36 @@ public class TasksFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tasks, container, false);
         thisContext = this.getContext();
 
+
         otasksListView = view.findViewById(R.id.otasksListView);
         Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
 
-        GetData retrieveData = new GetData();
-        retrieveData.execute("");
+
 
 
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ClosedTasksActivity.class);
-                startActivity(intent);
+                tImage = new ArrayList<>();
+                tName = new ArrayList<>();
+                if(i == 0) {
+                    GetClosedData retrieveClosedData = new GetClosedData();
+                    retrieveClosedData.execute("");
+                    closedTaskBtn.setText("Show me open tasks");
+                    i = 1;
+                } else if(i == 1){
+                    GetData retrieveData = new GetData();
+                    retrieveData.execute("");
+                    closedTaskBtn.setText("Show me closed tasks");
+                    i = 0;
+                }
             }
         });
+        if(i == 0) {
+            GetData retrieveData = new GetData();
+            retrieveData.execute("");
+            System.out.println("Open");
+        }
 
         return view;
     }
@@ -108,6 +125,89 @@ public class TasksFragment extends Fragment {
 
                 stmt = conn.createStatement();
                 String sql = "SELECT * FROM activity,task WHERE task.ActivityID = activity.ActivityID AND StatusID = 0";
+                ResultSet rs = stmt.executeQuery(sql);
+                int i = 0;
+
+                while (rs.next()) {
+                    String aImageString = rs.getString("AIcon");
+                    String aName = rs.getString("AName");
+
+                    Resources res = getResources();
+                    int aImage = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
+
+                    tImage.add(i, aImage);
+                    tName.add(i, aName);
+                    i++;
+
+                }
+
+
+                System.out.println(tImage);
+                System.out.println(tName);
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            TasksAdapter tasksAdapter = new TasksAdapter(thisContext, tImage, tName);
+            otasksListView.setAdapter(tasksAdapter);
+        }
+    }
+
+    private class GetClosedData extends AsyncTask<String, String, String> {
+        String msg = "";
+
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            String ip = "192.168.1.164";
+            String db = "oyp_database";
+            String un = "root";
+            String pass = "pass";
+
+            try {
+                conn = connectionclass(un, pass, db, ip);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT * FROM activity,task WHERE task.ActivityID = activity.ActivityID AND StatusID = 1";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
