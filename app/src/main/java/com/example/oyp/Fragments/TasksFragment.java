@@ -65,7 +65,7 @@ public class TasksFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
-        String ConnectionURL = null;
+        String ConnectionURL;
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
@@ -102,9 +102,6 @@ public class TasksFragment extends Fragment {
             String db = "oyp_database";
             String un = "root";
             String pass = "pass";
-
-            ArrayList<String> activityIDs = new ArrayList<>();
-
 
             try {
                 conn = connectionclass(un, pass, db, ip);

@@ -1,12 +1,15 @@
 package com.example.oyp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.sql.Connection;
@@ -29,11 +32,15 @@ public class ClosedTasksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.layout.fadein, R.layout.fadeout);
         setContentView(R.layout.activity_closed_task);
 
         thisContext = this;
 
         ctasksListView = findViewById(R.id.ctasksListView);
+        Button openTaskBtn = findViewById(R.id.openTaskBtn);
+
+
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");

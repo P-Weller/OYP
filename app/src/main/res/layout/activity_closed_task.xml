@@ -36,17 +36,15 @@
             android:background="@color/default_white" />
 
         <Button
-            android:id="@+id/ShowopentaskBtn"
+            android:id="@+id/openTaskBtn"
             style="@style/ButtonTheme"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:text="show me open tasks"
+            android:text="Show me open tasks"
             android:textSize="18sp"
-            android:textStyle="bold"
-
-            />
+            android:textStyle="bold" />
 
     </LinearLayout>
 
