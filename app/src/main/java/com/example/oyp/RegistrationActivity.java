@@ -5,7 +5,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -112,6 +114,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
 
+
         @Override
         protected String doInBackground(String... params) {
 
@@ -141,6 +144,15 @@ public class RegistrationActivity extends AppCompatActivity{
 
                         z = "Inserting Successfull";
 
+                        Intent intent = new Intent(RegistrationActivity.this, ChooseUserActivity.class);
+
+                        intent.putExtra("household",householdstr);
+                        intent.putExtra("email",emailstr);
+                        intent.putExtra("password",passwordstr);
+
+
+                        startActivity(intent);
+
                     }
 
                 }
@@ -162,7 +174,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
             if(isSuccess) {
 
-                Intent intent = new Intent(RegistrationActivity.this, StartActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, ChooseUserActivity.class);
 
                 intent.putExtra("household",householdstr);
                 intent.putExtra("email",emailstr);

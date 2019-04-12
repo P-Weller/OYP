@@ -1,9 +1,11 @@
 package com.example.oyp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -97,6 +99,7 @@ public class CreateUserActivity extends AppCompatActivity{
                 Adduser adduser = new Adduser();
                 adduser.execute();
 
+
             }
 
         });
@@ -110,6 +113,7 @@ public class CreateUserActivity extends AppCompatActivity{
         String householdstr=householdEt.getText().toString();
         String z="";
         String householdid;
+
 
         boolean isSuccess=false;
 
@@ -128,30 +132,36 @@ public class CreateUserActivity extends AppCompatActivity{
                         z = "Please check your internet connection";
                     }
                     else {
+
                         String query1= "SELECT HouseholdID FROM household WHERE HName = '"+householdstr+"'";
 
-                        Statement stmt = conn.createStatement();
+                        Statement stmt1 = conn.createStatement();
 
-                        stmt.executeUpdate(query1);
+                        stmt1.executeUpdate(query1);
 
-                        ResultSet rs=stmt.executeQuery(query1);
+                        ResultSet rs1=stmt1.executeQuery(query1);
 
-                        while (rs.next()) {
-                            householdid = rs.getString(1);
+                        while (rs1.next()) {
+                            householdid = rs1.getString(1);
 
                         }
 
 
 
 
-                        String query= "INSERT INTO user (UName, GenderID, HouseholdID) VALUES('"+usernamestr+"' ,'"+genderstr+"', '"+householdid+"' )";
+                        String query2= "INSERT INTO user (UName, GenderID, HouseholdID) VALUES('"+usernamestr+"' ,'"+genderstr+"', '"+householdid+"' )";
 
 
                         Statement stmt2 = conn.createStatement();
-                        stmt2.executeUpdate(query);
+                        stmt2.executeUpdate(query2);
 
 
                         z = "Inserting Successfull";
+
+                        Intent intent=new Intent(CreateUserActivity.this, MainActivity.class);
+
+
+                        startActivity(intent);
 
                     }
 
