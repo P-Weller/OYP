@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class ChooseUserAdapter extends BaseAdapter {
     LayoutInflater mInflator;
     String[] users;
-
+//create Constructor
     public ChooseUserAdapter(Context c, String[] u){
         users = u;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
