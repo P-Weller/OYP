@@ -1,6 +1,7 @@
 package com.example.oyp.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,11 +12,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.oyp.OpenTasksAdapter;
+import com.example.oyp.ClosedTasksActivity;
+import com.example.oyp.TasksAdapter;
 import com.example.oyp.R;
-import com.example.oyp.UnamesAdapter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,6 +33,7 @@ public class TasksFragment extends Fragment {
     ArrayList<String> tName = new ArrayList();
     ListView otasksListView;
 
+
     public TasksFragment(){
     }
 
@@ -41,11 +44,21 @@ public class TasksFragment extends Fragment {
         thisContext = this.getContext();
 
         otasksListView = view.findViewById(R.id.otasksListView);
+        Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
-        return view;
 
+
+        closedTaskBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ClosedTasksActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 
     public Connection connectionclass(String user, String password, String database, String server) {
@@ -150,8 +163,8 @@ public class TasksFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            OpenTasksAdapter openTasksAdapter = new OpenTasksAdapter(thisContext, tImage, tName);
-            otasksListView.setAdapter(openTasksAdapter);
+            TasksAdapter tasksAdapter = new TasksAdapter(thisContext, tImage, tName);
+            otasksListView.setAdapter(tasksAdapter);
         }
     }
 }

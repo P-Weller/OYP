@@ -10,17 +10,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class OpenTasksAdapter extends BaseAdapter {
+public class TasksAdapter extends BaseAdapter {
 
     LayoutInflater mInflator;
     ArrayList<Integer> tImage;
     ArrayList<String> tName;
 
-    public OpenTasksAdapter(){
+    public TasksAdapter(){
 
     }
 
-    public OpenTasksAdapter(Context c, ArrayList<Integer> i, ArrayList<String> t){
+    public TasksAdapter(Context c, ArrayList<Integer> i, ArrayList<String> t){
         tImage = i;
         tName = t;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
