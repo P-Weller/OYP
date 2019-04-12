@@ -43,8 +43,13 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         datePickerFragment.c.set(Calendar.MINUTE, minute);
         datePickerFragment.c.set(Calendar.SECOND, 0);
         //jumps into the updateDateTimeText() method in CreateTaskFragment.java
-        createTaskFragment.updateDateTimeText(datePickerFragment.c);
+
+        createTaskFragment.updateText();
         //jumps into the startAlarm() method in CreateTaskFragment.java
+
+
         createTaskFragment.startAlarm(datePickerFragment.c);
+
+
     }
 }
