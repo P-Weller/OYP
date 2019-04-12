@@ -34,10 +34,14 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     ConnectionClass connectionClass;
 
-    Connection conn;
+    private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_LOGINHNAME = "key_loginhname";
+    private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
+
+   Connection conn;
     String un,pass,db,ip;
 
-    protected void onCreate(Bundle savedInstanceState) {
+   protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -65,17 +69,35 @@ public class LoginActivity extends AppCompatActivity {
         logIn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveUsername();
                 Dologin dologin=new Dologin();
                 dologin.execute();
             }
         });
     }
 
+    private void saveUsername(){
+        String name = mName.getText().toString();
+        String password = mPassword.getText().toString();
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putString(KEY_LOGINHNAME, name);
+        editor.putString(KEY_LOGINHPASSWORD, password);
+
+
+        editor.apply();
+    }
 
 
 
 
     public class Dologin extends AsyncTask<String,String,String> {
+
+
 
         String namestr=mName.getText().toString();
         String passstr=mPassword.getText().toString();
@@ -84,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
         boolean isSuccess=false;
 
         String nm,password;
-
 
 
 

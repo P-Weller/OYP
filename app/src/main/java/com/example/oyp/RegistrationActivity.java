@@ -1,6 +1,7 @@
 package com.example.oyp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -40,10 +41,6 @@ import com.example.oyp.LoginActivity;
  */
 
 
-
-
-
-
 public class RegistrationActivity extends AppCompatActivity{
 
     Button createhouseholdBtn;
@@ -56,6 +53,14 @@ public class RegistrationActivity extends AppCompatActivity{
 
     Connection conn;
     String un,pass,db,ip;
+
+    private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_HOUSEHOLDNAME = "key_householdname";
+    private static final String KEY_EMAIL = "key_email";
+    private static final String KEY_HPASSWORD = "key_hpassword";
+
+
+
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -81,23 +86,37 @@ public class RegistrationActivity extends AppCompatActivity{
         termsCb = (CheckBox) findViewById(R.id.termsAndConditionsCheckBox);
 
 
-
-
-
-
         //Capture click on createBtn to go and add the user to the database and go to screen scoreboard
-        createhouseholdBtn.setOnClickListener(new View.OnClickListener(){
+        createhouseholdBtn.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v){
-
+            public void onClick(View v) {
+                saveHousehold();
                 Addhousehold addhousehold = new Addhousehold();
                 addhousehold.execute();
 
             }
 
         });
-
     }
+
+        private void saveHousehold(){
+            String household = householdEt.getText().toString();
+            String email = emailET.getText().toString();
+            String password = passwordET.getText().toString();
+
+
+            SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+            SharedPreferences.Editor editor = sp.edit();
+
+            editor.putString(KEY_HOUSEHOLDNAME, household);
+            editor.putString(KEY_EMAIL, email);
+            editor.putString(KEY_HPASSWORD, password);
+
+            editor.apply();
+        }
+
+
 
     private class Addhousehold extends AsyncTask<String,String,String>  {
 
@@ -110,6 +129,8 @@ public class RegistrationActivity extends AppCompatActivity{
         String householdid;
 
         boolean isSuccess=false;
+
+
 
 
 
