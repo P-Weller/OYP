@@ -1,7 +1,6 @@
 package com.example.oyp.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.oyp.ClosedTasksActivity;
 import com.example.oyp.TasksAdapter;
 import com.example.oyp.R;
 
