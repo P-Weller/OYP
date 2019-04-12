@@ -94,7 +94,7 @@ public class UsersFragment extends Fragment {
                 conn = connectionclass(un, pass, db, ip);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM user";
+                String sql = "SELECT * FROM user ORDER BY UPoints DESC";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 

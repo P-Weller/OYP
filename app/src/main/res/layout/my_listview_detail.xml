@@ -18,25 +18,28 @@
     <TextView
         android:id="@+id/unamesTextView"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="183dp"
-        android:gravity="left"
+        android:gravity="center"
         android:text="Name"
         android:textAlignment="gravity"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        />
 
     <TextView
         android:id="@+id/upointsTextView"
         android:layout_width="wrap_content"
+
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="47dp"
         android:text="Points"
-        android:textAlignment="textEnd"
+        android:textAlignment="gravity"
         android:textSize="24sp" />
 </RelativeLayout>

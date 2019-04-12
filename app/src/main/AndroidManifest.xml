@@ -30,9 +30,6 @@
         <activity android:name=".ChooseUserActivity"/>
         <activity android:name=".CreateUserActivity"/>
         <activity android:name=".RegistrationActivity"/>
-        <activity android:name=".ClosedTasksActivity"/>
-        <activity android:name=".TaskDetailActivity"/>
-
 
 
     </application>
