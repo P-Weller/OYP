@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
@@ -25,7 +26,9 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     //Creates instance of Calendar
-    public Calendar c = Calendar.getInstance();
+
+    CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
 
     @NonNull
     @Override
@@ -46,9 +49,11 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
 
     //saving the chosen date values in the created Calendar instance
-        c.set(Calendar.YEAR, chosenYear);
-        c.set(Calendar.MONTH, chosenMonth);
-        c.set(Calendar.DAY_OF_MONTH, chosenDay);
+        createTaskFragment.c.set(Calendar.YEAR, chosenYear);
+        createTaskFragment.c.set(Calendar.MONTH, chosenMonth);
+        createTaskFragment.c.set(Calendar.DAY_OF_MONTH, chosenDay);
+
+        Log.d("onDateSet" , "OnDateSet: " + createTaskFragment.c.toString());
 
         //creates a new timePickerFragment --> Jumps into onTimeSet() in TimePickerFragment.java
         DialogFragment timePicker = new TimePickerFragment();

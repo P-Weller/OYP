@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.TimePicker;
 
 import com.example.oyp.Fragments.CreateTaskFragment;
@@ -17,9 +18,9 @@ import java.util.Calendar;
 // Creates Fragment of the TimePicker
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
     //Creates instance of the DatePickerFragment
-    DatePickerFragment datePickerFragment = new DatePickerFragment();
-    //Creates instance of the CreateTaskFragment
     CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+    //Creates instance of the CreateTaskFragment
+
 
     @NonNull
     @Override
@@ -39,16 +40,18 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
         //saving the time values in the created Calendar instance in the DatePickerFragment
-        datePickerFragment.c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        datePickerFragment.c.set(Calendar.MINUTE, minute);
-        datePickerFragment.c.set(Calendar.SECOND, 0);
+        createTaskFragment.c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        createTaskFragment.c.set(Calendar.MINUTE, minute);
+        createTaskFragment.c.set(Calendar.SECOND, 0);
         //jumps into the updateDateTimeText() method in CreateTaskFragment.java
 
-        createTaskFragment.updateText();
+        Log.d("onTimeSet" , "OnTimeSet: " + createTaskFragment.c.toString());
+
+        //createTaskFragment.updateText();
         //jumps into the startAlarm() method in CreateTaskFragment.java
 
 
-        createTaskFragment.startAlarm(datePickerFragment.c);
+        createTaskFragment.startAlarm(getActivity());
 
 
     }
