@@ -29,7 +29,7 @@ import com.example.oyp.LoginActivity;
 
 /****************************************************
  * Was fehlt:
- * Household muss immer angegeben werden, kann man die Variable vom Login übernehmen ?
+ *
  * Wie wollen wir die Color mitgeben ? Draufklicken und eine Farbauswahl bekommen ?
  *
  */
@@ -47,6 +47,10 @@ public class CreateUserActivity extends AppCompatActivity{
 
     Connection conn;
     String un,pass,db,ip;
+
+    private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_USERNAME = "key_username";
+    private static final String KEY_LOGINHNAME = "key_loginhname";
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -67,7 +71,7 @@ public class CreateUserActivity extends AppCompatActivity{
         cancelBtn = (Button) findViewById(R.id.cancelcreateUserBtn);
         createBtn = (Button) findViewById(R.id.createUserBtn);
         usernameEt = (EditText) findViewById(R.id.addUserEditText);
-        householdEt = (EditText) findViewById(R.id.household2EditText);
+        //householdEt = (EditText) findViewById(R.id.household2EditText);
         radio_g = (RadioGroup) findViewById(R.id.radiogroup);
 
 
@@ -77,7 +81,6 @@ public class CreateUserActivity extends AppCompatActivity{
             public void onClick(View v){
                 Intent intent = new Intent(CreateUserActivity.this, StartActivity.class);
                 startActivity(intent);
-
 
             }
 
@@ -94,6 +97,9 @@ public class CreateUserActivity extends AppCompatActivity{
                 //find the radiobutton by returned id
                 radio_b = (RadioButton) findViewById(selectedId);
 
+                saveUsername();
+                getHousehold();
+                Log.d("Haushalt:", getHousehold());
 
 
                 Adduser adduser = new Adduser();
@@ -106,74 +112,96 @@ public class CreateUserActivity extends AppCompatActivity{
 
     }
 
+    private void saveUsername(){
+        String name = usernameEt.getText().toString();
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putString(KEY_USERNAME, name);
+
+        editor.apply();
+    }
+
+    private String getHousehold(){
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+        String household = sp.getString("key_loginhname", "");
+        return household;
+
+    }
+
     private class Adduser extends AsyncTask<String,String,String>  {
 
         String genderstr=radio_b.getText().toString();
         String usernamestr=usernameEt.getText().toString();
-        String householdstr=householdEt.getText().toString();
+        String householdstr = getHousehold();
+
         String z="";
         String householdid;
 
-
         boolean isSuccess=false;
-
-
 
         @Override
         protected String doInBackground(String... params) {
 
-            if(usernamestr.trim().equals("")|| householdstr.trim().equals("")  )
+            String query1 = null;
+
+            if (usernamestr.trim().equals(""))
                 z = "Please enter all fields...";
-            else
-            {
+            else {
                 try {
                     conn = connectionclass(un, pass, db, ip);
                     if (conn == null) {
                         z = "Please check your internet connection";
-                    }
-                    else {
+                    } else {
 
-                        String query1= "SELECT HouseholdID FROM household WHERE HName = '"+householdstr+"'";
+                        query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
+
 
                         Statement stmt1 = conn.createStatement();
 
                         stmt1.executeUpdate(query1);
 
-                        ResultSet rs1=stmt1.executeQuery(query1);
+                        ResultSet rs1 = stmt1.executeQuery(query1);
 
                         while (rs1.next()) {
                             householdid = rs1.getString(1);
 
                         }
 
+                        Log.d("Householdid", householdid);
 
+                        String query2 = "INSERT INTO user (UName, GenderID, HouseholdID) VALUES" +
+                                "('" + usernamestr + "','" + genderstr + "','" + householdid + "' )";
 
-
-                        String query2= "INSERT INTO user (UName, GenderID, HouseholdID) VALUES('"+usernamestr+"' ,'"+genderstr+"', '"+householdid+"' )";
-
-
+                        Log.d("SQL Eingabe",query2);
                         Statement stmt2 = conn.createStatement();
                         stmt2.executeUpdate(query2);
 
 
                         z = "Inserting Successfull";
 
-                        Intent intent=new Intent(CreateUserActivity.this, MainActivity.class);
-
+                        Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
+                        intent.putExtra("username",usernamestr);
+                        //intent.putExtra("upoints",20);
+                        intent.putExtra("gender",genderstr);
+                        intent.putExtra("household",householdstr);
 
                         startActivity(intent);
 
                     }
 
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     isSuccess = false;
-                    z = "Exceptions"+ex;
+                    z = "Exceptions" + ex;
                 }
             }
             return z;
         }
+
 
         @Override
         protected void onPostExecute(String s) {
@@ -191,6 +219,7 @@ public class CreateUserActivity extends AppCompatActivity{
 
         }
     }
+
 
 
 

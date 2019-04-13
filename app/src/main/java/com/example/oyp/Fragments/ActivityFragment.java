@@ -96,7 +96,8 @@ public class ActivityFragment extends Fragment {
                 conn = connectionclass(un, pass, db, ip);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM activity ORDER BY AName DESC";
+                String sql = "SELECT * FROM activity ORDER BY AName ASC";
+
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 

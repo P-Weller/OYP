@@ -114,20 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditText"
-            >
-
-            <EditText
-                android:id="@+id/household2EditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:inputType="textPersonName"
-                tools:targetApi="o"
-                android:hint="household"
-
-                />
-        </android.support.design.widget.TextInputLayout>
+            />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
