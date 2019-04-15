@@ -17,12 +17,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.example.oyp.ConnectionClass;
@@ -32,6 +36,7 @@ import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
 import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
+import com.example.oyp.RepeatSpinnerAdapter;
 import com.example.oyp.StartActivity;
 
 import java.sql.Connection;
@@ -40,7 +45,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import static com.example.oyp.R.id.createTaskEditText;
 
@@ -55,9 +62,13 @@ import static com.example.oyp.R.id.createTaskEditText;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, personEt, dateEt, repeatEt, pointsEt;
+    public EditText taskEt, personEt, dateEt, pointsEt;
+    Spinner repeatSpinner;
     Button createBtn;
     Context thisContext;
+
+    String[] repeatName={"Settings","Person"};
+    int icons[] = {R.drawable.ic_settings_black_32dp, R.drawable.ic_person_add_black_24dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
     public Calendar c = Calendar.getInstance();
@@ -72,9 +83,9 @@ public class CreateTaskFragment extends Fragment {
 
 
 
+
     public CreateTaskFragment() {
     }
-
 
 
 
@@ -94,9 +105,21 @@ public class CreateTaskFragment extends Fragment {
         taskEt = view.findViewById(R.id.createTaskEditText);
         personEt = view.findViewById(R.id.personEditText);
         dateEt = view.findViewById(R.id.dateEditText);
-        repeatEt = view.findViewById(R.id.repeatEditText);
         pointsEt = view.findViewById(R.id.taskpointsEditText);
         createBtn = view.findViewById(R.id.createTaskBtn);
+        repeatSpinner = view.findViewById(R.id.repeatSpinner);
+
+        repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), icons, repeatName);
+        repeatSpinner.setAdapter( repeatSpinnerAdapter);
 
 
         dateEt.setOnClickListener(new View.OnClickListener() {
@@ -109,16 +132,10 @@ public class CreateTaskFragment extends Fragment {
 
                 //updateText();
 
-
-
-
-
                 }
 
         });
-
-
-        //Capture click on createTaskBtn
+                //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Createtask createtask = new Createtask();
@@ -172,7 +189,6 @@ public class CreateTaskFragment extends Fragment {
         String taskstr = taskEt.getText().toString();
         String personstr = personEt.getText().toString();
         String datestr = dateEt.getText().toString();
-        String repeatstr = repeatEt.getText().toString();
         String pointsstr = pointsEt.getText().toString();
         String timestr;
         String userstr;
@@ -201,7 +217,7 @@ public class CreateTaskFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            if (taskstr.trim().equals("") || personstr.trim().equals("") || datestr.trim().equals("") || repeatstr.trim().equals("") || pointsstr.trim().equals(""))
+            if (taskstr.trim().equals("") || personstr.trim().equals("") || datestr.trim().equals("") || pointsstr.trim().equals(""))
                 z = "Please fill in all fields";
 
 
@@ -215,7 +231,7 @@ public class CreateTaskFragment extends Fragment {
                     } else {
 
                         String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES" +
-                                "('" +pointsstr+ "' ,'" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+repeatstr+"','"+taskstr+"')";
+                                "('" +pointsstr+ "' ,'" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+taskstr+"')";
 
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate(query);
