@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     ConnectionClass connectionClass;
 
     private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_LOGINHNAME = "key_loginhname";
+    private static final String KEY_LOGINHNAME = "key_householdname";
     private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
 
    Connection conn;
@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         String namestr=mName.getText().toString();
         String passstr=mPassword.getText().toString();
 
-        String z="";
+        String z="Household name or password is wrong. \n               Please try again!";
         boolean isSuccess=false;
 
         String nm,password;
@@ -152,11 +152,12 @@ public class LoginActivity extends AppCompatActivity {
 
                             {
                                 isSuccess=true;
-                                z = "Login successful";
+                                z = "Login successful!";
 
                             }
                             else {
                                 isSuccess = false;
+                                z = "Household or password is wrong. Please try again!";
                             }
                         }
                     }
@@ -172,9 +173,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
-
-
-
 
             if(isSuccess) {
 

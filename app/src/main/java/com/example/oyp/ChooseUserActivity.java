@@ -10,6 +10,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -59,6 +60,18 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         });
 
+        // Creating a method to be able to click on the list rows
+        usersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+
+                Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+                mainActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
+                startActivity(mainActivity);
+
+            }
+        });
+
 
     }
 
@@ -66,7 +79,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
 
-        String household = sp.getString("key_loginhname", "");
+        String household = sp.getString("key_householdname", "");
         return household;
 
     }
