@@ -15,20 +15,18 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/changepasswordTextView"
+            android:id="@+id/changeemailTextView"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
-            android:text="Change password"
+            android:text="Change email"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold"
             android:paddingStart="15dp"
             />
-
-
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -37,14 +35,14 @@
             >
 
             <EditText
-                android:id="@+id/newpasswordEditText"
+                android:id="@+id/oldemailEdittext"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 tools:targetApi="o"
-                android:hint="new password"
+                android:hint="old email"
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -56,14 +54,33 @@
             >
 
             <EditText
-                android:id="@+id/confirmpasswordEditText"
+                android:id="@+id/newemailEdittext"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:autofillHints=""
                 android:ems="10"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 tools:targetApi="o"
-                android:hint="confirm password"
+                android:hint="new email"
+
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/EditText"
+            >
+
+            <EditText
+                android:id="@+id/confirmemailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                tools:targetApi="o"
+                android:hint="confirm email"
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -76,13 +93,13 @@
         <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
-            android:text="change password"
+            android:text="change email"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:clickable="true"
-            android:id="@+id/changepasswordBtn"
+            android:id="@+id/changeemailBtn"
 
 
             />

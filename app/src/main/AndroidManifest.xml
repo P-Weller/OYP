@@ -30,6 +30,9 @@
         <activity android:name=".ChooseUserActivity"/>
         <activity android:name=".CreateUserActivity"/>
         <activity android:name=".RegistrationActivity"/>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".ChangeemailActivity"/>
+        <activity android:name=".ChangehouseholdActivity"/>
 
     </application>
 
