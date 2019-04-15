@@ -2,6 +2,7 @@ package com.example.oyp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ public class ChooseUserActivity extends AppCompatActivity{
     Button createuserBtn;
     ArrayList<String> uNames = new ArrayList<>();
 
+    private static final String SHARED_PREF_NAME = "userdata";
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         thisContext = this;
@@ -36,6 +39,8 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         Resources res = getResources();
         usersListView = (ListView) findViewById(R.id.usersListView);
+
+        getHousehold();
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
@@ -54,6 +59,15 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         });
 
+
+    }
+
+    private String getHousehold(){
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+        String household = sp.getString("key_loginhname", "");
+        return household;
 
     }
 
@@ -81,6 +95,8 @@ public class ChooseUserActivity extends AppCompatActivity{
     private class GetData extends AsyncTask<String, String, String> {
         String msg = "";
 
+        String householdstr = getHousehold();
+
 
         @Override
         protected void onPreExecute() {
@@ -98,13 +114,33 @@ public class ChooseUserActivity extends AppCompatActivity{
             String db = "oyp_database";
             String un = "root";
             String pass = "pass";
+            String householdid ="";
+            String query1;
+
 
 
             try {
                 conn = connectionclass(un, pass, db, ip);
 
+                query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
+
+                Statement stmt1 = conn.createStatement();
+
+                stmt1.executeUpdate(query1);
+
+                ResultSet rs1 = stmt1.executeQuery(query1);
+
+                while (rs1.next()) {
+                    householdid = rs1.getString(1);
+
+                }
+
+                Log.d("HouseholdID", householdid);
+
+                String sql = "SELECT UName FROM user WHERE HouseholdID = '" + householdid + "' ORDER BY UName ASC";
+
                 stmt = conn.createStatement();
-                String sql = "SELECT UName FROM user ORDER BY UPoints DESC";
+
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 

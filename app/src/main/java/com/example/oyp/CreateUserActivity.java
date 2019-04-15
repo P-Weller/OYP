@@ -50,7 +50,6 @@ public class CreateUserActivity extends AppCompatActivity{
 
     private static final String SHARED_PREF_NAME = "userdata";
     private static final String KEY_USERNAME = "key_username";
-    private static final String KEY_LOGINHNAME = "key_loginhname";
 
     public void onCreate(Bundle savedInstanceState) {
 

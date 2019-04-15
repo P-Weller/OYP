@@ -21,31 +21,26 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
+            android:paddingStart="15dp"
             android:text="Settings"
             android:textAlignment="textStart"
             android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/changeemail"
+            style="@style/ButtonTheme"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:clickable="true"
+            android:text="change email"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:paddingStart="15dp"
+
+
             />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditText"
-            >
-
-            <EditText
-                android:id="@+id/householdEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:inputType="textPersonName"
-                tools:targetApi="o"
-                android:hint="household"
-
-                />
-        </android.support.design.widget.TextInputLayout>
 
         <Button
             android:layout_height="wrap_content"
@@ -53,7 +48,7 @@
             android:text="change householdname"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:clickable="true"
             android:id="@+id/changehouseholdname"
@@ -61,42 +56,10 @@
 
             />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/EditText"
-            >
-
-            <EditText
-                android:id="@+id/changeeMailEditText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:inputType="textPersonName"
-                tools:targetApi="o"
-                android:hint="email"
-
-                />
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:layout_height="wrap_content"
-            style="@style/ButtonTheme"
-            android:text="change email"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:id="@+id/changeemail"
-
-
-            />
 
 
 
-        <Button
+    <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
             android:text="change password"
