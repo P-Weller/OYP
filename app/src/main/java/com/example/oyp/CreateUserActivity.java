@@ -127,7 +127,7 @@ public class CreateUserActivity extends AppCompatActivity{
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
 
-        String household = sp.getString("key_loginhname", "");
+        String household = sp.getString("key_householdname", "");
         return household;
 
     }

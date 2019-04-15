@@ -16,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.oyp.Fragments.MoreFragment;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -40,6 +42,8 @@ public class ChangehouseholdActivity extends AppCompatActivity {
     String newhousehold;
 
     private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_HOUSEHOLDNAME = "key_householdname";
+
 
 
     public void onCreate(Bundle savedInstanceState){
@@ -68,6 +72,7 @@ public class ChangehouseholdActivity extends AppCompatActivity {
                 getHousehold();
                 Changehousehold changehousehold = new Changehousehold();
                 changehousehold.execute();
+                updateSharedPref();
 
             }
         });
@@ -79,8 +84,20 @@ public class ChangehouseholdActivity extends AppCompatActivity {
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        String household = sp.getString("key_loginhname", "");
+        String household = sp.getString("key_householdname", "");
         return household;
+    }
+
+    private void updateSharedPref(){
+        String household = newhouseholdEt.getText().toString();
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putString(KEY_HOUSEHOLDNAME, household);
+
+        editor.apply();
     }
 
     private class Changehousehold extends AsyncTask<String,String,String>{
@@ -117,6 +134,7 @@ public class ChangehouseholdActivity extends AppCompatActivity {
 
                         stmt.executeUpdate(query1);
 
+                        isSuccess = true;
                         z = "Householdname updated successfully";
 
                     }
@@ -141,7 +159,7 @@ public class ChangehouseholdActivity extends AppCompatActivity {
 
                 Intent intent=new Intent(ChangehouseholdActivity.this, MainActivity.class);
 
-                intent.putExtra("password",newhouseholdstr);
+                intent.putExtra("household",newhouseholdstr);
 
                 startActivity(intent);
             }
