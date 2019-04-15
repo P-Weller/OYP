@@ -14,27 +14,22 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/changepasswordTextView"
+            android:id="@+id/usersTextView"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
+            android:paddingStart="15dp"
             android:text="Choose your user"
             android:textAlignment="textStart"
             android:textSize="30sp"
-            android:textStyle="bold"
-            android:paddingStart="15dp"
-            />
-
-
-
-
+            android:textStyle="bold" />
 
         <ListView
-            android:id="@+id/myListView"
+            android:id="@+id/usersListView"
             android:layout_width="match_parent"
-            android:layout_height="315dp"
+            android:layout_height="450dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="8dp"
 

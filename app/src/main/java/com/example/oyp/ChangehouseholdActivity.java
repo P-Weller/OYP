@@ -22,26 +22,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/*****************************************+
- * - beim initialen Login das Password mitnehmen und mit dem unter "oldpassword" eingetragenen abgleichen
- * - prüfen, ob beide neuen Passwörter gleich sind
- */
 
 
 
-public class ChangepasswordActivity extends AppCompatActivity {
+public class ChangehouseholdActivity extends AppCompatActivity {
 
     Button changeBtn;
-    EditText newpasswordEt;
-    EditText new2passwordEt;
+    EditText newhouseholdEt;
+    EditText new2householdEt;
 
     ConnectionClass connectionclass;
 
     Connection conn;
     String un, pass, db, ip;
 
-    String oldpass;
-    String newpass;
+    String oldhousehold;
+    String newhousehold;
 
     private static final String SHARED_PREF_NAME = "userdata";
 
@@ -58,20 +54,20 @@ public class ChangepasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Get the view from activity_changepassword.xml
-        setContentView(R.layout.activity_changepassword);
+        setContentView(R.layout.activity_changehousehold);
 
-        changeBtn = (Button) findViewById(R.id.changepasswordBtn);
-        newpasswordEt = (EditText) findViewById(R.id.newpasswordEditText);
-        new2passwordEt = (EditText) findViewById(R.id.confirmpasswordEditText);
+        changeBtn = (Button) findViewById(R.id.changeemailBtn);
+        newhouseholdEt = (EditText) findViewById(R.id.newhouseholdEdittext);
+        new2householdEt = (EditText) findViewById(R.id.confirmhouseholdEditText);
 
 
         changeBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
 
-                getPassword();
-                Changepassword changepassword = new Changepassword();
-                changepassword.execute();
+                getHousehold();
+                Changehousehold changehousehold = new Changehousehold();
+                changehousehold.execute();
 
             }
         });
@@ -79,19 +75,19 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
     }
 
-    private String getPassword(){
+    private String getHousehold(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        String password = sp.getString("KEY_LOGINHPASSWORD", "");
-        return password;
+        String household = sp.getString("key_loginhname", "");
+        return household;
     }
 
-    private class Changepassword extends AsyncTask<String,String,String>{
+    private class Changehousehold extends AsyncTask<String,String,String>{
 
-        String passwordstr = getPassword();
-        String newpasswordstr = newpasswordEt.getText().toString();
-        String confpasswordstr = new2passwordEt.getText().toString();
+        String hnamestr = getHousehold();
+        String newhouseholdstr = newhouseholdEt.getText().toString();
+        String confhouseholdstr = new2householdEt.getText().toString();
 
         String z="";
 
@@ -104,28 +100,24 @@ public class ChangepasswordActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
 
-            if(newpasswordstr.trim().equals("") || confpasswordstr.trim().equals("")  )
+            if(newhouseholdstr.trim().equals("") || confhouseholdstr.trim().equals("")  )
                 z = "Please enter all fields...";
 
 
-
-            else
             {
                 try {
                     conn = connectionclass(un, pass, db, ip);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }
-
-
                     else {
-                        String query1= "UPDATE household SET HPassword = '"+newpasswordstr+"' WHERE HPassword = '"+passwordstr+"' ";
+                        String query1= "UPDATE household SET HName = '"+newhouseholdstr+"' WHERE HName = '"+hnamestr+"'";
 
                         Statement stmt = conn.createStatement();
 
                         stmt.executeUpdate(query1);
 
-                        z = "Password updated successfully";
+                        z = "Householdname updated successfully";
 
                     }
 
@@ -147,9 +139,9 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(ChangepasswordActivity.this, MainActivity.class);
+                Intent intent=new Intent(ChangehouseholdActivity.this, MainActivity.class);
 
-                intent.putExtra("password",newpasswordstr);
+                intent.putExtra("password",newhouseholdstr);
 
                 startActivity(intent);
             }
@@ -186,5 +178,5 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
 
 
-    }
+}
 

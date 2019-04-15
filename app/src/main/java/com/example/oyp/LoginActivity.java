@@ -1,9 +1,14 @@
 package com.example.oyp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
+import android.renderscript.Sampler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -13,11 +18,14 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.mysql.fabric.xmlrpc.base.Value;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.prefs.Preferences;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,10 +34,14 @@ public class LoginActivity extends AppCompatActivity {
     ProgressBar progressBar;
     ConnectionClass connectionClass;
 
-    Connection conn;
+    private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_LOGINHNAME = "key_loginhname";
+    private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
+
+   Connection conn;
     String un,pass,db,ip;
 
-    protected void onCreate(Bundle savedInstanceState) {
+   protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -57,34 +69,44 @@ public class LoginActivity extends AppCompatActivity {
         logIn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveUsername();
                 Dologin dologin=new Dologin();
                 dologin.execute();
             }
         });
     }
 
+    private void saveUsername(){
+        String name = mName.getText().toString();
+        String password = mPassword.getText().toString();
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putString(KEY_LOGINHNAME, name);
+        editor.putString(KEY_LOGINHPASSWORD, password);
+
+
+        editor.apply();
+    }
 
 
 
 
-    protected class Dologin extends AsyncTask<String,String,String> {
+    public class Dologin extends AsyncTask<String,String,String> {
 
 
 
         String namestr=mName.getText().toString();
         String passstr=mPassword.getText().toString();
+
         String z="";
         boolean isSuccess=false;
 
         String nm,password;
 
-        public String getNamestr() {
-            return namestr;
-        }
-
-        public void setNamestr(String namestr) {
-            this.namestr = namestr;
-        }
 
 
         @Override
@@ -97,6 +119,8 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
+
             if(namestr.trim().equals("")||passstr.trim().equals(""))
                 z = "Please enter all fields...";
             else
@@ -150,6 +174,8 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
 
 
+
+
             if(isSuccess) {
 
                 Intent intent=new Intent(LoginActivity.this,ChooseUserActivity.class);
@@ -162,6 +188,8 @@ public class LoginActivity extends AppCompatActivity {
             progressBar.setVisibility(View.INVISIBLE);
         }
     }
+
+
 
     public Connection connectionclass(String user, String password, String database, String server){
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

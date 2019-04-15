@@ -8,17 +8,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class OpenTasksAdapter extends BaseAdapter {
+import java.util.ArrayList;
+
+public class TasksAdapter extends BaseAdapter {
 
     LayoutInflater mInflator;
-    int[] tImage;
-    String[] tName;
+    ArrayList<Integer> tImage;
+    ArrayList<String> tName;
 
-    public OpenTasksAdapter(){
+    public TasksAdapter(){
 
     }
 
-    public OpenTasksAdapter(Context c, int[] i, String [] t){
+    public TasksAdapter(Context c, ArrayList<Integer> i, ArrayList<String> t){
         tImage = i;
         tName = t;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -26,12 +28,12 @@ public class OpenTasksAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return tName.length;
+        return tName.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return tName[i];
+        return tName.get(i);
     }
 
     @Override
@@ -41,12 +43,12 @@ public class OpenTasksAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup parent) {
-        View v = mInflator.inflate(R.layout.opentasks_detail, null);
+        View v = mInflator.inflate(R.layout.tasks_detail, null);
         ImageView imageView = (ImageView) v.findViewById(R.id. imageView);
         TextView opentasksTextView = (TextView) v.findViewById(R.id. opentasksTextView);
 
-        String name = tName[i];
-        int bild = tImage[i];
+        String name = tName.get(i);
+        int bild = tImage.get(i);
 
         imageView.setImageResource(bild);
         opentasksTextView.setText(name);
