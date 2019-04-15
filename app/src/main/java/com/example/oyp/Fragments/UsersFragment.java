@@ -1,6 +1,7 @@
 package com.example.oyp.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -12,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.oyp.MainActivity;
 import com.example.oyp.R;
-import com.example.oyp.UnamesAdapter;
+import com.example.oyp.UNamesAdapter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,6 +31,7 @@ public class UsersFragment extends Fragment {
     ArrayList<String> uPoints = new ArrayList<>();
     ListView myListView;
 
+    private static final String SHARED_PREF_NAME = "userdata";
 
     public UsersFragment() {
     }
@@ -39,6 +42,8 @@ public class UsersFragment extends Fragment {
         thisContext = this.getContext();
 
         myListView = view.findViewById(R.id.myListView);
+
+        getHousehold();
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
@@ -71,6 +76,7 @@ public class UsersFragment extends Fragment {
     private class GetData extends AsyncTask<String, String, String> {
         String msg = "";
 
+        String householdstr = getHousehold();
 
         @Override
         protected void onPreExecute() {
@@ -88,13 +94,30 @@ public class UsersFragment extends Fragment {
             String db = "oyp_database";
             String un = "root";
             String pass = "pass";
+            String householdid ="";
+            String query1;
 
 
             try {
                 conn = connectionclass(un, pass, db, ip);
 
+                query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
+
+                Statement stmt1 = conn.createStatement();
+
+                stmt1.executeUpdate(query1);
+
+                ResultSet rs1 = stmt1.executeQuery(query1);
+
+                while (rs1.next()) {
+                    householdid = rs1.getString(1);
+
+                }
+
+                Log.d("HouseholdID", householdid);
+
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM user ORDER BY UPoints DESC";
+                String sql = "SELECT * FROM user WHERE HouseholdID = '" + householdid + "' ORDER BY UPoints DESC";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -144,10 +167,18 @@ public class UsersFragment extends Fragment {
                 count.add(k,str);
             }
 
-            UnamesAdapter unamesAdapter = new UnamesAdapter(thisContext, uNames, uPoints, count);
+            UNamesAdapter unamesAdapter = new UNamesAdapter(thisContext, uNames, uPoints, count);
             myListView.setAdapter(unamesAdapter);
         }
     }
 
+    public String getHousehold(){
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        String household = sp.getString("key_loginhname", "");
+        return household;
+
+    }
 
 }
