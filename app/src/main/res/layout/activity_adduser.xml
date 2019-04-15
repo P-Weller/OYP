@@ -29,16 +29,28 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="30dp"
+            >
 
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radiogroup"
+                android:orientation="horizontal"
                 >
+
+                <TextView
+                    android:id="@+id/maleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="casual"
+                    android:text="male"
+                    android:textAlignment="textStart"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/maleRadioBtn"
@@ -48,48 +60,42 @@
                     android:text="0"
                     android:textSize="0sp"
                     android:checked="true"
-                    />
-
-                <TextView
-                    android:id="@+id/maleTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="male"
-                    android:fontFamily="casual"
-                    android:textAlignment="textStart"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
-
-
-                <RadioButton
-                    android:id="@+id/femaleRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_toEndOf="@+id/maleRadioBtn"
-                    android:fontFamily="casual"
-                    android:text="1"
-                    android:textSize="0sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
 
                     />
+
 
                 <TextView
                     android:id="@+id/femaleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="female"
                     android:fontFamily="casual"
+                    android:text="female"
                     android:textAlignment="textStart"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:layout_marginStart="50dp"
+                    />
+
+                <RadioButton
+                    android:id="@+id/femaleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/maleRadioBtn"
+                    android:fontFamily="casual"
+                    android:text="1"
+                    android:textSize="0sp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+
                     />
 
             </RadioGroup>
 
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

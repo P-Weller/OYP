@@ -56,7 +56,7 @@ public class NotificationHelper extends ContextWrapper {
                 .setAutoCancel(true)
                 .setContentTitle("Push Notification!")
                 .setContentText("The Push Notification is working!")
-                .setColor(Color.BLUE)
+                .setColor(Color.rgb(72,169,197))
                 .setSmallIcon(R.drawable.ic_event)
                 .setContentIntent(contentIntent);
     }

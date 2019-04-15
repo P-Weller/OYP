@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     ConnectionClass connectionClass;
 
     private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_LOGINHNAME = "key_loginhname";
+    private static final String KEY_LOGINHNAME = "key_householdname";
     private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
 
    Connection conn;

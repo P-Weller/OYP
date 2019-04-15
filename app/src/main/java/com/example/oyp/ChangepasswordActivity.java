@@ -16,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.oyp.Fragments.MoreFragment;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -44,6 +46,7 @@ public class ChangepasswordActivity extends AppCompatActivity {
     String newpass;
 
     private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
 
 
     public void onCreate(Bundle savedInstanceState){
@@ -69,9 +72,10 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
             public void onClick(View v){
 
-                getPassword();
+                getHousehold();
                 Changepassword changepassword = new Changepassword();
                 changepassword.execute();
+                updateSharedPref();
 
             }
         });
@@ -79,17 +83,29 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
     }
 
-    private String getPassword(){
+    private String getHousehold(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
-        String password = sp.getString("KEY_LOGINHPASSWORD", "");
-        return password;
+        String household = sp.getString("key_householdname", "");
+        return household;
+    }
+
+    private void updateSharedPref(){
+        String password = newpasswordEt.getText().toString();
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putString(KEY_LOGINHPASSWORD, password);
+
+        editor.apply();
     }
 
     private class Changepassword extends AsyncTask<String,String,String>{
 
-        String passwordstr = getPassword();
+        String hnamestr = getHousehold();
         String newpasswordstr = newpasswordEt.getText().toString();
         String confpasswordstr = new2passwordEt.getText().toString();
 
@@ -119,11 +135,13 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
 
                     else {
-                        String query1= "UPDATE household SET HPassword = '"+newpasswordstr+"' WHERE HPassword = '"+passwordstr+"' ";
+                        String query1= "UPDATE household SET HPassword = '"+newpasswordstr+"' WHERE HName = '"+hnamestr+"' ";
 
                         Statement stmt = conn.createStatement();
 
                         stmt.executeUpdate(query1);
+
+                        isSuccess = true;
 
                         z = "Password updated successfully";
 

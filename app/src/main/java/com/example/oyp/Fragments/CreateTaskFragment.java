@@ -1,6 +1,5 @@
 package com.example.oyp.Fragments;
 
-
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -11,38 +10,21 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.Toast;
-
-import com.example.oyp.ConnectionClass;
-import com.example.oyp.CreateUserActivity;
-import com.example.oyp.MainActivity;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
-import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
-import com.example.oyp.StartActivity;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import static com.example.oyp.R.id.createTaskEditText;
 
 /***********************************************+
  * Was noch fehlt:
@@ -55,14 +37,26 @@ import static com.example.oyp.R.id.createTaskEditText;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, personEt, dateEt, repeatEt, pointsEt;
+    public EditText taskEt, personEt, repeatEt, pointsEt;
+    public static EditText dateEt;
     Button createBtn;
     Context thisContext;
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public Calendar c = Calendar.getInstance();
+    public static Calendar c = Calendar.getInstance();
 
-    public int updateTextID = 0;
+    //Creates new DateFormat to convert date in the database format
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+    //Creates new TimeFormat convert time in the database format
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+    //Declaration of timeText and dateText to use in updateText() method and as input for the database string
+    String timeText ="";
+    String dateText ="";
+
+
+
 
 
 
@@ -70,12 +64,8 @@ public class CreateTaskFragment extends Fragment {
     String un, pass, db, ip;
 
 
-
-
     public CreateTaskFragment() {
     }
-
-
 
 
     @Override
@@ -107,13 +97,7 @@ public class CreateTaskFragment extends Fragment {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-                //updateText();
-
-
-
-
-
-                }
+            }
 
         });
 
@@ -121,6 +105,9 @@ public class CreateTaskFragment extends Fragment {
         //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                startAlarm(getActivity());
+
                 Createtask createtask = new Createtask();
                 createtask.execute();
             }
@@ -128,10 +115,14 @@ public class CreateTaskFragment extends Fragment {
 
         return view;
 
+
     }
 
 
+
+
     public void startAlarm(Context context) {
+
 
 
         //creates Object of AlarmManager
@@ -149,17 +140,28 @@ public class CreateTaskFragment extends Fragment {
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
+        System.out.println("startAlarm: " + c.toString());
+
     }
 
     public void updateText() {
 
 
 
-                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-            dateEt.setText(timeText);
+        if(dateEt!= null) {
 
 
-}
+            timeText += dateFormat.format(c.getTime());
+            dateText += timeFormat.format(c.getTime());
+            dateEt.setText(timeText + "  " + dateText);
+
+
+        }
+
+    }
+
+
+
 
 
 
@@ -171,10 +173,10 @@ public class CreateTaskFragment extends Fragment {
 
         String taskstr = taskEt.getText().toString();
         String personstr = personEt.getText().toString();
-        String datestr = dateEt.getText().toString();
+        String datestr = dateText;
+        String timestr = timeText;
         String repeatstr = repeatEt.getText().toString();
         String pointsstr = pointsEt.getText().toString();
-        String timestr;
         String userstr;
         String statusstr;
 
