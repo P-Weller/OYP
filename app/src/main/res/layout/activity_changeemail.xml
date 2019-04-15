@@ -32,20 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/EditText"
-            >
-
-            <EditText
-                android:id="@+id/oldemailEdittext"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                tools:targetApi="o"
-                android:hint="old email"
-
-                />
-        </android.support.design.widget.TextInputLayout>
+            />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

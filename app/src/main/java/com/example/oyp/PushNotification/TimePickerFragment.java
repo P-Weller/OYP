@@ -18,8 +18,7 @@ import java.util.Calendar;
 // Creates Fragment of TimePicker
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
-    //Creates instance of the CreateTaskFragment
-    CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
 
 
 
@@ -39,17 +38,20 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
     //setting the time
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
+        //Creates instance of the CreateTaskFragment
+        CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
         //saving the time values in the created Calendar instance in the CreateTaskFragment
         createTaskFragment.c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         createTaskFragment.c.set(Calendar.MINUTE, minute);
         createTaskFragment.c.set(Calendar.SECOND, 0);
 
+        System.out.println("onTimeSet: " + createTaskFragment.c.toString());
+
         //jumps into the updateText() method in CreateTaskFragment.java
-
-        createTaskFragment.updateTextID = 1;
-
+        createTaskFragment.updateText();
         //jumps into the startAlarm() method in CreateTaskFragment.java
-        createTaskFragment.startAlarm(getActivity());
+
 
     }
 }
