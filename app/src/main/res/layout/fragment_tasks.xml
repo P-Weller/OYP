@@ -46,7 +46,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:text="Show me closed tasks"
+            android:text="@string/show_me_tasks"
             android:textSize="18sp"
             android:textStyle="bold" />
 
