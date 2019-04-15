@@ -59,13 +59,13 @@ public class CreateTaskFragment extends Fragment {
     Button createBtn;
     Context thisContext;
 
+    //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
     public Calendar c = Calendar.getInstance();
+
+
 
     Connection conn;
     String un, pass, db, ip;
-
-
-
 
     private View view;
 
@@ -104,7 +104,12 @@ public class CreateTaskFragment extends Fragment {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-            }
+
+
+
+
+                }
+
         });
 
 
@@ -138,10 +143,20 @@ public class CreateTaskFragment extends Fragment {
         }*/
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-        Log.d("startAlarm" , "startAlarm: " + c.toString());
+
     }
 
+    public void updateText() {
 
+        if (dateEt != null) {
+
+            dateEt.setText("Test");
+
+        } else {
+
+            System.err.print("EditText is null!");
+        }
+    }
 
 
 

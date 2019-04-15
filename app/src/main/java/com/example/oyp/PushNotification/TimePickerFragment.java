@@ -15,11 +15,12 @@ import com.example.oyp.MainActivity;
 
 import java.util.Calendar;
 
-// Creates Fragment of the TimePicker
+// Creates Fragment of TimePicker
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-    //Creates instance of the DatePickerFragment
-    CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
     //Creates instance of the CreateTaskFragment
+    CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
 
 
     @NonNull
@@ -34,25 +35,21 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         return new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
     }
 
-
     @Override
     //setting the time
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
-        //saving the time values in the created Calendar instance in the DatePickerFragment
+        //saving the time values in the created Calendar instance in the CreateTaskFragment
         createTaskFragment.c.set(Calendar.HOUR_OF_DAY, hourOfDay);
         createTaskFragment.c.set(Calendar.MINUTE, minute);
         createTaskFragment.c.set(Calendar.SECOND, 0);
-        //jumps into the updateDateTimeText() method in CreateTaskFragment.java
 
-        Log.d("onTimeSet" , "OnTimeSet: " + createTaskFragment.c.toString());
+        //jumps into the updateText() method in CreateTaskFragment.java
 
         //createTaskFragment.updateText();
+
         //jumps into the startAlarm() method in CreateTaskFragment.java
-
-
         createTaskFragment.startAlarm(getActivity());
-
 
     }
 }
