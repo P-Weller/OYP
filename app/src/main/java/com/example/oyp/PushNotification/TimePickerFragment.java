@@ -46,7 +46,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         //jumps into the updateText() method in CreateTaskFragment.java
 
-        //createTaskFragment.updateText();
+        createTaskFragment.updateTextID = 1;
 
         //jumps into the startAlarm() method in CreateTaskFragment.java
         createTaskFragment.startAlarm(getActivity());

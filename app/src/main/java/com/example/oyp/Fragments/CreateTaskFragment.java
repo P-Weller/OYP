@@ -62,12 +62,15 @@ public class CreateTaskFragment extends Fragment {
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
     public Calendar c = Calendar.getInstance();
 
+    public int updateTextID = 0;
+
 
 
     Connection conn;
     String un, pass, db, ip;
 
-    private View view;
+
+
 
     public CreateTaskFragment() {
     }
@@ -77,9 +80,9 @@ public class CreateTaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
-        this.view = view;
         thisContext = this.getContext();
 
         ip = "192.168.1.164";
@@ -103,6 +106,8 @@ public class CreateTaskFragment extends Fragment {
 
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
+
+                //updateText();
 
 
 
@@ -148,15 +153,14 @@ public class CreateTaskFragment extends Fragment {
 
     public void updateText() {
 
-        if (dateEt != null) {
 
-            dateEt.setText("Test");
 
-        } else {
+                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+            dateEt.setText(timeText);
 
-            System.err.print("EditText is null!");
-        }
-    }
+
+}
+
 
 
 

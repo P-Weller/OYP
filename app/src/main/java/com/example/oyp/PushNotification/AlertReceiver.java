@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
-//AlertReceiver
+//AlertReceiver class
 
 //receives the Alarm from the startAlarm method
 public class AlertReceiver extends BroadcastReceiver {

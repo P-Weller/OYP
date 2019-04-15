@@ -14,7 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import com.example.oyp.Fragments.CreateTaskFragment;
 import com.example.oyp.R;
 
-//NotificationHelper
+//NotificationHelper class
 
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
