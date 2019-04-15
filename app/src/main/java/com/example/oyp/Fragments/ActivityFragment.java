@@ -1,6 +1,7 @@
 package com.example.oyp.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.oyp.ActivityAdapter;
@@ -43,6 +45,19 @@ public class ActivityFragment extends Fragment {
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
+
+
+        // Creating a method to be able to click on the list rows
+        activityListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+
+                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
+                showDetailActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
+                startActivity(showDetailActivity);
+
+            }
+        });
 
         return view;
 
