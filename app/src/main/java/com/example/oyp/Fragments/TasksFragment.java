@@ -28,8 +28,8 @@ import java.util.ArrayList;
 public class TasksFragment extends Fragment {
 
     Context thisContext;
-    ArrayList<Integer> tImage = new ArrayList();
-    ArrayList<String> tName = new ArrayList();
+    ArrayList<Integer> tImage = new ArrayList<>();
+    ArrayList<String> tName = new ArrayList<>();
     ListView otasksListView;
     int i = 0;
 

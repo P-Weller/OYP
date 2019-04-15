@@ -25,8 +25,8 @@ import java.util.ArrayList;
 public class UsersFragment extends Fragment {
 
     Context thisContext;
-    ArrayList<String> uNames = new ArrayList();
-    ArrayList<String> uPoints = new ArrayList();
+    ArrayList<String> uNames = new ArrayList<>();
+    ArrayList<String> uPoints = new ArrayList<>();
     ListView myListView;
 
 
@@ -51,7 +51,7 @@ public class UsersFragment extends Fragment {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
-        String ConnectionURL = null;
+        String ConnectionURL;
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
@@ -138,7 +138,7 @@ public class UsersFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            ArrayList<String> count = new ArrayList<String>();
+            ArrayList<String> count = new ArrayList<>();
             for (int k = 0; k < uNames.size(); k++) {
                 String str = k + 1 + ".";
                 count.add(k,str);
