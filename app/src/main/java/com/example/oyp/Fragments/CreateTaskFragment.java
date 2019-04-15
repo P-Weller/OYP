@@ -1,13 +1,17 @@
 package com.example.oyp.Fragments;
 
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +28,9 @@ import android.widget.Toast;
 import com.example.oyp.ConnectionClass;
 import com.example.oyp.CreateUserActivity;
 import com.example.oyp.MainActivity;
+import com.example.oyp.PushNotification.AlertReceiver;
+import com.example.oyp.PushNotification.DatePickerFragment;
+import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.StartActivity;
 
@@ -32,6 +39,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 import static com.example.oyp.R.id.createTaskEditText;
 
@@ -46,18 +55,32 @@ import static com.example.oyp.R.id.createTaskEditText;
 
 public class CreateTaskFragment extends Fragment {
 
-    EditText taskEt, personEt, dateEt, repeatEt, pointsEt;
+    public EditText taskEt, personEt, dateEt, repeatEt, pointsEt;
     Button createBtn;
     Context thisContext;
+
+    //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
+    public Calendar c = Calendar.getInstance();
+
+    public int updateTextID = 0;
+
+
 
     Connection conn;
     String un, pass, db, ip;
 
-    public CreateTaskFragment(){};
+
+
+
+    public CreateTaskFragment() {
+    }
+
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
 
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
         thisContext = this.getContext();
@@ -68,8 +91,6 @@ public class CreateTaskFragment extends Fragment {
         pass = "pass";
 
 
-
-
         taskEt = view.findViewById(R.id.createTaskEditText);
         personEt = view.findViewById(R.id.personEditText);
         dateEt = view.findViewById(R.id.dateEditText);
@@ -78,7 +99,26 @@ public class CreateTaskFragment extends Fragment {
         createBtn = view.findViewById(R.id.createTaskBtn);
 
 
-        //Capture click on createtaskBtn
+        dateEt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                DialogFragment datePicker = new DatePickerFragment();
+                datePicker.show(getFragmentManager(), "date picker");
+
+                //updateText();
+
+
+
+
+
+                }
+
+        });
+
+
+        //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Createtask createtask = new Createtask();
@@ -86,9 +126,46 @@ public class CreateTaskFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_createtask, container, false);
+        return view;
 
     }
+
+
+    public void startAlarm(Context context) {
+
+
+        //creates Object of AlarmManager
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        //passing the Alarm to AlertReceiver Class
+        Intent intent = new Intent(context, AlertReceiver.class);
+        final int id = (int) System.currentTimeMillis();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
+
+        //Compares the chosen time with the real time
+        /*if (c.before(Calendar.getInstance())) {
+            c.add(Calendar.DATE, 1);
+        }*/
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
+    }
+
+    public void updateText() {
+
+
+
+                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+            dateEt.setText(timeText);
+
+
+}
+
+
+
+
+
+
 
     class Createtask extends AsyncTask<String, String, String> {
 
