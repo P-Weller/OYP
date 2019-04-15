@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.oyp.TasksAdapter;
 import com.example.oyp.R;
@@ -45,7 +46,7 @@ public class TasksFragment extends Fragment {
 
         otasksListView = view.findViewById(R.id.otasksListView);
         Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
-
+        TextView opentasksTextView = view.findViewById(R.id.opentasksTextView);
 
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +57,13 @@ public class TasksFragment extends Fragment {
                     GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
                     retrieveClosedTaskData.execute("");
                     closedTaskBtn.setText("Show me open tasks");
+                    opentasksTextView.setText("Closed Tasks");
                     i = 1;
                 } else if(i == 1){
                     GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
                     retrieveOpenTaskData.execute("");
                     closedTaskBtn.setText("Show me closed tasks");
+                    opentasksTextView.setText("Open Tasks");
                     i = 0;
                 }
             }
@@ -68,7 +71,6 @@ public class TasksFragment extends Fragment {
         if(i == 0) {
             GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
             retrieveOpenTaskData.execute("");
-            System.out.println("Open");
         }
 
         return view;
