@@ -1,6 +1,7 @@
 package com.example.oyp.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,11 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import com.example.oyp.TasksAdapter;
 import com.example.oyp.R;
+import com.example.oyp.TaskDetailActivity;
+import com.example.oyp.TasksAdapter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,8 +31,8 @@ import java.util.ArrayList;
 public class TasksFragment extends Fragment {
 
     Context thisContext;
-    ArrayList<Integer> tImage = new ArrayList();
-    ArrayList<String> tName = new ArrayList();
+    ArrayList<Integer> tImage = new ArrayList<>();
+    ArrayList<String> tName = new ArrayList<>();
     ListView otasksListView;
     int i = 0;
 
@@ -45,7 +49,7 @@ public class TasksFragment extends Fragment {
 
         otasksListView = view.findViewById(R.id.otasksListView);
         Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
-
+        TextView opentasksTextView = view.findViewById(R.id.opentasksTextView);
 
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +60,13 @@ public class TasksFragment extends Fragment {
                     GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
                     retrieveClosedTaskData.execute("");
                     closedTaskBtn.setText("Show me open tasks");
+                    opentasksTextView.setText("Closed Tasks");
                     i = 1;
                 } else if(i == 1){
                     GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
                     retrieveOpenTaskData.execute("");
                     closedTaskBtn.setText("Show me closed tasks");
+                    opentasksTextView.setText("Open Tasks");
                     i = 0;
                 }
             }
@@ -68,8 +74,19 @@ public class TasksFragment extends Fragment {
         if(i == 0) {
             GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
             retrieveOpenTaskData.execute("");
-            System.out.println("Open");
         }
+
+        // Creating a method to be able to click on the list rows
+        otasksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+
+                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
+                showDetailActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
+                startActivity(showDetailActivity);
+
+            }
+        });
 
         return view;
     }

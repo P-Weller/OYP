@@ -55,9 +55,9 @@ public class RegistrationActivity extends AppCompatActivity{
     String un,pass,db,ip;
 
     private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_HOUSEHOLDNAME = "key_householdname";
-    private static final String KEY_EMAIL = "key_email";
-    private static final String KEY_HPASSWORD = "key_hpassword";
+    private static final String KEY_LOGINHNAME = "key_householdname";
+    private static final String KEY_HEMAIL = "key_email";
+    private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
 
 
 
@@ -109,9 +109,9 @@ public class RegistrationActivity extends AppCompatActivity{
 
             SharedPreferences.Editor editor = sp.edit();
 
-            editor.putString(KEY_HOUSEHOLDNAME, household);
-            editor.putString(KEY_EMAIL, email);
-            editor.putString(KEY_HPASSWORD, password);
+            editor.putString(KEY_LOGINHNAME, household);
+            editor.putString(KEY_HEMAIL, email);
+            editor.putString(KEY_LOGINHPASSWORD, password);
 
             editor.apply();
         }

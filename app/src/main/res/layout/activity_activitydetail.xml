@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/detailsoftheactivity"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:text="Details of the activity"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:paddingStart="15dp"
+            />
+
+        <TextView
+            android:id="@+id/activitynameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+            android:text="Activity"
+            android:textAlignment="textStart"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/default_white"/>
+
+
+        <TextView
+            android:id="@+id/activitydescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            android:background="@color/TextViewBackground2"
+            android:drawablePadding="10dp"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+            android:text="Description of the activity"
+            android:textAlignment="textStart"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/default_white"/>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>
