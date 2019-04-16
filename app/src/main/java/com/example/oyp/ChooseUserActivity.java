@@ -29,6 +29,7 @@ public class ChooseUserActivity extends AppCompatActivity{
     ListView usersListView;
     Button createuserBtn;
     ArrayList<String> uNames = new ArrayList<>();
+    ArrayList<Integer> uImage = new ArrayList<>();
 
     private static final String SHARED_PREF_NAME = "userdata";
     private static final String KEY_CHOSENUSER = "key_chosenuser";
@@ -54,6 +55,7 @@ public class ChooseUserActivity extends AppCompatActivity{
         createuserBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
+
                     Intent intent = new Intent(ChooseUserActivity.this, CreateUserActivity.class);
                     startActivity(intent);
 
@@ -166,7 +168,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
                 Log.d("HouseholdID", householdid);
 
-                String sql = "SELECT UName FROM user WHERE HouseholdID = '" + householdid + "' ORDER BY UName ASC";
+                String sql = "SELECT UName, GIcon FROM user,gender WHERE HouseholdID = '" + householdid + "' AND user.GenderID = gender.GenderID ORDER BY UName ASC";
 
                 stmt = conn.createStatement();
 
@@ -175,11 +177,19 @@ public class ChooseUserActivity extends AppCompatActivity{
 
                 while (rs.next()) {
                     String name = rs.getString("UName");
+                    String gImageString = rs.getString("GIcon");
 
+                    Resources res = getResources();
+                    int gImage = res.getIdentifier(gImageString , "drawable", getPackageName());
+
+                    uImage.add(i, gImage);
                     uNames.add(i, name);
                     i++;
                     Log.d("Uname", String.valueOf(i));
                 }
+
+                System.out.println(uImage);
+                System.out.println(uNames);
 
                 msg = "Process complete.";
                 rs.close();
@@ -211,7 +221,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(String s) {
-            ChooseUserAdapter usersAdapter = new ChooseUserAdapter(thisContext, uNames);
+            ChooseUserAdapter usersAdapter = new ChooseUserAdapter(thisContext,uImage, uNames);
             usersListView.setAdapter(usersAdapter);
         }
     }
