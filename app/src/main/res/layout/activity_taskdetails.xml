@@ -42,7 +42,7 @@
             android:textColor="@color/default_Button_Background" />
 
         <TextView
-            android:id="@+id/taskdetailTextView"
+            android:id="@+id/taskDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -62,7 +62,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/personTextView"
+            android:id="@+id/userTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -75,7 +75,7 @@
             android:textColor="@color/default_Button_Background" />
 
         <TextView
-            android:id="@+id/persontetailTextView"
+            android:id="@+id/userDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -94,7 +94,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/dateTextView"
+            android:id="@+id/dateTimeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -107,7 +107,7 @@
             android:textColor="@color/default_Button_Background" />
 
         <TextView
-            android:id="@+id/datedetailTextView"
+            android:id="@+id/dateTimeDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -139,7 +139,7 @@
             android:textColor="@color/default_Button_Background" />
 
         <TextView
-            android:id="@+id/repeatdetailTextView"
+            android:id="@+id/repeatDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -171,7 +171,7 @@
             android:textColor="@color/default_Button_Background" />
 
         <TextView
-            android:id="@+id/pointsdetailTextView"
+            android:id="@+id/pointsDetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"

@@ -94,10 +94,6 @@ public class TasksFragment extends Fragment {
 
                 GetID retrieveIDData = new GetID(selectedFromList);
                 retrieveIDData.execute("");
-                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
-                showDetailActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
-                startActivity(showDetailActivity);
-
             }
         });
 
@@ -387,12 +383,12 @@ public class TasksFragment extends Fragment {
                 conn = connectionclass(un, pass, db, ip);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT TaskID FROM activity,task WHERE task.ActivityID = activity.ActivityID AND activity.AName '" + tName + "'";
+                String sql = "SELECT TaskID FROM activity,task WHERE task.ActivityID = activity.ActivityID AND activity.AName = '" + tName + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
                 while (rs.next()) {
-                    taskID = rs.getInt("ActivityID");
+                    taskID = rs.getInt("TaskID");
                     i++;
                 }
 
@@ -429,6 +425,9 @@ public class TasksFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
+            Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
+            showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", 0);
+            startActivity(showDetailActivity);
         }
     }
 }

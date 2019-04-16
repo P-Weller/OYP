@@ -39,9 +39,7 @@ public class ActivityDetailActivity extends AppCompatActivity {
     }
 
     private int getActivity(){
-
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-
         int activityID = sp.getInt("key_chosenacitivity", 0);
         System.out.println("2: " + activityID);
         return activityID;
@@ -49,14 +47,8 @@ public class ActivityDetailActivity extends AppCompatActivity {
     }
 
     private void deleteActivity(){
-
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
-
-
-        SharedPreferences settings = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-        settings.edit().remove("key_chosenacitivity").apply();
-        System.out.println("Ich wurde aufgrufen!");
-
+        sp.edit().remove("key_chosenacitivity").apply();
     }
 
 
