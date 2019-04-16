@@ -31,6 +31,8 @@ public class ChooseUserActivity extends AppCompatActivity{
     ArrayList<String> uNames = new ArrayList<>();
 
     private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_CHOSENUSER = "key_chosenuser";
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class ChooseUserActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 
+                saveUser(i);
                 Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
                 mainActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
                 startActivity(mainActivity);
@@ -72,6 +75,19 @@ public class ChooseUserActivity extends AppCompatActivity{
             }
         });
 
+    }
+
+    public void saveUser(int i){
+
+        int username = i;
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putInt(KEY_CHOSENUSER, username);
+
+        editor.apply();
 
     }
 
@@ -162,6 +178,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
                     uNames.add(i, name);
                     i++;
+                    Log.d("Uname", String.valueOf(i));
                 }
 
                 msg = "Process complete.";

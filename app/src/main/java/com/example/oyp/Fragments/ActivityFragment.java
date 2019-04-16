@@ -18,6 +18,7 @@ import android.widget.ListView;
 import com.example.oyp.ActivityAdapter;
 import com.example.oyp.ActivityDetailActivity;
 import com.example.oyp.R;
+import com.example.oyp.TaskDetailActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
