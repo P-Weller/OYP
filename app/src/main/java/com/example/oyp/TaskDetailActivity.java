@@ -206,10 +206,10 @@ public class TaskDetailActivity extends AppCompatActivity {
                 pointsDetailTextView.setText(tPoints);
             } else {
                 taskDetailTextView.setText("-");
-                userDetailTextView.setText("Unfortunately something went wrong. Please go back and try again! \nWe apologise for any inconvenience!");
-                dateTimeDetailTextView.setText("");
-                repeatDetailTextView.setText("");
-                //pointsDetailTextView.setText("");
+                userDetailTextView.setText("-");
+                dateTimeDetailTextView.setText("-");
+                repeatDetailTextView.setText("-");
+                pointsDetailTextView.setText("-");
             }
 
         }

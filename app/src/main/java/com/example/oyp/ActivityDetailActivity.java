@@ -107,7 +107,7 @@ public class ActivityDetailActivity extends AppCompatActivity {
 
                 while (rs.next()) {
                     aName = rs.getString("AName");
-                    aDescription = rs.getString("AName");
+                    aDescription = rs.getString("ADescription");
                     i++;
                 }
                 msg = "Process complete.";
