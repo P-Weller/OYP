@@ -45,6 +45,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -62,25 +63,28 @@ import static com.example.oyp.R.id.createTaskEditText;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, personEt, dateEt, pointsEt;
+    public EditText taskEt, personEt, pointsEt;
+    public static EditText dateEt;
     Spinner repeatSpinner;
     Button createBtn;
     Context thisContext;
+
+    String dateText;
+    String timeText;
 
     String[] repeatName={"Settings","Person"};
     int icons[] = {R.drawable.ic_settings_black_32dp, R.drawable.ic_person_add_black_24dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public Calendar c = Calendar.getInstance();
+    public static Calendar c = Calendar.getInstance();
 
-    public int updateTextID = 0;
-
+    //Creating new DateFormat and TimeFormat to have the right format for the database
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
 
     Connection conn;
     String un, pass, db, ip;
-
-
 
 
 
@@ -126,11 +130,11 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
+                //Creates new instance of DatePicker
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-                //updateText();
+
 
                 }
 
@@ -140,6 +144,8 @@ public class CreateTaskFragment extends Fragment {
             public void onClick(View v) {
                 Createtask createtask = new Createtask();
                 createtask.execute();
+
+                startAlarm(getActivity());
             }
         });
 
@@ -160,9 +166,9 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        /*if (c.before(Calendar.getInstance())) {
+        if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }*/
+        }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
@@ -170,11 +176,15 @@ public class CreateTaskFragment extends Fragment {
 
     public void updateText() {
 
+    //checks if the dateEt EditText is null
+    if (dateEt != null) {
 
-
-                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-            dateEt.setText(timeText);
-
+        //Saving the chosen Date and Time in the dateText and timeText String
+        dateText = dateFormat.format(c.getTime());
+        timeText = timeFormat.format(c.getTime());
+        //Setting the date on the dateEt EditText
+        dateEt.setText(dateText + " " + timeText);
+    }
 
 }
 
