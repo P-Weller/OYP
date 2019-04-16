@@ -86,8 +86,6 @@ public class RegistrationActivity extends AppCompatActivity{
             public void onClick(View v) {
                 checkDataEntered();
 
-
-
                 saveHousehold();
                 Addhousehold addhousehold = new Addhousehold();
                 addhousehold.execute();
@@ -149,10 +147,12 @@ public class RegistrationActivity extends AppCompatActivity{
         @Override
         protected String doInBackground(String... params) {
 
+            System.out.println(passwordET.getText());
+            System.out.println(confpasswordET.getText());
+
             if(householdstr.trim().equals("")|| emailstr.trim().equals("") || passwordstr.trim().equals("") || confpasswordstr.trim().equals("")
                     && !confpasswordstr.equals(passwordstr) )
                 z = "Please enter all fields or check your password or accept TaC";
-
 
 
             else{
@@ -162,7 +162,16 @@ public class RegistrationActivity extends AppCompatActivity{
                     conn = connectionclass(un, pass, db, ip);
                     if (conn == null) {
                         z = "Please check your internet connection";
+                    } else if(isEmail(emailET) == false){
+                        z = "Please enter a valid email address";
+                    /*} else if(!termsCb.isSelected()){
+                        z = "Please accept the terms and conditions";*/
+                    } else if(passwordstr != confpasswordstr){
+                        z= "Please enter two matching passwords";
+                        passwordET.setError("Invalid Password");
+                        confpasswordET.setError("Invalid Password");
                     }
+
 
 
 
@@ -173,7 +182,7 @@ public class RegistrationActivity extends AppCompatActivity{
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate(query);
 
-                        z = "Inserting Successfull";
+                        z = "Inserting Successful";
 
                         Intent intent = new Intent(RegistrationActivity.this, ChooseUserActivity.class);
 
