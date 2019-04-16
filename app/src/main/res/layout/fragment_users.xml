@@ -55,21 +55,22 @@
                 android:textSize="30sp"
                 android:textStyle="bold"
                 />
+
             <TextView
+                android:id="@+id/usernameTextView"
+                style="@style/TextviewTheme"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:fontFamily="casual"
-                android:height="40dip"
-                android:textAlignment="center"
-                android:text="User"
-                android:textSize="30sp"
-                android:textColor="@color/default_white"
-                android:gravity="center"
-                android:background="@color/default_Button_Background"
-                android:id="@+id/usernameTextView"
                 android:layout_weight="2"
+                android:height="40dip"
+                android:background="@color/default_Button_Background"
+                android:fontFamily="casual"
+                android:gravity="start"
+                android:text="User"
+                android:textAlignment="textStart"
+                android:textColor="@color/default_white"
+                android:textSize="30sp"
                 android:textStyle="bold"
-                style="@style/TextviewTheme"
 
                 />
 
