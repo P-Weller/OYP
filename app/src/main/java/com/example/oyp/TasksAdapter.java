@@ -48,9 +48,9 @@ public class TasksAdapter extends BaseAdapter {
         TextView opentasksTextView = v.findViewById(R.id. opentasksTextView);
 
         String name = tName.get(i);
-        int bild = tImage.get(i);
+        int icon = tImage.get(i);
 
-        imageView.setImageResource(bild);
+        imageView.setImageResource(icon);
         opentasksTextView.setText(name);
 
         return v;
