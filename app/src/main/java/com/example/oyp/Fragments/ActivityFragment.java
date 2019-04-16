@@ -62,15 +62,15 @@ public class ActivityFragment extends Fragment {
 
                 GetID retrieveIDData = new GetID(selectedFromList);
                 retrieveIDData.execute("");
-                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), ActivityDetailActivity.class);
-                showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", i);
-                startActivity(showDetailActivity);
+                int activityID = Integer.parseInt(retrieveIDData.doInBackground());
+                saveActivity(activityID);
+                System.out.println("5: "+activityID);
+
                 System.out.println(selectedFromList);
             }
         });
 
         return view;
-
 
     }
 
@@ -256,11 +256,16 @@ public class ActivityFragment extends Fragment {
 
             saveActivity(activityID);
             System.out.println("1: " + activityID);
-            return null;
+            String activityIDString = Integer.toString(activityID);
+            return activityIDString;
         }
 
         @Override
         protected void onPostExecute(String s) {
+
+            Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), ActivityDetailActivity.class);
+            showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", 0);
+            startActivity(showDetailActivity);
         }
     }
 }
