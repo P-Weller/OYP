@@ -11,45 +11,25 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
-import com.example.oyp.ConnectionClass;
-import com.example.oyp.CreateUserActivity;
-import com.example.oyp.MainActivity;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
-import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
-import com.example.oyp.StartActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
-import static com.example.oyp.R.id.createTaskEditText;
 
 /***********************************************+
  * Was noch fehlt:
@@ -78,8 +58,8 @@ public class CreateTaskFragment extends Fragment {
     public static Calendar c = Calendar.getInstance();
 
     //Creating new DateFormat and TimeFormat to have the right format for the database
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+   // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   // SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
 
     Connection conn;
@@ -109,10 +89,11 @@ public class CreateTaskFragment extends Fragment {
 
         taskEt = view.findViewById(R.id.createTaskEditText);
         dateEt = view.findViewById(R.id.dateEditText);
-        taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
+        //taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
         repeatSpinner = view.findViewById(R.id.repeatSpinner);
-        personSpinner = view.findViewById(R.id.personSpinner);
+       //
+        //personSpinner = view.findViewById(R.id.personSpinner);
 
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -181,8 +162,8 @@ public class CreateTaskFragment extends Fragment {
     if (dateEt != null) {
 
         //Saving the chosen Date and Time in the dateText and timeText String
-        dateText = dateFormat.format(c.getTime());
-        timeText = timeFormat.format(c.getTime());
+     //   dateText = dateFormat.format(c.getTime());
+      //  timeText = timeFormat.format(c.getTime());
         //Setting the date on the dateEt EditText
         dateEt.setText(dateText + " " + timeText);
     }

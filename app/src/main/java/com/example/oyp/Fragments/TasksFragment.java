@@ -96,6 +96,8 @@ public class TasksFragment extends Fragment {
             }
         });
 
+
+
         return view;
     }
 

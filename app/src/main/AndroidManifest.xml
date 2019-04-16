@@ -32,7 +32,7 @@
         <activity android:name=".ChangehouseholdActivity"/>
         <activity android:name=".TaskDetailActivity"/>
         <activity android:name=".MainActivity"/>
-
+        <activity android:name=".ActivityDetailActivity"/>
 
         <receiver android:name=".PushNotification.AlertReceiver" />
 

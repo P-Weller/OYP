@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.example.oyp.MainActivity;
 import com.example.oyp.R;
 import com.example.oyp.UNamesAdapter;
 
@@ -176,7 +175,7 @@ public class UsersFragment extends Fragment {
 
         SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
 
-        String household = sp.getString("key_loginhname", "");
+        String household = sp.getString("key_householdname", "");
         return household;
 
     }
