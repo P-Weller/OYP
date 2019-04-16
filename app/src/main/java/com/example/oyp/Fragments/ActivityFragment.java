@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.oyp.ActivityAdapter;
+import com.example.oyp.ActivityDetailActivity;
 import com.example.oyp.R;
 import com.example.oyp.TaskDetailActivity;
 
@@ -53,8 +54,8 @@ public class ActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 
-                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
-                showDetailActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
+                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), ActivityDetailActivity.class);
+                showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", i);
                 startActivity(showDetailActivity);
 
             }

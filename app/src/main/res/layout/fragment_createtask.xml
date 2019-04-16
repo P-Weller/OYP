@@ -112,8 +112,8 @@
             android:layout_margin="5dp"
             style="@style/EditText">
 
-            <EditText
-                android:id="@+id/repeatEditText"
+            <Spinner
+                android:id="@+id/repeatSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:autofillHints=""
