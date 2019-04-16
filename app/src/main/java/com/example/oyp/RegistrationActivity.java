@@ -10,23 +10,14 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import com.example.oyp.Fragments.UsersFragment;
-import com.example.oyp.LoginActivity;
 
 /*********************************************************************************************+
  * Was hier noch fehlt:
@@ -64,6 +55,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
     public void onCreate(Bundle savedInstanceState) {
 
+
         connectionClass = new ConnectionClass();
 
 
@@ -86,10 +78,16 @@ public class RegistrationActivity extends AppCompatActivity{
         termsCb = (CheckBox) findViewById(R.id.termsAndConditionsCheckBox);
 
 
+
+
         //Capture click on createBtn to go and add the user to the database and go to screen scoreboard
         createhouseholdBtn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
+                checkDataEntered();
+
+
+
                 saveHousehold();
                 Addhousehold addhousehold = new Addhousehold();
                 addhousehold.execute();
@@ -97,7 +95,19 @@ public class RegistrationActivity extends AppCompatActivity{
             }
 
         });
+
     }
+
+        boolean isEmail(EditText text){
+        CharSequence emailET = text.getText().toString();
+        return (!TextUtils.isEmpty(emailET)) && Patterns.EMAIL_ADDRESS.matcher(emailET).matches();
+        }
+
+        void checkDataEntered(){
+        if(isEmail(emailET) == false) {
+            emailET.setError("Invalid Email");
+        }
+        }
 
         private void saveHousehold(){
             String household = householdEt.getText().toString();

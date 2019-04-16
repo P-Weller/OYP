@@ -34,4 +34,5 @@
     <string name="title_createtask">Create Task</string>
     <string name="show_me_tasks">Show me closed tasks</string>
     <string name="show_me_open_tasks">Show me open tasks</string>
+    <string name="invalidpw">Invalid password. Please try again.</string>
 </resources>
