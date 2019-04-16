@@ -119,7 +119,7 @@ public class CreateTaskFragment extends Fragment {
             }
         });
         RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), icons, repeatName);
-        repeatSpinner.setAdapter( repeatSpinnerAdapter);
+        repeatSpinner.setAdapter(repeatSpinnerAdapter);
 
 
         dateEt.setOnClickListener(new View.OnClickListener() {
