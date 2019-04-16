@@ -162,17 +162,20 @@ public class RegistrationActivity extends AppCompatActivity{
                     conn = connectionclass(un, pass, db, ip);
                     if (conn == null) {
                         z = "Please check your internet connection";
-                    } else if(isEmail(emailET) == false){
+                    } else if(isEmail(emailET) == false) {
                         z = "Please enter a valid email address";
-                    /*} else if(!termsCb.isSelected()){
-                        z = "Please accept the terms and conditions";*/
-                    } else if(passwordstr != confpasswordstr){
-                        z= "Please enter two matching passwords";
-                        passwordET.setError("Invalid Password");
-                        confpasswordET.setError("Invalid Password");
+
+                    }else if(!passwordstr.equals(confpasswordstr)){
+                            z= "Please enter two matching passwords";
+                            passwordET.setError("Invalid Password");
+                            confpasswordET.setError("Invalid Password");
+
+                            System.out.println(passwordstr);
+                            System.out.println(confpasswordstr);
+                    } else if(!termsCb.isChecked()) {
+                        z = "Please accept the terms and conditions";
+
                     }
-
-
 
 
                     else {

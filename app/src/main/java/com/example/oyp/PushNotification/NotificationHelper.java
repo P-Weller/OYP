@@ -55,8 +55,8 @@ public class NotificationHelper extends ContextWrapper {
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setAutoCancel(true)
-                .setContentTitle("Push Notification!")
-                .setContentText("The Push Notification is working!")
+                .setContentTitle("New Task!")
+                .setContentText("You have a new task named:" + "Name of the Activity")
                 .setColor(Color.rgb(72,169,197))
                 .setSmallIcon(R.drawable.ic_event)
                 .setContentIntent(contentIntent);
