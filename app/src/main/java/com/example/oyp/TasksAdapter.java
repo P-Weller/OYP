@@ -52,9 +52,9 @@ public class TasksAdapter extends BaseAdapter {
 
         String name = tName.get(i);
         String user = tUser.get(i);
-        int bild = tImage.get(i);
+        int icon = tImage.get(i);
 
-        imageView.setImageResource(bild);
+        imageView.setImageResource(icon);
         opentasksTextView.setText(name);
         userTextView.setText(user);
 
