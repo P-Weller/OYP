@@ -35,8 +35,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            tools:ignore="MissingConstraints"
             >
 
 
@@ -44,8 +45,7 @@
                 android:id="@+id/rankTextView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:height="40dip"
+                android:layout_weight="2"
                 android:background="@color/default_Button_Background"
                 android:fontFamily="casual"
                 android:gravity="center"
@@ -54,6 +54,7 @@
                 android:textColor="@color/default_white"
                 android:textSize="30sp"
                 android:textStyle="bold"
+
                 />
 
             <TextView
@@ -61,13 +62,13 @@
                 style="@style/TextviewTheme"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:height="40dip"
                 android:background="@color/default_Button_Background"
                 android:fontFamily="casual"
                 android:gravity="start"
                 android:text="User"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textColor="@color/default_white"
                 android:textSize="30sp"
                 android:textStyle="bold"
@@ -83,10 +84,9 @@
                 android:text="Points"
                 android:textSize="30sp"
                 android:textColor="@color/default_white"
-                android:gravity="center"
                 android:background="@color/default_Button_Background"
                 android:id="@+id/pointsTextView"
-                android:layout_weight="1.5"
+                android:layout_weight="3"
                 android:textStyle="bold"
                 style="@style/TextviewTheme"
 

@@ -55,9 +55,8 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="15dp"
-
-            android:textAlignment="textStart"
+            android:paddingStart="8dp"
+            android:gravity="bottom"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -88,8 +87,8 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="15dp"
-            android:textAlignment="textStart"
+            android:paddingStart="8dp"
+            android:gravity="bottom"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -120,8 +119,8 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="15dp"
-            android:textAlignment="textStart"
+            android:paddingStart="8dp"
+            android:gravity="bottom"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -152,8 +151,8 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="15dp"
-            android:textAlignment="textStart"
+            android:paddingStart="8dp"
+            android:gravity="bottom"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -184,8 +183,8 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="15dp"
-            android:textAlignment="textStart"
+            android:paddingStart="8dp"
+            android:gravity="bottom"
             android:textSize="30sp"
             android:textStyle="bold" />
 
