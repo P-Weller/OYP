@@ -13,32 +13,30 @@
         android:layout_marginTop="35dp"
         android:text="Count"
         android:textAlignment="gravity"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/unamesTextView"
-        android:layout_width="88dp"
-
+        android:layout_width="96dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="174dp"
-        android:gravity="center"
+        android:layout_marginEnd="191dp"
+        android:gravity="start"
         android:text="Name"
         android:textAlignment="textStart"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 
     <TextView
         android:id="@+id/upointsTextView"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="47dp"
+        android:layout_marginEnd="35dp"
         android:text="Points"
         android:textAlignment="gravity"
-        android:textSize="24sp" />
+        android:textSize="22sp" />
 </RelativeLayout>
