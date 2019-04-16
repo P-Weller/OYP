@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.example.oyp.Fragments.CreateTaskFragment;
+import com.example.oyp.MainActivity;
 import com.example.oyp.R;
 
 //NotificationHelper class
@@ -47,7 +48,7 @@ public class NotificationHelper extends ContextWrapper {
     public NotificationCompat.Builder getChannelNotification() {
 
         //sets Intent on the PushNotification
-        Intent activityIntent = new Intent(this, CreateTaskFragment.class);
+        Intent activityIntent = new Intent(this, MainActivity.class);
         activityIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);

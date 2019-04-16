@@ -55,11 +55,6 @@ public class CreateTaskFragment extends Fragment {
     String timeText ="";
     String dateText ="";
 
-
-
-
-
-
     Connection conn;
     String un, pass, db, ip;
 
@@ -88,15 +83,15 @@ public class CreateTaskFragment extends Fragment {
         pointsEt = view.findViewById(R.id.taskpointsEditText);
         createBtn = view.findViewById(R.id.createTaskBtn);
 
-
+        //Capture click on dateEtBtn
         dateEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-
+        //Creates new Fragment of the DatePicker
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
-
+        //Jumps into the onDateSet() method in DatePickerFragment.java
             }
 
         });
@@ -134,9 +129,9 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        /*if (c.before(Calendar.getInstance())) {
+        if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }*/
+        }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
@@ -147,14 +142,14 @@ public class CreateTaskFragment extends Fragment {
     public void updateText() {
 
 
-
+        //Checks if the text is null
         if(dateEt!= null) {
 
-
+        //Saving the time from the Calendar variable in the right format in the timeText and dateText String
             timeText += dateFormat.format(c.getTime());
             dateText += timeFormat.format(c.getTime());
+        //Setting the chosen date on the dateEt EditText
             dateEt.setText(timeText + "  " + dateText);
-
 
         }
 
