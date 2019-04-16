@@ -39,6 +39,7 @@ public class TasksFragment extends Fragment {
     int i = 0;
 
     private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_CHOSENTASK = "key_chosentask";
 
     public TasksFragment(){
     }
@@ -89,6 +90,10 @@ public class TasksFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 
+                String selectedFromList =(String) (parent.getItemAtPosition(i));
+
+                GetID retrieveIDData = new GetID(selectedFromList);
+                retrieveIDData.execute("");
                 Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
                 showDetailActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
                 startActivity(showDetailActivity);
@@ -107,6 +112,20 @@ public class TasksFragment extends Fragment {
 
         String household = sp.getString("key_householdname", "");
         return household;
+
+    }
+
+    public void saveTask(int i){
+
+        int activityID = i;
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putInt(KEY_CHOSENTASK, activityID);
+
+        editor.apply();
 
     }
 
@@ -337,6 +356,79 @@ public class TasksFragment extends Fragment {
 
             TasksAdapter tasksAdapter = new TasksAdapter(thisContext, tImage, tName,tUser);
             otasksListView.setAdapter(tasksAdapter);
+        }
+    }
+
+    private class GetID extends AsyncTask<String, String, String> {
+        String msg = "";
+        String tName;
+        int taskID;
+
+        private GetID(String taskName){
+            tName = taskName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            String ip = "192.168.1.164";
+            String db = "oyp_database";
+            String un = "root";
+            String pass = "pass";
+
+            try {
+                conn = connectionclass(un, pass, db, ip);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT TaskID FROM activity,task WHERE task.ActivityID = activity.ActivityID AND activity.AName '" + tName + "'";
+                ResultSet rs = stmt.executeQuery(sql);
+                int i = 0;
+
+                while (rs.next()) {
+                    taskID = rs.getInt("ActivityID");
+                    i++;
+                }
+
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            saveTask(taskID);
+            System.out.println("1: " + taskID);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
         }
     }
 }
