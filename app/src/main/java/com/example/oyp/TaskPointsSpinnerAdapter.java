@@ -1,5 +1,6 @@
 package com.example.oyp;
 
+import android.widget.BaseAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,31 +9,28 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.oyp.R;
+
 import java.util.ArrayList;
 
-public class RepeatSpinnerAdapter extends BaseAdapter{
+public class TaskPointsSpinnerAdapter extends BaseAdapter {
     Context context;
     int icons[];
-    ArrayList<String> repeatName = new ArrayList<>();
+    String [] pointsName;
+    LayoutInflater inflter;
 
-   //String[] repeatName;
-   LayoutInflater inflter;
-
-    public RepeatSpinnerAdapter(Context applicationContext, int[] icons, ArrayList<String> repeatName) {
+    public TaskPointsSpinnerAdapter(Context applicationContext, int[] icons, String[] pointsName) {
         this.context = applicationContext;
         this.icons = icons;
-        this.repeatName = repeatName;
+        this.pointsName = pointsName;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
-
-    public int getCount() {
-        return repeatName.size();
-    }
+    public int getCount() {return icons.length;}
 
 
     public Object getItem(int i) {
-        return repeatName.get(i);
+        return null;
     }
 
     public long getItemId(int i) {
@@ -40,13 +38,16 @@ public class RepeatSpinnerAdapter extends BaseAdapter{
     }
 
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.repeat_spinner_items, null);
+        view = inflter.inflate(R.layout.taskpoints_spinner_items, null);
         ImageView icon = (ImageView) view.findViewById(R.id.imageView);
         TextView names = (TextView) view.findViewById(R.id.textView);
         icon.setImageResource(icons[i]);
-        String repeatNames = repeatName.get(i);
-        names.setText(repeatNames);
+        names.setText(pointsName[i]);
         return view;
     }
 }
+
+
+
+
 

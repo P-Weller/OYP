@@ -3,33 +3,60 @@ package com.example.oyp.Fragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
+import com.example.oyp.ConnectionClass;
+import com.example.oyp.CreateUserActivity;
+import com.example.oyp.MainActivity;
+import com.example.oyp.PersonSpinnerAdapter;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
+import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
+import com.example.oyp.StartActivity;
+import com.example.oyp.TaskPointsSpinnerAdapter;
+import com.example.oyp.UNamesAdapter;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import static com.example.oyp.R.id.createTaskEditText;
 
 /***********************************************+
  * Was noch fehlt:
@@ -42,24 +69,30 @@ import java.util.Calendar;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, personEt, pointsEt;
-    public static EditText dateEt;
-    Spinner repeatSpinner;
+    public EditText taskEt, dateEt;
+    Spinner repeatSpinner, taskpointsSpinner, personSpinner;
     Button createBtn;
     Context thisContext;
 
-    String dateText;
-    String timeText;
+    ArrayList<String> rNames = new ArrayList<>();
+    ArrayList<String> pNames = new ArrayList<>();
+    ArrayList<Integer> pIcon = new ArrayList<>();
 
-    String[] repeatName={"Settings","Person"};
-    int icons[] = {R.drawable.ic_settings_black_32dp, R.drawable.ic_person_add_black_24dp};
+
+    private static final String SHARED_PREF_NAME = "userdata";
+
+    int iconsRepeat[] = {R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp};
+
+
+    String [] pointsName = {"Points", "10 Points", "20 Points" , "30 Points", "50 Points"};
+    int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public static Calendar c = Calendar.getInstance();
+    public Calendar c = Calendar.getInstance();
 
-    //Creating new DateFormat and TimeFormat to have the right format for the database
-   // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-   // SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    public int updateTextID = 0;
+
+
 
 
     Connection conn;
@@ -78,6 +111,10 @@ public class CreateTaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+
+
+
+
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
         thisContext = this.getContext();
 
@@ -87,13 +124,29 @@ public class CreateTaskFragment extends Fragment {
         pass = "pass";
 
 
+        rNames.add("repeat");
+        pNames.add("household member");
+        pIcon.add(R.drawable.ic_baseline_people_24px);
+
+
         taskEt = view.findViewById(R.id.createTaskEditText);
         dateEt = view.findViewById(R.id.dateEditText);
-        //taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
+        taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
         repeatSpinner = view.findViewById(R.id.repeatSpinner);
-       //
-        //personSpinner = view.findViewById(R.id.personSpinner);
+        personSpinner = view.findViewById(R.id.personSpinner);
+
+
+        getHousehold();
+
+        GetRepeatData getRepeatData = new GetRepeatData();
+        getRepeatData.execute("");
+
+        GetPersonData getPersonData = new GetPersonData();
+        getPersonData.execute("");
+
+
+
 
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -104,33 +157,52 @@ public class CreateTaskFragment extends Fragment {
 
             }
         });
-        RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), icons, repeatName);
-        repeatSpinner.setAdapter(repeatSpinnerAdapter);
+
+        taskpointsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        TaskPointsSpinnerAdapter taskPointsSpinnerAdapter = new TaskPointsSpinnerAdapter(getActivity().getApplicationContext(), iconsPoints, pointsName);
+        taskpointsSpinner.setAdapter(taskPointsSpinnerAdapter);
+
+        personSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         dateEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Creates new instance of DatePicker
+
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-
+                //updateText();
 
                 }
 
         });
+        /*
                 //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Createtask createtask = new Createtask();
                 createtask.execute();
-
-                startAlarm(getActivity());
             }
         });
-
+*/
         return view;
 
     }
@@ -148,41 +220,32 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        if (c.before(Calendar.getInstance())) {
+        /*if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }
+        }*/
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
-
     }
 
     public void updateText() {
-
-    //checks if the dateEt EditText is null
-    if (dateEt != null) {
-
-        //Saving the chosen Date and Time in the dateText and timeText String
-     //   dateText = dateFormat.format(c.getTime());
-      //  timeText = timeFormat.format(c.getTime());
-        //Setting the date on the dateEt EditText
-        dateEt.setText(dateText + " " + timeText);
-    }
-
+                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+            dateEt.setText(timeText);
 }
 
 
 
 
 
-
+/*
 
     class Createtask extends AsyncTask<String, String, String> {
 
         String taskstr = taskEt.getText().toString();
         String datestr = dateEt.getText().toString();
         String timestr;
-        String userstr;
-        String statusstr;
+        String pointsString = taskpointsSpinner.getSelectedItem().toString();
+        String personString = personSpinner.getSelectedItem().toString();
+
 
         String z = "";
 
@@ -192,8 +255,6 @@ public class CreateTaskFragment extends Fragment {
 
             taskEt.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
-
-
                 }
             });
 
@@ -221,7 +282,7 @@ public class CreateTaskFragment extends Fragment {
                     } else {
 
                         String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES" +
-                                "('" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+taskstr+"')";
+                                "('" + pointsString + "' ,'" +datestr+ "','"+timestr+"','"+personString+"',"0", '"+taskstr+"')";
 
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate(query);
@@ -246,7 +307,7 @@ public class CreateTaskFragment extends Fragment {
 
             if (isSuccess) {
 
-                /*Intent intent = new Intent(CreateTaskFragment.this, MainActivity.class);
+                Intent intent = new Intent(CreateTaskFragment.this, MainActivity.class);
 
                 intent.putExtra("task",taskstr);
                 intent.putExtra("person",personstr);
@@ -258,12 +319,12 @@ public class CreateTaskFragment extends Fragment {
 
 
                 startActivity(intent);
-                */
+
             }
 
         }
 
-    }
+    } **/
 
 
     public Connection connectionclass(String user, String password, String database, String server) {
@@ -286,5 +347,244 @@ public class CreateTaskFragment extends Fragment {
         return connection;
     }
 
+    private class GetPersonData extends AsyncTask<String, String, String> {
+        String msg= "";
+
+        String householdid;
+        String householdstr = getHousehold();
+
+
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt30 = null;
+
+            String ip = "192.168.1.164";
+            String db = "oyp_database";
+            String un = "root";
+            String pass = "pass";
+            String query30;
+            String query40;
+
+
+            try {
+                conn = connectionclass(un, pass, db, ip);
+
+                query40 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
+
+                Statement stmt1 = conn.createStatement();
+
+                stmt1.executeUpdate(query40);
+
+                ResultSet rs1 = stmt1.executeQuery(query40);
+
+                while (rs1.next()) {
+                    householdid = rs1.getString(1);
+
+                }
+
+
+
+                query30 = "SELECT UName, GIcon FROM user,gender WHERE HouseholdID = '" + householdid + "' AND user.GenderID = gender.GenderID ORDER BY UName ASC";
+
+
+                stmt30 = conn.createStatement();
+                stmt30.executeUpdate(query30);
+
+
+                ResultSet rs30=stmt30.executeQuery(query30);
+
+                while (rs30.next())
+
+
+                {
+                    String person = rs30.getString("UName");
+                    String icon = rs30.getString("GIcon");
+
+                    Resources res = getResources();
+                    int gImage = res.getIdentifier(icon , "drawable", getActivity().getPackageName());
+
+                    pNames.add(person);
+                    pIcon.add(gImage);
+
+                }
+
+
+                msg = "Process complete.";
+                rs30.close();
+                stmt30.close();
+                conn.close();
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt30 != null) {
+                        stmt30.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+          /*  ArrayList<String> count = new ArrayList<>();
+            for (int k = 0; k < rNames.size(); k++) {
+                String str = k + 1 + ".";
+                count.add(str);
+
+
+            }*/
+            //String[] count2 = new String[count.size()];
+            //count2 = count.toArray(count2);
+
+
+            PersonSpinnerAdapter personSpinnerAdapter = new PersonSpinnerAdapter(getActivity().getApplicationContext(), pIcon, pNames);
+            personSpinner.setAdapter(personSpinnerAdapter);
+
+        }
+    }
+
+
+
+
+
+
+    private class GetRepeatData extends AsyncTask<String, String, String> {
+        String msg = "";
+
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            String ip = "192.168.1.164";
+            String db = "oyp_database";
+            String un = "root";
+            String pass = "pass";
+            String query25;
+
+
+            try {
+                conn = connectionclass(un, pass, db, ip);
+
+
+                query25 = "SELECT * FROM `repeat`";
+
+
+                Statement stmt25 = conn.createStatement();
+                stmt25.executeUpdate(query25);
+
+
+                System.out.println("woSindwirDenn");
+                ResultSet rs25=stmt25.executeQuery(query25);
+
+                while (rs25.next())
+
+
+                {
+                    String repeat = rs25.getString("RName");
+                    rNames.add(repeat);
+
+                    System.out.println("SchonHier");
+                }
+
+                System.out.println("myTag");
+                System.out.println(rNames);
+
+
+                msg = "Process complete.";
+                rs25.close();
+                stmt25.close();
+                conn.close();
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            System.out.println("es tut!");
+            return null;
+            }
+
+
+
+
+
+
+
+        @Override
+        protected void onPostExecute(String s) {
+
+          /*  ArrayList<String> count = new ArrayList<>();
+            for (int k = 0; k < rNames.size(); k++) {
+                String str = k + 1 + ".";
+                count.add(str);
+
+
+            }*/
+            //String[] count2 = new String[count.size()];
+            //count2 = count.toArray(count2);
+
+
+            RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
+            repeatSpinner.setAdapter(repeatSpinnerAdapter);
+
+        }
+    }
+
+    public String getHousehold(){
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        String household = sp.getString("key_householdname", "");
+        return household;
+
+    }
+
 }
+
 

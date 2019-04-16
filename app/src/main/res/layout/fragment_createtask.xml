@@ -64,7 +64,7 @@
             <Spinner
                 android:id="@+id/personSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="55dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Person ?"
@@ -115,7 +115,7 @@
             <Spinner
                 android:id="@+id/repeatSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="55dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Repeat ?"
@@ -137,7 +137,7 @@
             <Spinner
                 android:id="@+id/taskpointsSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="55dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Points ?"
