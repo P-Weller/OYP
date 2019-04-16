@@ -28,7 +28,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/activityTextView"
+            android:id="@+id/activityNameTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -54,7 +54,7 @@
             android:textColor="@color/default_white" />
 
         <TextView
-            android:id="@+id/activityDescriptionTextView"
+            android:id="@+id/activityDescriptionTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -68,7 +68,7 @@
 
 
         <TextView
-            android:id="@+id/activitydescriptionTextView"
+            android:id="@+id/activityDescriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_gravity="start"
