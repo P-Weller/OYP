@@ -61,8 +61,8 @@
             android:layout_margin="5dp"
             style="@style/EditText">
 
-            <EditText
-                android:id="@+id/personEditText"
+            <Spinner
+                android:id="@+id/personSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:autofillHints=""
@@ -134,8 +134,8 @@
             android:layout_margin="5dp"
             style="@style/EditText">
 
-            <EditText
-                android:id="@+id/taskpointsEditText"
+            <Spinner
+                android:id="@+id/taskpointsSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:autofillHints=""
