@@ -74,8 +74,9 @@ public class RegistrationActivity extends AppCompatActivity{
         householdEt = (EditText) findViewById(R.id.HNameEditText);
         emailET = (EditText) findViewById(R.id.eMailEditText);
         passwordET = (EditText) findViewById(R.id.password2EditText);
-        confpasswordET = (EditText) findViewById(R.id.password2EditText);
+        confpasswordET = (EditText) findViewById(R.id.password3EditText);
         termsCb = (CheckBox) findViewById(R.id.termsAndConditionsCheckBox);
+
 
 
 
@@ -147,32 +148,33 @@ public class RegistrationActivity extends AppCompatActivity{
         @Override
         protected String doInBackground(String... params) {
 
-            System.out.println(passwordET.getText());
-            System.out.println(confpasswordET.getText());
 
-            if(householdstr.trim().equals("")|| emailstr.trim().equals("") || passwordstr.trim().equals("") || confpasswordstr.trim().equals("")
-                    && !confpasswordstr.equals(passwordstr) )
+            if (householdstr.trim().equals("") || emailstr.trim().equals("") || passwordstr.trim().equals("") || confpasswordstr.trim().equals("")
+                    && !confpasswordstr.equals(passwordstr))
                 z = "Please enter all fields or check your password or accept TaC";
 
 
-            else{
+
+        else{
 
 
                 try {
                     conn = connectionclass(un, pass, db, ip);
                     if (conn == null) {
                         z = "Please check your internet connection";
-                    } else if(isEmail(emailET) == false){
+                    } else if(isEmail(emailET) == false) {
                         z = "Please enter a valid email address";
-                    /*} else if(!termsCb.isSelected()){
-                        z = "Please accept the terms and conditions";*/
-                    } else if(passwordstr != confpasswordstr){
-                        z= "Please enter two matching passwords";
-                        passwordET.setError("Invalid Password");
-                        confpasswordET.setError("Invalid Password");
+
+
+                    } else if(!termsCb.isChecked()) {
+                        z = "Please accept the terms and conditions";
+
+                    }else if(!confpasswordstr.equals(passwordstr)){
+                            z= "Please enter two matching passwords";
+                            passwordET.setError("Invalid Password");
+                            confpasswordET.setError("Invalid Password");
+
                     }
-
-
 
 
                     else {
@@ -186,9 +188,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
                         Intent intent = new Intent(RegistrationActivity.this, ChooseUserActivity.class);
 
-                        intent.putExtra("household",householdstr);
-                        intent.putExtra("email",emailstr);
-                        intent.putExtra("password",passwordstr);
+
 
 
                         startActivity(intent);

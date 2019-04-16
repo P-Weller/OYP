@@ -121,6 +121,7 @@
             android:fontFamily="casual"
             android:textSize="14sp"
             android:text="I accept the terms and conditions"
+            android:checked="false"
             />
 
 
