@@ -22,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="191dp"
+        android:layout_marginEnd="203dp"
         android:gravity="start"
         android:text="Name"
         android:textAlignment="textStart"
