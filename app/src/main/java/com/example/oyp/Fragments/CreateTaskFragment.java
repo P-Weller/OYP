@@ -45,7 +45,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -88,6 +87,8 @@ public class CreateTaskFragment extends Fragment {
 
 
 
+
+
     public CreateTaskFragment() {
     }
 
@@ -107,11 +108,11 @@ public class CreateTaskFragment extends Fragment {
 
 
         taskEt = view.findViewById(R.id.createTaskEditText);
-        personEt = view.findViewById(R.id.personEditText);
         dateEt = view.findViewById(R.id.dateEditText);
-        pointsEt = view.findViewById(R.id.taskpointsEditText);
+        taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
         repeatSpinner = view.findViewById(R.id.repeatSpinner);
+        personSpinner = view.findViewById(R.id.personSpinner);
 
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -197,9 +198,7 @@ public class CreateTaskFragment extends Fragment {
     class Createtask extends AsyncTask<String, String, String> {
 
         String taskstr = taskEt.getText().toString();
-        String personstr = personEt.getText().toString();
         String datestr = dateEt.getText().toString();
-        String pointsstr = pointsEt.getText().toString();
         String timestr;
         String userstr;
         String statusstr;
@@ -227,7 +226,7 @@ public class CreateTaskFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            if (taskstr.trim().equals("") || personstr.trim().equals("") || datestr.trim().equals("") || pointsstr.trim().equals(""))
+            if (taskstr.trim().equals("") || datestr.trim().equals(""))
                 z = "Please fill in all fields";
 
 
@@ -241,7 +240,7 @@ public class CreateTaskFragment extends Fragment {
                     } else {
 
                         String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES" +
-                                "('" +pointsstr+ "' ,'" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+taskstr+"')";
+                                "('" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+taskstr+"')";
 
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate(query);

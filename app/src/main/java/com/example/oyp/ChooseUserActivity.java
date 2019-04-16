@@ -31,7 +31,7 @@ public class ChooseUserActivity extends AppCompatActivity{
     ArrayList<String> uNames = new ArrayList<>();
 
     private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_CHOOSEDUSER = "key_chooseduser";
+    private static final String KEY_CHOSENUSER = "key_chosenuser";
 
 
     public void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         SharedPreferences.Editor editor = sp.edit();
 
-        editor.putInt(KEY_CHOOSEDUSER, username);
+        editor.putInt(KEY_CHOSENUSER, username);
 
         editor.apply();
 

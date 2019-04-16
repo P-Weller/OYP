@@ -29,88 +29,162 @@
             />
 
         <TextView
+            android:id="@+id/whatTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="Task"
+            android:textColor="@color/default_Button_Background" />
+
+        <TextView
             android:id="@+id/taskdetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_margin="20dp"
-            android:background="@color/TextViewBackground2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/default_EditText_Background"
             android:drawableStart="@drawable/ic_help_outline_black_24dp"
             android:drawableLeft="@drawable/ic_help_outline_black_24dp"
+
             android:drawablePadding="10dp"
             android:fontFamily="casual"
             android:paddingStart="15dp"
 
             android:textAlignment="textStart"
             android:textSize="30sp"
-            android:textStyle="bold"
+            android:textStyle="bold" />
 
-            />
+        <TextView
+            android:id="@+id/personTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="Person"
+            android:textColor="@color/default_Button_Background" />
 
         <TextView
             android:id="@+id/persontetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_margin="20dp"
-            android:background="@color/TextViewBackground2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/default_EditText_Background"
             android:drawableStart="@drawable/ic_person_add_black_24dp"
             android:drawableLeft="@drawable/ic_person_add_black_24dp"
+
             android:drawablePadding="10dp"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="Date"
+            android:textColor="@color/default_Button_Background" />
 
         <TextView
             android:id="@+id/datedetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_margin="20dp"
-            android:background="@color/TextViewBackground2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/default_EditText_Background"
             android:drawableStart="@drawable/ic_date_range_32dp"
             android:drawableLeft="@drawable/ic_date_range_32dp"
+
             android:drawablePadding="10dp"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/repeatTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="Repeat"
+            android:textColor="@color/default_Button_Background" />
 
         <TextView
             android:id="@+id/repeatdetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_margin="20dp"
-            android:background="@color/TextViewBackground2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/default_EditText_Background"
             android:drawableStart="@drawable/ic_loop_black_32dp"
             android:drawableLeft="@drawable/ic_loop_black_32dp"
+
             android:drawablePadding="10dp"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pointsTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="Points"
+            android:textColor="@color/default_Button_Background" />
 
         <TextView
             android:id="@+id/pointsdetailTextView"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="start"
-            android:layout_margin="20dp"
-            android:background="@color/TextViewBackground2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/default_EditText_Background"
             android:drawableStart="@drawable/ic_attach_money_black_32dp"
             android:drawableLeft="@drawable/ic_attach_money_black_32dp"
+
             android:drawablePadding="10dp"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
