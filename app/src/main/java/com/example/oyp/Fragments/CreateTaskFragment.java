@@ -11,45 +11,25 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
-import com.example.oyp.ConnectionClass;
-import com.example.oyp.CreateUserActivity;
-import com.example.oyp.MainActivity;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
-import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
-import com.example.oyp.StartActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
-import static com.example.oyp.R.id.createTaskEditText;
 
 /***********************************************+
  * Was noch fehlt:
@@ -62,19 +42,24 @@ import static com.example.oyp.R.id.createTaskEditText;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, personEt, dateEt, pointsEt;
+    public EditText taskEt, personEt, pointsEt;
+    public static EditText dateEt;
     Spinner repeatSpinner;
     Button createBtn;
     Context thisContext;
+
+    String dateText;
+    String timeText;
 
     String[] repeatName={"Settings","Person"};
     int icons[] = {R.drawable.ic_settings_black_32dp, R.drawable.ic_person_add_black_24dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public Calendar c = Calendar.getInstance();
+    public static Calendar c = Calendar.getInstance();
 
-    public int updateTextID = 0;
-
+    //Creating new DateFormat and TimeFormat to have the right format for the database
+   // SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+   // SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
 
     Connection conn;
@@ -103,11 +88,12 @@ public class CreateTaskFragment extends Fragment {
 
 
         taskEt = view.findViewById(R.id.createTaskEditText);
-        personEt = view.findViewById(R.id.personEditText);
         dateEt = view.findViewById(R.id.dateEditText);
-        pointsEt = view.findViewById(R.id.taskpointsEditText);
+        //taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
         repeatSpinner = view.findViewById(R.id.repeatSpinner);
+       //
+        //personSpinner = view.findViewById(R.id.personSpinner);
 
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -126,11 +112,11 @@ public class CreateTaskFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-
+                //Creates new instance of DatePicker
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-                //updateText();
+
 
                 }
 
@@ -140,6 +126,8 @@ public class CreateTaskFragment extends Fragment {
             public void onClick(View v) {
                 Createtask createtask = new Createtask();
                 createtask.execute();
+
+                startAlarm(getActivity());
             }
         });
 
@@ -160,9 +148,9 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        /*if (c.before(Calendar.getInstance())) {
+        if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }*/
+        }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
@@ -170,11 +158,15 @@ public class CreateTaskFragment extends Fragment {
 
     public void updateText() {
 
+    //checks if the dateEt EditText is null
+    if (dateEt != null) {
 
-
-                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-            dateEt.setText(timeText);
-
+        //Saving the chosen Date and Time in the dateText and timeText String
+     //   dateText = dateFormat.format(c.getTime());
+      //  timeText = timeFormat.format(c.getTime());
+        //Setting the date on the dateEt EditText
+        dateEt.setText(dateText + " " + timeText);
+    }
 
 }
 
@@ -187,9 +179,7 @@ public class CreateTaskFragment extends Fragment {
     class Createtask extends AsyncTask<String, String, String> {
 
         String taskstr = taskEt.getText().toString();
-        String personstr = personEt.getText().toString();
         String datestr = dateEt.getText().toString();
-        String pointsstr = pointsEt.getText().toString();
         String timestr;
         String userstr;
         String statusstr;
@@ -217,7 +207,7 @@ public class CreateTaskFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            if (taskstr.trim().equals("") || personstr.trim().equals("") || datestr.trim().equals("") || pointsstr.trim().equals(""))
+            if (taskstr.trim().equals("") || datestr.trim().equals(""))
                 z = "Please fill in all fields";
 
 
@@ -231,7 +221,7 @@ public class CreateTaskFragment extends Fragment {
                     } else {
 
                         String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES" +
-                                "('" +pointsstr+ "' ,'" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+taskstr+"')";
+                                "('" +datestr+ "','"+timestr+"','"+userstr+"','"+statusstr+"','"+taskstr+"')";
 
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate(query);
