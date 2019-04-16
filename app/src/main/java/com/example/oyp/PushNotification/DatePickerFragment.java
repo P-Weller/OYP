@@ -22,14 +22,9 @@ import com.example.oyp.MainActivity;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-    //Creates Fragment of the DatePicker
+    //Creates new DatePickerFragment
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-    //Creates instance of Calendar
-
-    CreateTaskFragment createTaskFragment = new CreateTaskFragment();
-
 
     @NonNull
     @Override
@@ -48,6 +43,9 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     @Override
     //setting the date
     public void onDateSet(DatePicker view, int chosenYear, int chosenMonth, int chosenDay) {
+
+        //Creates instance of CreateTaskFragment to access Calendar variable
+        CreateTaskFragment createTaskFragment = new CreateTaskFragment();
 
     //saving the chosen date values in the created Calendar instance
         createTaskFragment.c.set(Calendar.YEAR, chosenYear);
