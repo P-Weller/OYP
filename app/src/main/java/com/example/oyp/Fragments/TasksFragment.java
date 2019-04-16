@@ -2,6 +2,7 @@ package com.example.oyp.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class TasksFragment extends Fragment {
     ListView otasksListView;
     int i = 0;
 
+    private static final String SHARED_PREF_NAME = "userdata";
 
     public TasksFragment(){
     }
@@ -50,6 +52,8 @@ public class TasksFragment extends Fragment {
         otasksListView = view.findViewById(R.id.otasksListView);
         Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
         TextView opentasksTextView = view.findViewById(R.id.opentasksTextView);
+
+        getHousehold();
 
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +95,15 @@ public class TasksFragment extends Fragment {
         return view;
     }
 
+    public String getHousehold(){
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        String household = sp.getString("key_loginhname", "");
+        return household;
+
+    }
+
     public Connection connectionclass(String user, String password, String database, String server) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -114,6 +127,7 @@ public class TasksFragment extends Fragment {
 
     private class GetOpenTaskData extends AsyncTask<String, String, String> {
         String msg = "";
+        String householdstr = getHousehold();
 
 
         @Override
@@ -132,12 +146,29 @@ public class TasksFragment extends Fragment {
             String db = "oyp_database";
             String un = "root";
             String pass = "pass";
+            String householdid ="";
+            String query1;
 
             try {
                 conn = connectionclass(un, pass, db, ip);
 
+                query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
+
+                Statement stmt1 = conn.createStatement();
+
+                stmt1.executeUpdate(query1);
+
+                ResultSet rs1 = stmt1.executeQuery(query1);
+
+                while (rs1.next()) {
+                    householdid = rs1.getString(1);
+
+                }
+
+                Log.d("HouseholdID", householdid);
+
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM activity,task WHERE task.ActivityID = activity.ActivityID AND StatusID = 0";
+                String sql = "SELECT AIcon,AName FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -197,6 +228,7 @@ public class TasksFragment extends Fragment {
 
     private class GetClosedTaskData extends AsyncTask<String, String, String> {
         String msg = "";
+        String householdstr = getHousehold();
 
 
         @Override
@@ -215,12 +247,29 @@ public class TasksFragment extends Fragment {
             String db = "oyp_database";
             String un = "root";
             String pass = "pass";
+            String householdid ="";
+            String query1;
 
             try {
                 conn = connectionclass(un, pass, db, ip);
 
+                query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
+
+                Statement stmt1 = conn.createStatement();
+
+                stmt1.executeUpdate(query1);
+
+                ResultSet rs1 = stmt1.executeQuery(query1);
+
+                while (rs1.next()) {
+                    householdid = rs1.getString(1);
+
+                }
+
+                Log.d("HouseholdID", householdid);
+
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM activity,task WHERE task.ActivityID = activity.ActivityID AND StatusID = 1";
+                String sql = "SELECT AIcon,AName FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 1 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 

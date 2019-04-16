@@ -54,7 +54,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         createTaskFragment.c.set(Calendar.MONTH, chosenMonth);
         createTaskFragment.c.set(Calendar.DAY_OF_MONTH, chosenDay);
 
-        Log.d("onDateSet" , "OnDateSet: " + createTaskFragment.c.toString());
+        System.out.println("onDateSet: " + createTaskFragment.c.toString());
 
         //creates a new timePickerFragment --> Jumps into onTimeSet() in TimePickerFragment.java
         DialogFragment timePicker = new TimePickerFragment();
