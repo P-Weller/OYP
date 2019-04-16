@@ -2,6 +2,7 @@ package com.example.oyp.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,6 +35,9 @@ public class ActivityFragment extends Fragment {
     ArrayList<String> aName = new ArrayList<>();
     ListView activityListView;
 
+    private static final String SHARED_PREF_NAME = "userdata";
+    private static final String KEY_CHOSENACTIVITY = "key_chosenacitivity";
+
     public ActivityFragment(){
     }
 
@@ -54,15 +58,33 @@ public class ActivityFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 
+                String selectedFromList =(String) (parent.getItemAtPosition(i));
+
+                GetID retrieveIDData = new GetID(selectedFromList);
+                retrieveIDData.execute("");
                 Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), ActivityDetailActivity.class);
                 showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", i);
                 startActivity(showDetailActivity);
-
+                System.out.println(selectedFromList);
             }
         });
 
         return view;
 
+
+    }
+
+    public void saveActivity(int i){
+
+        int activityID = i;
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putInt(KEY_CHOSENACTIVITY, activityID);
+
+        editor.apply();
 
     }
 
@@ -166,6 +188,79 @@ public class ActivityFragment extends Fragment {
 
             ActivityAdapter activityAdapter = new ActivityAdapter(thisContext, aImage, aName);
             activityListView.setAdapter(activityAdapter);
+        }
+    }
+
+    private class GetID extends AsyncTask<String, String, String> {
+        String msg = "";
+        String aName;
+        int activityID;
+
+        private GetID(String activityName){
+            aName = activityName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            String ip = "192.168.1.164";
+            String db = "oyp_database";
+            String un = "root";
+            String pass = "pass";
+
+            try {
+                conn = connectionclass(un, pass, db, ip);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT ActivityID FROM activity WHERE AName = '" + aName + "'";
+                ResultSet rs = stmt.executeQuery(sql);
+                int i = 0;
+
+                while (rs.next()) {
+                    activityID = rs.getInt("ActivityID");
+                    i++;
+                }
+
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            saveActivity(activityID);
+            System.out.println("1: " + activityID);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
         }
     }
 }

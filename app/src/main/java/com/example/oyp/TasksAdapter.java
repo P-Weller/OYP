@@ -58,7 +58,10 @@ public class TasksAdapter extends BaseAdapter {
         opentasksTextView.setText(name);
         userTextView.setText(user);
 
+
+
         return v;
     }
+
 }
 
