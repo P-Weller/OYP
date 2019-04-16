@@ -68,7 +68,7 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Person ?"
-                android:inputType="number"
+                android:inputType="text"
                 tools:targetApi="o"
 
                 android:drawableStart="@drawable/ic_person_add_black_24dp"
@@ -119,7 +119,7 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="Repeat ?"
-                android:inputType="number"
+                android:inputType="text"
                 tools:targetApi="o"
 
                 android:drawableStart="@drawable/ic_loop_black_32dp"

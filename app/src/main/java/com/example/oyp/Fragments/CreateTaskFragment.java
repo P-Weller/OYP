@@ -79,7 +79,7 @@ public class CreateTaskFragment extends Fragment {
         taskEt = view.findViewById(R.id.createTaskEditText);
         personEt = view.findViewById(R.id.personEditText);
         dateEt = view.findViewById(R.id.dateEditText);
-        repeatEt = view.findViewById(R.id.repeatEditText);
+        //repeatEt = view.findViewById(R.id.repeatEditText);
         pointsEt = view.findViewById(R.id.taskpointsEditText);
         createBtn = view.findViewById(R.id.createTaskBtn);
 

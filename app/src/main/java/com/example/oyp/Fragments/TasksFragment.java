@@ -99,7 +99,7 @@ public class TasksFragment extends Fragment {
 
         SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
 
-        String household = sp.getString("key_loginhname", "");
+        String household = sp.getString("key_householdname", "");
         return household;
 
     }
