@@ -41,7 +41,7 @@
             android:textColor="@color/default_Button_Background" />
 
         <TextView
-            android:id="@+id/activitynameTextView"
+            android:id="@+id/activityNameTextView"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -54,7 +54,7 @@
             android:textColor="@color/default_white" />
 
         <TextView
-            android:id="@+id/descriptionTextView"
+            android:id="@+id/activityDescriptionTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
