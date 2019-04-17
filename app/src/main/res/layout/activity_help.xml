@@ -37,7 +37,7 @@
             style="@style/TextviewTheme"
             android:id="@+id/helpTextView"
             android:layout_marginTop="100dp"
-            android:text="Zu Risiken und Nebenwirkungen lesen Sie die Packungsbeilage oder fragen Sie Ihren Arzt oder Apotheker!"
+            android:text="Version 1.2 - OYP                 all rights reserved"
             android:layout_gravity="center"
             android:fontFamily="casual"
             android:textAlignment="center"
