@@ -31,9 +31,11 @@ public class TaskDetailActivity extends AppCompatActivity {
     TextView repeatDetailTextView;
     TextView pointsDetailTextView;
     Button closeTaskButton;
+    Button deleteTaskBtn;
     int taskID;
     int tUserID;
     String tPoints;
+    int tStatus;
 
     private static final String SHARED_PREF_NAME = "userdata";
 
@@ -53,6 +55,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         repeatDetailTextView = findViewById(R.id.repeatDetailTextView);
         pointsDetailTextView = findViewById(R.id.pointsDetailTextView);
         closeTaskButton = findViewById(R.id.closeTaskBtn);
+        deleteTaskBtn = findViewById(R.id.deleteTaskBtn);
 
         closeTaskButton.setOnClickListener(new View.OnClickListener(){
 
@@ -67,7 +70,7 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
-
+        System.out.println(tStatus);
 
 
         deleteTask();
@@ -160,6 +163,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                     tTime = rs.getString("TTime");
                     tRepeatID = rs.getInt("RepeatID");
                     tPoints = rs.getString("TPoints");
+                    tStatus = rs.getInt("StatusID");
                 }
 
                 msg = "Process complete.";
@@ -196,6 +200,11 @@ public class TaskDetailActivity extends AppCompatActivity {
                 rs.close();
                 stmt.close();
                 conn.close();
+
+                if(tStatus == 1){
+                    closeTaskButton.setVisibility(View.GONE);
+                    deleteTaskBtn.setVisibility(View.GONE);
+                }
 
 
             } catch (SQLException connError) {
