@@ -19,7 +19,7 @@ import android.widget.ListView;
 
 import com.example.oyp.ActivityListViewAdapter;
 import com.example.oyp.ActivityDetailActivity;
-import com.example.oyp.AddActivity;
+import com.example.oyp.CreateActivityActivity;
 import com.example.oyp.R;
 
 import java.sql.Connection;
@@ -36,7 +36,7 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class ActivityFragment extends Fragment {
 
-    Button addActBtn;
+    Button createActivityBtn;
 
     Context thisContext;
     ArrayList<Integer> aImage = new ArrayList<>();
@@ -75,12 +75,12 @@ public class ActivityFragment extends Fragment {
 
         // Creating a method to be able to add a new activity
 
-        addActBtn = view.findViewById(R.id.newActivityBtn);
+        createActivityBtn = view.findViewById(R.id.newActivityBtn);
 
-        addActBtn.setOnClickListener(new View.OnClickListener() {
+        createActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddActivity.class);
+                Intent intent = new Intent(getActivity(), CreateActivityActivity.class);
                 startActivity(intent);
             }
         });
