@@ -18,11 +18,12 @@ public class PersonSpinnerAdapter extends BaseAdapter {
     ArrayList<String> personName = new ArrayList<>();
     LayoutInflater inflter;
 
-    public PersonSpinnerAdapter(Context context, ArrayList<Integer> icons, ArrayList<String> personName) {
-        this.context = context;
+
+    public PersonSpinnerAdapter(Context applicationContext, ArrayList<Integer> icons, ArrayList<String> personName) {
+        this.context = applicationContext;
         this.icons = icons;
         this.personName = personName;
-        inflter = (LayoutInflater.from(context));
+        inflter = (LayoutInflater.from(applicationContext));
     }
 
     public int getCount() {return personName.size();    }
