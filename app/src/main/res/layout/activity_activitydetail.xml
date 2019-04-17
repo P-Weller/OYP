@@ -48,7 +48,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:background="@color/default_EditText_Background"
+            android:background="@color/background1"
             android:fontFamily="casual"
             android:gravity="center_vertical"
             android:textColor="@color/default_black"
@@ -71,25 +71,23 @@
 
         <TextView
             android:id="@+id/activityDescriptionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
             android:layout_gravity="start"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
-            android:background="@color/default_EditText_Background"
+            android:background="@color/background1"
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:gravity="center_vertical"
-            android:paddingStart="15dp"
+            android:gravity="fill_horizontal"
+            android:paddingStart="5dp"
             android:textColor="@color/default_black"
             android:textSize="20sp"
+            android:singleLine="false"
 
-            app:autoSizeTextType="uniform"
-            app:autoSizeMinTextSize="20sp"
-            app:autoSizeMaxTextSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
 
-             />
+            />
 
 
     </LinearLayout>
