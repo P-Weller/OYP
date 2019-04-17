@@ -3,14 +3,19 @@ package com.example.oyp;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import static com.example.oyp.DBStrings.DATABASE_IP;
@@ -36,7 +41,34 @@ public class CreateActivityActivity extends AppCompatActivity {
         activityDescriptionEditText = findViewById(R.id.activityDescriptionEditText);
         createActivityBtn = findViewById(R.id.createActivityBtn);
 
+        createActivityBtn.setOnClickListener(new View.OnClickListener() {
 
+            public void onClick(View v) {
+
+                AddActivity addActivity = new AddActivity();
+                addActivity.execute();
+            }
+        });
+    }
+
+    public Connection connectionclass(String user, String password, String database, String server) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String ConnectionURL;
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            ConnectionURL = "jdbc:mariadb://" + server + "/" + database;
+            connection = DriverManager.getConnection(ConnectionURL, user, password);
+        } catch (SQLException se) {
+            Log.e("error here 1 : ", se.getMessage());
+        } catch (ClassNotFoundException e) {
+            Log.e("error here 2 : ", e.getMessage());
+        } catch (Exception e) {
+            Log.e("error here 3 : ", e.getMessage());
+        }
+        return connection;
     }
 
     private class AddActivity extends AsyncTask<String,String,String> {
@@ -50,6 +82,9 @@ public class CreateActivityActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            Connection conn = null;
+            Statement stmt = null;
+
 
             String query1 = null;
 
@@ -62,38 +97,19 @@ public class CreateActivityActivity extends AppCompatActivity {
                         z = "Please check your internet connection";
                     } else {
 
-                        String query2 = "INSERT INTO activity (AName, ADescription, AIcon) VALUES" +
-                                "('" + aNameStr + "','" + aDescriptionStr + "',icon_other)";
+                        String query = "INSERT INTO activity (AName, ADescription, AIcon) VALUES" +
+                                "('" + aNameStr + "','" + aDescriptionStr + "', 'icon_other')";
 
-                        Log.d("SQL Eingabe",query2);
+                        Log.d("SQL",query);
                         Statement stmt2 = conn.createStatement();
-                        stmt2.executeUpdate(query2);
+                        stmt2.executeUpdate(query);
 
-                        while (rs1.next()) {
-                            householdid = rs1.getString(1);
+                        z = "Inserting successful";
 
-                        }
-
-                        Log.d("Householdid", householdid);
-
-                        String query2 = "INSERT INTO user (UName, GenderID, HouseholdID) VALUES" +
-                                "('" + usernamestr + "','" + genderstr + "','" + householdid + "' )";
-
-                        Log.d("SQL Eingabe",query2);
-                        Statement stmt2 = conn.createStatement();
-                        stmt2.executeUpdate(query2);
-
-
-                        z = "Inserting Successfull";
-
-                        Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
-                        intent.putExtra("username",usernamestr);
-                        //intent.putExtra("upoints",20);
-                        intent.putExtra("gender",genderstr);
-                        intent.putExtra("household",householdstr);
-
+                        Intent intent = new Intent(CreateActivityActivity.this, MainActivity.class);
+                        intent.putExtra("activityName",aNameStr);
+                        intent.putExtra("activityDescription",aDescriptionStr);
                         startActivity(intent);
-
                     }
 
                 } catch (Exception ex) {
@@ -112,10 +128,9 @@ public class CreateActivityActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(CreateUserActivity.this, MainActivity.class);
-
-                intent.putExtra("username",usernamestr);
-
+                Intent intent = new Intent(CreateActivityActivity.this, MainActivity.class);
+                intent.putExtra("activityName",aNameStr);
+                intent.putExtra("activityDescription",aDescriptionStr);
                 startActivity(intent);
             }
 
