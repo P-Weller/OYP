@@ -98,10 +98,8 @@ public class CreateUserActivity extends AppCompatActivity{
                 getHousehold();
                 Log.d("Haushalt:", getHousehold());
 
-
                 Adduser adduser = new Adduser();
                 adduser.execute();
-
 
             }
 

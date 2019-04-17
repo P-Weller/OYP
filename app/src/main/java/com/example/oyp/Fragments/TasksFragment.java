@@ -418,7 +418,7 @@ public class TasksFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
-            showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", 0);
+            showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", taskID);
             startActivity(showDetailActivity);
         }
     }
