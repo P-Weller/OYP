@@ -49,7 +49,7 @@ public class ChooseUserActivity extends AppCompatActivity{
         setContentView(R.layout.activity_chooseuser);
 
         Resources res = getResources();
-        usersListView = (ListView) findViewById(R.id.usersListView);
+        usersListView = findViewById(R.id.usersListView);
 
         getHousehold();
 
@@ -111,7 +111,7 @@ public class ChooseUserActivity extends AppCompatActivity{
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         Connection connection = null;
-        String ConnectionURL = null;
+        String ConnectionURL;
 
         try {
             Class.forName("org.mariadb.jdbc.Driver");
