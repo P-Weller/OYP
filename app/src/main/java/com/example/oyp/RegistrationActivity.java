@@ -20,7 +20,6 @@ import com.example.oyp.Fragments.CreateTaskFragment;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
 import static com.example.oyp.DBStrings.DATABASE_IP;
@@ -43,6 +42,7 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class RegistrationActivity extends AppCompatActivity{
 
+
     Button createhouseholdBtn;
 
     EditText householdEt, emailET, passwordET, confpasswordET;
@@ -57,6 +57,8 @@ public class RegistrationActivity extends AppCompatActivity{
     private static final String KEY_LOGINHNAME = "key_householdname";
     private static final String KEY_HEMAIL = "key_email";
     private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
+
+
 
 
 
@@ -83,6 +85,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
 
+
         //Capture click on createBtn to go and add the user to the database and go to screen scoreboard
         createhouseholdBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -98,6 +101,8 @@ public class RegistrationActivity extends AppCompatActivity{
         });
 
     }
+
+
 
         boolean isEmail(EditText text){
         CharSequence emailET = text.getText().toString();
@@ -151,9 +156,12 @@ public class RegistrationActivity extends AppCompatActivity{
         protected String doInBackground(String... params) {
 
 
+
             if (householdstr.trim().equals("") || emailstr.trim().equals("") || passwordstr.trim().equals("") || confpasswordstr.trim().equals("")
                     && !confpasswordstr.equals(passwordstr))
                 z = "Please enter all fields or check your password or accept TaC";
+
+
 
 
 
@@ -167,15 +175,13 @@ public class RegistrationActivity extends AppCompatActivity{
                     } else if(isEmail(emailET) == false) {
                         z = "Please enter a valid email address";
 
-
                     } else if(!termsCb.isChecked()) {
                         z = "Please accept the terms and conditions";
 
                     }else if(!confpasswordstr.equals(passwordstr)){
-                            z= "Please enter two matching passwords";
-                            passwordET.setError("Invalid Password");
-                            confpasswordET.setError("Invalid Password");
-
+                        z= "Please enter two matching passwords";
+                        passwordET.setError("Invalid Password");
+                        confpasswordET.setError("Invalid Password");
                     }
 
 
@@ -213,16 +219,18 @@ public class RegistrationActivity extends AppCompatActivity{
                 catch (Exception ex)
                 {
                     isSuccess = false;
-                    z = "Exceptions"+ex;
+                    z = "Please enter two matching passwords";
                 }
 
             }
             return z;
         }
 
+
+
         @Override
         protected void onPostExecute(String s) {
-            Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(),""+ z,Toast.LENGTH_LONG).show();
 
 
             if(isSuccess) {
@@ -235,6 +243,10 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
                 startActivity(intent);
+
+
+
+
             }
 
         }
