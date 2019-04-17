@@ -13,7 +13,6 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +34,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -55,10 +54,14 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, dateEt;
+    public EditText taskEt;
+    public static EditText dateEt;
     Spinner repeatSpinner, taskpointsSpinner, personSpinner;
     Button createBtn;
     Context thisContext;
+
+    String dateText;
+    String timeText;
 
     ArrayList<String> rNames = new ArrayList<>();
     ArrayList<String> pNames = new ArrayList<>();
@@ -74,9 +77,13 @@ public class CreateTaskFragment extends Fragment {
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public Calendar c = Calendar.getInstance();
+    public static Calendar c = Calendar.getInstance();
 
-    public int updateTextID = 0;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+
+
 
     Connection conn;
 
@@ -161,7 +168,7 @@ public class CreateTaskFragment extends Fragment {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-                //updateText();
+
 
                 }
 
@@ -170,6 +177,8 @@ public class CreateTaskFragment extends Fragment {
                 //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+            startAlarm();
                 Createtask createtask = new Createtask();
                 createtask.execute();
             }
@@ -192,16 +201,20 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        /*if (c.before(Calendar.getInstance())) {
+        if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }*/
+        }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
     public void updateText() {
-                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-            dateEt.setText(timeText);
+
+       dateText = dateFormat.format(c.getTime());
+       timeText = timeFormat.format(c.getTime());
+
+
+            dateEt.setText(dateText + "  " + timeText);
 }
 
 
@@ -213,8 +226,8 @@ public class CreateTaskFragment extends Fragment {
     class Createtask extends AsyncTask<String, String, String> {
 
         String taskstr = taskEt.getText().toString();
-        String datestr = dateEt.getText().toString();
-        String timestr;
+        String datestr = dateText;
+        String timestr = timeText;
         String pointsString = taskpointsSpinner.getSelectedItem().toString();
         String personString = personSpinner.getSelectedItem().toString();
 
