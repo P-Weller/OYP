@@ -9,7 +9,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:padding="5dp"
-        android:src="@drawable/ic_settings_black_32dp" />
+        android:src="@drawable/ic_help_outline_black_24dp" />
 
     <TextView
         android:id="@+id/textView"
@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/activity_horizontal_margin"
+        android:fontFamily="casual"
         android:text="Demo"
         android:textSize="20sp"
         android:textColor="#000" />

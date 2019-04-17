@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background1"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="629dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/newactivity"
+            style="@style/TextviewTheme"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="start"
+            android:fontFamily="casual"
+            android:paddingStart="15dp"
+            android:text="New Activity"
+            android:textAlignment="textStart"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activityNameTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:text="Activity"
+            android:textColor="@color/default_Button_Background"
+            android:textSize="20dp" />
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/activitynameEditText"
+                style="@style/TextviewTheme"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/default_EditText_Background"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:textColor="@color/default_white" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/descriptionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:fontFamily="casual"
+            android:gravity="center_vertical"
+            android:text="Description"
+            android:textColor="@color/default_Button_Background"
+            android:textSize="20dp" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/activitydescriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/default_EditText_Background"
+                android:drawablePadding="10dp"
+                android:fontFamily="casual"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:textColor="@color/default_white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/createActivityBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="202dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+
+            android:layout_marginBottom="8dp"
+            android:clickable="true"
+            android:text="Create Activity"
+            android:textSize="18sp"
+            android:textStyle="bold">
+
+        </Button>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

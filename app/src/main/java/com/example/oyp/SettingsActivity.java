@@ -1,6 +1,8 @@
 package com.example.oyp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -68,18 +70,23 @@ public class SettingsActivity extends AppCompatActivity {
 
             public void onClick(View v){
 
-                //Start xxxxx.class
+                //Start StartActivity.class
+                clearSharedPref();
                 Intent intent = new Intent(SettingsActivity.this,StartActivity.class);
                 startActivity(intent);
 
             }
 
-
         });
 
+    }
 
+    private void clearSharedPref() {
+        SharedPreferences sp = getSharedPreferences("userdata", Context.MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = sp.edit();
 
+        editor.clear().apply();
     }
 
 }

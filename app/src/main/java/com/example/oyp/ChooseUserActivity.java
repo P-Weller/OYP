@@ -14,6 +14,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.oyp.Fragments.TasksFragment;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -74,11 +76,9 @@ public class ChooseUserActivity extends AppCompatActivity{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
 
-                saveUser(i);
-                Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-                mainActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", i);
-                startActivity(mainActivity);
-
+                String selectedFromList =(String) (parent.getItemAtPosition(i));
+                GetUserID retrieveIDData = new GetUserID(selectedFromList);
+                retrieveIDData.execute("");
             }
         });
 
@@ -224,6 +224,78 @@ public class ChooseUserActivity extends AppCompatActivity{
         protected void onPostExecute(String s) {
             ChooseUserListViewAdapter usersAdapter = new ChooseUserListViewAdapter(thisContext,uImage, uNames);
             usersListView.setAdapter(usersAdapter);
+        }
+    }
+
+    private class GetUserID extends AsyncTask<String, String, String> {
+        String msg = "";
+        String uName;
+        int userID;
+
+        private GetUserID(String userName){
+            uName = userName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+            String householdStr = getHousehold();
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT UserID FROM user,household WHERE household.HName = '" + householdStr + "' AND user.UName = '" + uName + "'";
+                ResultSet rs = stmt.executeQuery(sql);
+
+                while (rs.next()) {
+                    userID = rs.getInt("UserID");
+                }
+
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            saveUser(userID);
+            System.out.println("HOUSEHOLD: " + householdStr);
+            System.out.println("USERNAME: " + uName);
+            System.out.println("SAVEDUSERID: " + userID);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+            mainActivity.putExtra("com.example.oyp.Fragments.ITEM_INDEX", userID);
+            startActivity(mainActivity);
         }
     }
 

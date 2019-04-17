@@ -14,6 +14,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.oyp.Fragments.CreateTaskFragment;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -224,7 +227,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
             if(isSuccess) {
 
-                Intent intent = new Intent(RegistrationActivity.this, ChooseUserActivity.class);
+                Intent intent = new Intent(RegistrationActivity.this, CreateTaskFragment.class);
 
                 intent.putExtra("household",householdstr);
                 intent.putExtra("email",emailstr);

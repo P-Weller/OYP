@@ -13,6 +13,7 @@ import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.oyp.ActivityDetailActivity;
+import com.example.oyp.ActivitySpinnerAdapter;
 import com.example.oyp.PersonSpinnerAdapter;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
@@ -34,7 +37,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -54,18 +57,17 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt;
-    public static EditText dateEt;
-    Spinner repeatSpinner, taskpointsSpinner, personSpinner;
+    public EditText taskEt, dateEt;
+    Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner;
     Button createBtn;
     Context thisContext;
-
-    String dateText;
-    String timeText;
 
     ArrayList<String> rNames = new ArrayList<>();
     ArrayList<String> pNames = new ArrayList<>();
     ArrayList<Integer> pIcon = new ArrayList<>();
+    ArrayList<Integer> aImage = new ArrayList<>();
+    ArrayList<String> aName = new ArrayList<>();
+    private static final String KEY_CHOSENACTIVITY = "key_chosenacitivity";
 
 
     private static final String SHARED_PREF_NAME = "userdata";
@@ -77,13 +79,9 @@ public class CreateTaskFragment extends Fragment {
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public static Calendar c = Calendar.getInstance();
+    public Calendar c = Calendar.getInstance();
 
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-
-
-
+    public int updateTextID = 0;
 
     Connection conn;
 
@@ -103,12 +101,14 @@ public class CreateTaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
         thisContext = this.getContext();
 
+        aName.add("activity");
+        aImage.add(R.drawable.ic_help_blue_32dp);
         rNames.add("repeat");
         pNames.add("household member");
         pIcon.add(R.drawable.ic_baseline_people_24px);
 
 
-        taskEt = view.findViewById(R.id.createTaskEditText);
+       //activitySpinner = view.findViewById(R.id.activitySpinner);
         dateEt = view.findViewById(R.id.dateEditText);
         taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
@@ -124,7 +124,8 @@ public class CreateTaskFragment extends Fragment {
         GetPersonData getPersonData = new GetPersonData();
         getPersonData.execute("");
 
-
+        GetActivityData getActivityData = new GetActivityData();
+        getActivityData.execute("");
 
 
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -158,6 +159,15 @@ public class CreateTaskFragment extends Fragment {
 
             }
         });
+        activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         dateEt.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +178,7 @@ public class CreateTaskFragment extends Fragment {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-
+                //updateText();
 
                 }
 
@@ -177,8 +187,6 @@ public class CreateTaskFragment extends Fragment {
                 //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-            startAlarm();
                 Createtask createtask = new Createtask();
                 createtask.execute();
             }
@@ -201,21 +209,31 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        if (c.before(Calendar.getInstance())) {
+        /*if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }
+        }*/
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
     public void updateText() {
-
-       dateText = dateFormat.format(c.getTime());
-       timeText = timeFormat.format(c.getTime());
-
-
-            dateEt.setText(dateText + "  " + timeText);
+                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
+            dateEt.setText(timeText);
 }
+
+    public void saveActivity(int i){
+
+        int activityID = i;
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.putInt(KEY_CHOSENACTIVITY, activityID);
+
+        editor.apply();
+
+    }
 
 
 
@@ -226,8 +244,8 @@ public class CreateTaskFragment extends Fragment {
     class Createtask extends AsyncTask<String, String, String> {
 
         String taskstr = taskEt.getText().toString();
-        String datestr = dateText;
-        String timestr = timeText;
+        String datestr = dateEt.getText().toString();
+        String timestr;
         String pointsString = taskpointsSpinner.getSelectedItem().toString();
         String personString = personSpinner.getSelectedItem().toString();
 
@@ -547,9 +565,154 @@ public class CreateTaskFragment extends Fragment {
             //count2 = count.toArray(count2);
 
 
-            RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
-            repeatSpinner.setAdapter(repeatSpinnerAdapter);
+            //RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
+            //repeatSpinner.setAdapter(repeatSpinnerAdapter);
 
+        }
+    }
+
+    private class GetActivityData extends AsyncTask<String, String, String> {
+        String msg = "";
+
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT * FROM activity ORDER BY AName ASC";
+
+                ResultSet rs = stmt.executeQuery(sql);
+
+                while (rs.next()) {
+                    String aImageString = rs.getString("AIcon");
+                    String aNameString = rs.getString("AName");
+
+                    Resources res = getResources();
+                    int aImageInt = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
+
+                    aImage.add(aImageInt);
+                    aName.add(aNameString);
+
+                }
+
+
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            ActivitySpinnerAdapter activitySpinnerAdapter = new ActivitySpinnerAdapter(getActivity().getApplicationContext(), aImage, aName);
+            activitySpinner.setAdapter(activitySpinnerAdapter);;
+        }
+    }
+
+    private class GetID extends AsyncTask<String, String, String> {
+        String msg = "";
+        String aName;
+        int activityID;
+
+        private GetID(String activityName){
+            aName = activityName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT ActivityID FROM activity WHERE AName = '" + aName + "'";
+                ResultSet rs = stmt.executeQuery(sql);
+                int i = 0;
+
+                while (rs.next()) {
+                    activityID = rs.getInt("ActivityID");
+                    i++;
+                }
+
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            saveActivity(activityID);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), ActivityDetailActivity.class);
+            showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", 0);
+            startActivity(showDetailActivity);
         }
     }
 

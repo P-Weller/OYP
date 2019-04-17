@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <TextView
+       <TextView
             android:id="@+id/activityTextView"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
@@ -30,15 +29,28 @@
         <ListView
             android:id="@+id/activityListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="475dp"
             android:layout_gravity="left"
             android:dividerHeight="3dp"
             android:textAlignment="gravity"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            />
 
+
+
+        <Button
+            android:id="@+id/newActivityBtn"
+            style="@style/ButtonTheme"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:text="Add new activity"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
+
 
 
 
