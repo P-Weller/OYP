@@ -25,6 +25,7 @@ import java.sql.Statement;
 
 import com.example.oyp.Fragments.UsersFragment;
 import com.example.oyp.LoginActivity;
+import com.google.common.base.Strings;
 
 import static com.example.oyp.DBStrings.DATABASE_IP;
 import static com.example.oyp.DBStrings.DATABASE_NAME;
@@ -138,6 +139,7 @@ public class CreateUserActivity extends AppCompatActivity{
         String genderstr=radio_b.getText().toString();
         String usernamestr=usernameEt.getText().toString();
         String householdstr = getHousehold();
+        String uName;
 
         String z="";
         String householdid;
@@ -157,57 +159,70 @@ public class CreateUserActivity extends AppCompatActivity{
                     if (conn == null) {
                         z = "Please check your internet connection";
                     } else {
-
-                        query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
-
-                        Statement stmt1 = conn.createStatement();
-
-                        stmt1.executeUpdate(query1);
-
-                        ResultSet rs1 = stmt1.executeQuery(query1);
-
-                        while (rs1.next()) {
-                            householdid = rs1.getString(1);
-
-                        }
-
-                        Log.d("Householdid", householdid);
-
-                        String query2 = "INSERT INTO user (UName, GenderID, HouseholdID) VALUES" +
-                                "('" + usernamestr + "','" + genderstr + "','" + householdid + "' )";
-
-                        Log.d("SQL Eingabe",query2);
-                        Statement stmt2 = conn.createStatement();
-                        stmt2.executeUpdate(query2);
-
-                        z = "Inserting Successfull";
-
-                        stmt1 = conn.createStatement();
-                        String query3 = "SELECT UserID FROM user WHERE HouseholdID = '" + householdid + "' AND user.UName = '" + usernamestr + "'";
-                        ResultSet rs = stmt1.executeQuery(query3);
-
+                        Statement stmt = conn.createStatement();
+                        String query4 = "SELECT UName FROM user,household WHERE HName = '" + householdstr + "' AND household.HouseholdID = user.HouseholdID AND UName = '" + usernamestr + "'";
+                        ResultSet rs = stmt.executeQuery(query4);
 
                         while (rs.next()) {
-                            userID = rs.getInt("UserID");
+                            uName = rs.getString("UName");
                         }
 
-                        z = "Process complete.";
                         rs.close();
-                        stmt1.close();
-                        conn.close();
+                        stmt.close();
+                        if(!Strings.isNullOrEmpty(uName)){
+                            z = "This username already exists. Please try another one.";
+                        } else {
 
-                        saveUser(userID);
-                        System.out.println("HOUSEHOLD: " + householdid);
-                        System.out.println("USERNAME: " + usernamestr);
-                        System.out.println("SAVEDUSERID: " + userID);
 
-                        Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
-                        intent.putExtra("username",usernamestr);
-                        intent.putExtra("gender",genderstr);
-                        intent.putExtra("household",householdstr);
+                            query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
 
-                        startActivity(intent);
+                            Statement stmt1 = conn.createStatement();
 
+                            stmt1.executeUpdate(query1);
+
+                            ResultSet rs1 = stmt1.executeQuery(query1);
+
+                            while (rs1.next()) {
+                                householdid = rs1.getString(1);
+
+                            }
+
+                            Log.d("Householdid", householdid);
+
+                            String query2 = "INSERT INTO user (UName, GenderID, HouseholdID) VALUES" +
+                                    "('" + usernamestr + "','" + genderstr + "','" + householdid + "' )";
+
+                            Log.d("SQL Eingabe", query2);
+                            Statement stmt2 = conn.createStatement();
+                            stmt2.executeUpdate(query2);
+
+                            z = "Inserting Successfull";
+
+                            stmt1 = conn.createStatement();
+                            String query3 = "SELECT UserID FROM user WHERE HouseholdID = '" + householdid + "' AND user.UName = '" + usernamestr + "'";
+                            ResultSet rs2 = stmt1.executeQuery(query3);
+
+                            while (rs2.next()) {
+                                userID = rs2.getInt("UserID");
+                            }
+
+                            z = "Process complete.";
+                            rs2.close();
+                            stmt1.close();
+                            conn.close();
+
+                            saveUser(userID);
+                            System.out.println("HOUSEHOLD: " + householdid);
+                            System.out.println("USERNAME: " + usernamestr);
+                            System.out.println("SAVEDUSERID: " + userID);
+
+                            Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
+                            intent.putExtra("username", usernamestr);
+                            intent.putExtra("gender", genderstr);
+                            intent.putExtra("household", householdstr);
+
+                            startActivity(intent);
+                        }
                     }
 
                 } catch (Exception ex) {
