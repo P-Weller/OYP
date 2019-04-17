@@ -1,14 +1,10 @@
 package com.example.oyp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.renderscript.Sampler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,14 +14,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.mysql.fabric.xmlrpc.base.Value;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.prefs.Preferences;
 
 import static com.example.oyp.DBStrings.DATABASE_IP;
 import static com.example.oyp.DBStrings.DATABASE_NAME;
@@ -57,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         mName = (EditText) findViewById(R.id.mNameEditText);
         mPassword = (EditText) findViewById(R.id.mPasswordEditText);
         logIn2 = (Button) findViewById(R.id.logIn2Btn);
-
 
 
         connectionClass = new ConnectionClass();
