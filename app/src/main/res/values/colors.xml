@@ -11,9 +11,11 @@
     <color name="default_Button_Text">#3B4142</color>
     <color name="default_EditText_Background">#1E9C9B9B</color>
     <color name="default_black">#000000</color>
-    <color name="default_Hint_Color">#DFDCDC</color>
+    <color name="default_Hint_Color">#B6B4B4</color>
     <color name="cancel_background">#EC5E59</color>
     <color name="TextViewBackground2">#A248A9C5</color>
     <color name="blacki">#BA000000</color>
+    <color name="delete_background">#09BF03</color>
+    <color name="logout_background">#09BF03</color>
 
 </resources>
