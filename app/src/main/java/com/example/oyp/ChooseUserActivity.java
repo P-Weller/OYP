@@ -33,6 +33,7 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
  */
 public class ChooseUserActivity extends AppCompatActivity{
 
+    //List View for users
     Context thisContext;
     ListView usersListView;
     Button createuserBtn;
@@ -310,7 +311,5 @@ public class ChooseUserActivity extends AppCompatActivity{
         return connection;
     }
 }
-
-
 
 

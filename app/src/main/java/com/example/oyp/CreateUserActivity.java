@@ -49,7 +49,7 @@ public class CreateUserActivity extends AppCompatActivity{
     Connection conn;
 
     private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_USERNAME = "key_username";
+    private static final String KEY_CHOSENUSER = "key_chosenuser";
 
     public void onCreate(Bundle savedInstanceState) {
 
@@ -65,13 +65,14 @@ public class CreateUserActivity extends AppCompatActivity{
         createBtn = (Button) findViewById(R.id.createUserBtn);
         usernameEt = (EditText) findViewById(R.id.addUserEditText);
         //householdEt = (EditText) findViewById(R.id.household2EditText);
-        radio_g = (RadioGroup) findViewById(R.id.radiogroup);
+        radio_g = findViewById(R.id.radiogroup);
 
 
         //Capture click on cancelBtn to go back to ChooseUserActivity
         cancelBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
+
                 Intent intent = new Intent(CreateUserActivity.this, ChooseUserActivity.class);
                 startActivity(intent);
 
@@ -90,11 +91,10 @@ public class CreateUserActivity extends AppCompatActivity{
                 //find the radiobutton by returned id
                 radio_b = (RadioButton) findViewById(selectedId);
 
-                saveUsername();
                 getHousehold();
                 Log.d("Haushalt:", getHousehold());
 
-                Adduser adduser = new Adduser();
+                AddUser adduser = new AddUser();
                 adduser.execute();
 
             }
@@ -104,14 +104,15 @@ public class CreateUserActivity extends AppCompatActivity{
     }
 
     //method to save the created username in the sharepref file
-    private void saveUsername(){
-        String name = usernameEt.getText().toString();
+    public void saveUser(int i){
+
+        int username = i;
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sp.edit();
 
-        editor.putString(KEY_USERNAME, name);
+        editor.putInt(KEY_CHOSENUSER, username);
 
         editor.apply();
     }
@@ -126,12 +127,13 @@ public class CreateUserActivity extends AppCompatActivity{
 
     }
 
+
     /**
      * class which  - connects to the database
      *              - select the ID of the current household
      *              - insert username, householdname and genderid into the database table user
      */
-    private class Adduser extends AsyncTask<String,String,String>  {
+    private class AddUser extends AsyncTask<String,String,String>  {
 
         String genderstr=radio_b.getText().toString();
         String usernamestr=usernameEt.getText().toString();
@@ -144,7 +146,7 @@ public class CreateUserActivity extends AppCompatActivity{
 
         @Override
         protected String doInBackground(String... params) {
-
+            int userID = 0;
             String query1 = null;
 
             if (usernamestr.trim().equals(""))
@@ -157,7 +159,6 @@ public class CreateUserActivity extends AppCompatActivity{
                     } else {
 
                         query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
-
 
                         Statement stmt1 = conn.createStatement();
 
@@ -179,8 +180,26 @@ public class CreateUserActivity extends AppCompatActivity{
                         Statement stmt2 = conn.createStatement();
                         stmt2.executeUpdate(query2);
 
-
                         z = "Inserting Successfull";
+
+                        stmt1 = conn.createStatement();
+                        String query3 = "SELECT UserID FROM user WHERE HouseholdID = '" + householdid + "' AND user.UName = '" + usernamestr + "'";
+                        ResultSet rs = stmt1.executeQuery(query3);
+
+
+                        while (rs.next()) {
+                            userID = rs.getInt("UserID");
+                        }
+
+                        z = "Process complete.";
+                        rs.close();
+                        stmt1.close();
+                        conn.close();
+
+                        saveUser(userID);
+                        System.out.println("HOUSEHOLD: " + householdid);
+                        System.out.println("USERNAME: " + usernamestr);
+                        System.out.println("SAVEDUSERID: " + userID);
 
                         Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
                         intent.putExtra("username",usernamestr);
@@ -242,5 +261,4 @@ public class CreateUserActivity extends AppCompatActivity{
         }
         return connection;
     }
-
 }
