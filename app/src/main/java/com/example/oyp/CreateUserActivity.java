@@ -32,11 +32,8 @@ import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
 import static com.example.oyp.DBStrings.DATABASE_USER;
 
 
-/****************************************************
- * Was fehlt:
- *
- * Wie wollen wir die Color mitgeben ? Draufklicken und eine Farbauswahl bekommen ?
- *
+/**
+ * Activity to create a new user in a household
  */
 
 public class CreateUserActivity extends AppCompatActivity{
@@ -46,7 +43,6 @@ public class CreateUserActivity extends AppCompatActivity{
     EditText usernameEt, householdEt;
     RadioGroup radio_g;
     RadioButton radio_b;
-
 
     ConnectionClass connectionClass;
 
@@ -64,10 +60,10 @@ public class CreateUserActivity extends AppCompatActivity{
         //Get the view from activity_adduser.xml
         setContentView(R.layout.activity_adduser);
 
-        //Find cancelBtn by his ID
-        cancelBtn = findViewById(R.id.cancelcreateUserBtn);
-        createBtn = findViewById(R.id.createUserBtn);
-        usernameEt = findViewById(R.id.addUserEditText);
+        //compare objects to the specific object in the XML
+        cancelBtn = (Button) findViewById(R.id.cancelcreateUserBtn);
+        createBtn = (Button) findViewById(R.id.createUserBtn);
+        usernameEt = (EditText) findViewById(R.id.addUserEditText);
         //householdEt = (EditText) findViewById(R.id.household2EditText);
         radio_g = findViewById(R.id.radiogroup);
 
@@ -77,14 +73,14 @@ public class CreateUserActivity extends AppCompatActivity{
 
             public void onClick(View v){
 
-                Intent intent = new Intent(CreateUserActivity.this, StartActivity.class);
+                Intent intent = new Intent(CreateUserActivity.this, ChooseUserActivity.class);
                 startActivity(intent);
 
             }
 
         });
 
-        //Capture click on createBtn to go and add the user to the database and go to screen scoreboard
+        //Capture click on createBtn to go and add the user to the database and go to screen UsersFragment
         createBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
@@ -107,6 +103,7 @@ public class CreateUserActivity extends AppCompatActivity{
 
     }
 
+    //method to save the created username in the sharepref file
     public void saveUser(int i){
 
         int username = i;
@@ -118,9 +115,9 @@ public class CreateUserActivity extends AppCompatActivity{
         editor.putInt(KEY_CHOSENUSER, username);
 
         editor.apply();
-
     }
 
+    //method to get the current householdname out of the sharedpref file
     private String getHousehold(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
@@ -130,6 +127,12 @@ public class CreateUserActivity extends AppCompatActivity{
 
     }
 
+
+    /**
+     * class which  - connects to the database
+     *              - select the ID of the current household
+     *              - insert username, householdname and genderid into the database table user
+     */
     private class AddUser extends AsyncTask<String,String,String>  {
 
         String genderstr=radio_b.getText().toString();
@@ -200,7 +203,6 @@ public class CreateUserActivity extends AppCompatActivity{
 
                         Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
                         intent.putExtra("username",usernamestr);
-                        //intent.putExtra("upoints",20);
                         intent.putExtra("gender",genderstr);
                         intent.putExtra("household",householdstr);
 
