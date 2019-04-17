@@ -24,8 +24,8 @@ public class AddActivity extends AppCompatActivity {
         //Get the view from fragment_addactivity
         setContentView(R.layout.activity_createactivity);
 
-        addActivityTextView = findViewById(R.id.addActivityTextView);
-        addDescriptionTextView = findViewById(R.id.addDescriptionTextView);
+        //addActivityTextView = findViewById(R.id.addActivityTextView);
+        //addDescriptionTextView = findViewById(R.id.addDescriptionTextView);
 
 
 

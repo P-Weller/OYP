@@ -28,10 +28,11 @@ import static com.example.oyp.DBStrings.DATABASE_NAME;
 import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
 import static com.example.oyp.DBStrings.DATABASE_USER;
 
-
+/**
+ * Activity which displays a list from registered users in the household - the user have to choose his name to continue
+ */
 public class ChooseUserActivity extends AppCompatActivity{
 
-    //List View for users
     Context thisContext;
     ListView usersListView;
     Button createuserBtn;
@@ -45,19 +46,19 @@ public class ChooseUserActivity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         thisContext = this;
+
         //Get the view from activity_chooseuser.xml
         setContentView(R.layout.activity_chooseuser);
 
+        //compare the object with the listview in the XML
         Resources res = getResources();
         usersListView = (ListView) findViewById(R.id.usersListView);
+        createuserBtn = (Button) findViewById(R.id.createuserBtn);
 
         getHousehold();
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
-
-
-        createuserBtn = (Button) findViewById(R.id.createuserBtn);
 
         createuserBtn.setOnClickListener(new View.OnClickListener(){
 
@@ -84,6 +85,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
     }
 
+    //method to save the ID of the chosen user in the shared pref file
     public void saveUser(int i){
 
         int username = i;
@@ -98,6 +100,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
     }
 
+    //method to get the current householdname
     private String getHousehold(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
@@ -107,26 +110,13 @@ public class ChooseUserActivity extends AppCompatActivity{
 
     }
 
-    public Connection connectionclass(String user, String password, String database, String server) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Connection connection = null;
-        String ConnectionURL = null;
 
-        try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            ConnectionURL = "jdbc:mariadb://" + server + "/" + database;
-            connection = DriverManager.getConnection(ConnectionURL, user, password);
-        } catch (SQLException se) {
-            Log.e("error here 1 : ", se.getMessage());
-        } catch (ClassNotFoundException e) {
-            Log.e("error here 2 : ", e.getMessage());
-        } catch (Exception e) {
-            Log.e("error here 3 : ", e.getMessage());
-        }
-        return connection;
-    }
-
+    /**
+     * class which   - connects to the database
+     *               - get the ID for the current household
+     *               - get the username and the gendericon for the related ID
+     *               - fill the listview with this information
+     */
 
     private class GetData extends AsyncTask<String, String, String> {
         String msg = "";
@@ -299,6 +289,28 @@ public class ChooseUserActivity extends AppCompatActivity{
         }
     }
 
+
+    public Connection connectionclass(String user, String password, String database, String server) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        Connection connection = null;
+        String ConnectionURL = null;
+
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+            ConnectionURL = "jdbc:mariadb://" + server + "/" + database;
+            connection = DriverManager.getConnection(ConnectionURL, user, password);
+        } catch (SQLException se) {
+            Log.e("error here 1 : ", se.getMessage());
+        } catch (ClassNotFoundException e) {
+            Log.e("error here 2 : ", e.getMessage());
+        } catch (Exception e) {
+            Log.e("error here 3 : ", e.getMessage());
+        }
+        return connection;
+    }
 }
+
+
 
 

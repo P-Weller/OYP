@@ -22,6 +22,9 @@ import static com.example.oyp.DBStrings.DATABASE_NAME;
 import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
 import static com.example.oyp.DBStrings.DATABASE_USER;
 
+/**
+ * Activity to change the householdname
+ */
 
 public class ChangeHouseholdActivity extends AppCompatActivity {
 
@@ -67,6 +70,7 @@ public class ChangeHouseholdActivity extends AppCompatActivity {
 
     }
 
+    //method to get the current householdname out of the sharedpref file
     private String getHousehold(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
@@ -75,6 +79,7 @@ public class ChangeHouseholdActivity extends AppCompatActivity {
         return household;
     }
 
+    //method to write to new householdname into the sharedpref file
     private void updateSharedPref(){
         String household = newhouseholdEt.getText().toString();
 
@@ -87,6 +92,8 @@ public class ChangeHouseholdActivity extends AppCompatActivity {
         editor.apply();
     }
 
+
+    //class which connects to the database and update the householdname
     private class Changehousehold extends AsyncTask<String,String,String>{
 
         String hnamestr = getHousehold();
