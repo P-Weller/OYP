@@ -61,11 +61,11 @@ public class ChooseUserActivity extends AppCompatActivity{
 
             public void onClick(View v){
 
-                    Intent intent = new Intent(ChooseUserActivity.this, CreateUserActivity.class);
-                    startActivity(intent);
+                Intent intent = new Intent(ChooseUserActivity.this, CreateUserActivity.class);
+                startActivity(intent);
 
 
-                }
+            }
 
         });
 
@@ -228,5 +228,3 @@ public class ChooseUserActivity extends AppCompatActivity{
     }
 
 }
-
-

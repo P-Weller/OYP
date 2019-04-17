@@ -210,9 +210,9 @@ public class TasksFragment extends Fragment {
                 }
 
 
-                System.out.println(tImage);
-                System.out.println(tName);
-                System.out.println(tUser);
+               // System.out.println(tImage);
+               // System.out.println(tName);
+                //System.out.println(tUser);
 
                 msg = "Process complete.";
                 rs.close();
