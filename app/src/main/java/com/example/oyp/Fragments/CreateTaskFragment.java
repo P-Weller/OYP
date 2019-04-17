@@ -38,6 +38,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -57,10 +58,16 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class CreateTaskFragment extends Fragment {
 
-    public EditText taskEt, dateEt;
+    public static EditText dateEt;
     Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner;
     Button createBtn;
     Context thisContext;
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+    String dateText;
+    String timeText;
 
     ArrayList<String> rNames = new ArrayList<>();
     ArrayList<String> pNames = new ArrayList<>();
@@ -79,9 +86,9 @@ public class CreateTaskFragment extends Fragment {
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
-    public Calendar c = Calendar.getInstance();
+    public static Calendar c = Calendar.getInstance();
 
-    public int updateTextID = 0;
+
 
     Connection conn;
 
@@ -101,14 +108,14 @@ public class CreateTaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
         thisContext = this.getContext();
 
-        aName.add("activity");
+        aName.add("Activity");
         aImage.add(R.drawable.ic_help_blue_32dp);
-        rNames.add("repeat");
-        pNames.add("household member");
-        pIcon.add(R.drawable.ic_baseline_people_24px);
+        rNames.add("Repeat");
+        pNames.add("Household member");
+        pIcon.add(R.drawable.ic_baseline_people_blue_32);
 
 
-       //activitySpinner = view.findViewById(R.id.activitySpinner);
+        activitySpinner = view.findViewById(R.id.activitySpinner);
         dateEt = view.findViewById(R.id.dateEditText);
         taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
@@ -159,6 +166,7 @@ public class CreateTaskFragment extends Fragment {
 
             }
         });
+
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
@@ -178,7 +186,6 @@ public class CreateTaskFragment extends Fragment {
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
 
-                //updateText();
 
                 }
 
@@ -187,6 +194,9 @@ public class CreateTaskFragment extends Fragment {
                 //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+            startAlarm();
+
                 Createtask createtask = new Createtask();
                 createtask.execute();
             }
@@ -209,16 +219,19 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        /*if (c.before(Calendar.getInstance())) {
+        if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }*/
+        }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
 
     public void updateText() {
-                String timeText = DateFormat.getDateInstance(DateFormat.SHORT).format(c.getTime()) + "  " + DateFormat.getTimeInstance(DateFormat.SHORT).format(c.getTime());
-            dateEt.setText(timeText);
+
+                String dateText = dateFormat.format(c.getTime());
+                String timeText = timeFormat.format(c.getTime());
+
+            dateEt.setText(dateText + "  "+ timeText);
 }
 
     public void saveActivity(int i){
@@ -565,8 +578,8 @@ public class CreateTaskFragment extends Fragment {
             //count2 = count.toArray(count2);
 
 
-            //RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
-            //repeatSpinner.setAdapter(repeatSpinnerAdapter);
+            RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
+            repeatSpinner.setAdapter(repeatSpinnerAdapter);
 
         }
     }
