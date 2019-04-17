@@ -68,15 +68,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:autofillHints=""
+                android:clickable="true"
                 android:fontFamily="casual"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_person_add_black_24dp"
-                android:drawableLeft="@drawable/ic_person_add_black_24dp"
+                android:drawableStart="@drawable/ic_help_outline_black_24dp"
+                android:drawableLeft="@drawable/ic_help_outline_black_24dp"
                 android:drawablePadding="10dp"
-                android:ems="10"
 
-                android:hint="Person ?"
-                android:inputType="text"
+                android:ems="10"
+                android:hint="What ?"
+                android:inputType="textPersonName"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
@@ -95,7 +96,7 @@
                 android:autofillHints=""
                 android:drawableStart="@drawable/ic_date_range_32dp"
                 android:drawableLeft="@drawable/ic_date_range_32dp"
-                android:drawablePadding="10dp"
+                android:drawablePadding="32dp"
                 android:ems="10"
                 android:focusable="false"
 
@@ -119,15 +120,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:autofillHints=""
+                android:clickable="true"
                 android:fontFamily="casual"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_loop_black_32dp"
-                android:drawableLeft="@drawable/ic_loop_black_32dp"
+                android:drawableStart="@drawable/ic_help_outline_black_24dp"
+                android:drawableLeft="@drawable/ic_help_outline_black_24dp"
                 android:drawablePadding="10dp"
-                android:ems="10"
 
-                android:hint="Repeat ?"
-                android:inputType="text"
+                android:ems="10"
+                android:hint="What ?"
+                android:inputType="textPersonName"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
@@ -143,15 +145,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:autofillHints=""
+                android:clickable="true"
                 android:fontFamily="casual"
                 android:textStyle="bold"
-                android:drawableStart="@drawable/ic_attach_money_black_32dp"
-                android:drawableLeft="@drawable/ic_attach_money_black_32dp"
+                android:drawableStart="@drawable/ic_help_outline_black_24dp"
+                android:drawableLeft="@drawable/ic_help_outline_black_24dp"
                 android:drawablePadding="10dp"
-                android:ems="10"
 
-                android:hint="Points ?"
-                android:inputType="number"
+                android:ems="10"
+                android:hint="What ?"
+                android:inputType="textPersonName"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
