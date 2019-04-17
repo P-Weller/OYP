@@ -33,8 +33,8 @@ public class SettingsActivity extends AppCompatActivity {
         changeemailBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                //Start ChangeemailActivity.class
-                Intent intent = new Intent(SettingsActivity.this,ChangeemailActivity.class);
+                //Start ChangeEmailActivity.class
+                Intent intent = new Intent(SettingsActivity.this, ChangeEmailActivity.class);
                 startActivity(intent);
 
             }

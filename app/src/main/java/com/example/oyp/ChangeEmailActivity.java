@@ -8,19 +8,12 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import com.example.oyp.Fragments.MoreFragment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,7 +23,7 @@ import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
 import static com.example.oyp.DBStrings.DATABASE_USER;
 
 
-public class ChangeemailActivity extends AppCompatActivity {
+public class ChangeEmailActivity extends AppCompatActivity {
 
     Button changeBtn;
     EditText newemailEt;
@@ -155,7 +148,7 @@ public class ChangeemailActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(ChangeemailActivity.this, MainActivity.class);
+                Intent intent=new Intent(ChangeEmailActivity.this, MainActivity.class);
 
                 intent.putExtra("email",newemailstr);
 
