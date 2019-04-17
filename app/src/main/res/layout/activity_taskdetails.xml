@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -161,7 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:fontFamily="casual"
             android:gravity="center_vertical"
@@ -195,25 +195,42 @@
             style="@style/ButtonTheme"
             android:text="Close task"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
             android:layout_gravity="center"
             android:clickable="true"
             android:id="@+id/closeTaskBtn"
             android:drawableStart="@drawable/ic_exit_to_app_white_32dp"
             android:layout_width="280dp"
             android:fontFamily="casual"
-            android:background="@color/cancel_background"
+            android:background="@color/delete_background"
+
             android:textColor="@color/default_white"
             android:textAllCaps="false"
+            android:paddingStart="20dp"
+
+            />
+
+        <Button
+            android:id="@+id/deleteTaskBtn"
+            style="@style/ButtonTheme"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@color/cancel_background"
+            android:clickable="true"
+            android:fontFamily="casual"
+            android:text="Delete task"
+            android:textAllCaps="false"
+            android:textColor="@color/default_white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:drawableStart="@drawable/ic_delete_32"
+            android:paddingStart="20dp"
             />
 
     </LinearLayout>
-
-
-
-
-
 
 
 </android.support.constraint.ConstraintLayout>

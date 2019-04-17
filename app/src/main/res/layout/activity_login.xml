@@ -50,6 +50,7 @@
                 android:ems="10"
                 android:hint="@string/household_name"
                 android:inputType="textEmailAddress"
+                android:textColorHint="@color/default_Hint_Color"
                 tools:ignore="MissingConstraints"
                 tools:targetApi="o" />
 

@@ -22,7 +22,9 @@ import static com.example.oyp.DBStrings.DATABASE_NAME;
 import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
 import static com.example.oyp.DBStrings.DATABASE_USER;
 
-
+/**
+ * Activity to change the email address from household
+ */
 public class ChangeEmailActivity extends AppCompatActivity {
 
     Button changeBtn;
@@ -43,7 +45,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        //Get the view from activity_changepassword.xml
+        //Get the view from activity_changeemail.xml
         setContentView(R.layout.activity_changeemail);
 
         changeBtn = (Button) findViewById(R.id.changeemailBtn);
@@ -66,6 +68,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
     }
 
+    //method to get the householdname from local sharedpref file - the name will be used to verify the right household will be updated
     private String getHName(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
@@ -75,7 +78,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
     }
 
 
-
+    //method to write and update the email in the sharedpref file
     private void updateSharedPref(){
         String email = newemailEt.getText().toString();
 
@@ -88,6 +91,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    //class which connects to the database and update the email in the right household
     private class Changeemail extends AsyncTask<String,String,String>{
 
         String hnamestr = getHName();

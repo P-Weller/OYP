@@ -22,13 +22,9 @@ import static com.example.oyp.DBStrings.DATABASE_NAME;
 import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
 import static com.example.oyp.DBStrings.DATABASE_USER;
 
-/*****************************************+
- * - beim initialen Login das Password mitnehmen und mit dem unter "oldpassword" eingetragenen abgleichen
- * - prüfen, ob beide neuen Passwörter gleich sind
+/**
+ * Activity to change the password from the household
  */
-
-
-
 public class ChangePasswordActivity extends AppCompatActivity {
 
     Button changeBtn;
@@ -71,7 +67,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
 
     }
-
+    //method to get the current householdname in the sharedpref file
     private String getHousehold(){
 
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
@@ -80,6 +76,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         return household;
     }
 
+    //method to write to new password into the sharedpref file
     private void updateSharedPref(){
         String password = newpasswordEt.getText().toString();
 
@@ -92,6 +89,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         editor.apply();
     }
 
+    //class which connects to the database and update the password from the right household
     private class Changepassword extends AsyncTask<String,String,String>{
 
         String hnamestr = getHousehold();
