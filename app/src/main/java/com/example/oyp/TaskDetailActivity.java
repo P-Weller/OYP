@@ -264,7 +264,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                 stmt2 = conn.createStatement();
                 stmt2.executeUpdate(query);
 
-                query= "UPDATE user SET UPoints = UPoints+'" + tPoints + "' WHERE UserID = 5 ";
+                query= "UPDATE user SET UPoints = UPoints+'" + tPoints + "' WHERE UserID =  '" + tUserID + "'";
                 stmt2 = conn.createStatement();
                 stmt2.executeUpdate(query);
 
@@ -274,7 +274,6 @@ public class TaskDetailActivity extends AppCompatActivity {
 
                 msg = "Update successful.";
 
-                System.out.println("");
 
 
             } catch (SQLException connError) {

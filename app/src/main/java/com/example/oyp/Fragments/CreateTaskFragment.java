@@ -115,7 +115,7 @@ public class CreateTaskFragment extends Fragment {
         pIcon.add(R.drawable.ic_baseline_people_blue_32);
 
 
-        activitySpinner = view.findViewById(R.id.activitySpinner);
+       //activitySpinner = view.findViewById(R.id.activitySpinner);
         dateEt = view.findViewById(R.id.dateEditText);
         taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
         createBtn = view.findViewById(R.id.createTaskBtn);
@@ -577,8 +577,8 @@ public class CreateTaskFragment extends Fragment {
             //count2 = count.toArray(count2);
 
 
-            RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
-            repeatSpinner.setAdapter(repeatSpinnerAdapter);
+            //RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
+            //repeatSpinner.setAdapter(repeatSpinnerAdapter);
 
         }
     }
