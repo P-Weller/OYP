@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.oyp.ActivityDetailActivity;
 import com.example.oyp.ActivitySpinnerAdapter;
@@ -58,7 +59,7 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class CreateTaskFragment extends Fragment {
 
-    public static EditText dateEt;
+    public static TextView dateEt;
     Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner;
     Button createBtn;
     Context thisContext;
