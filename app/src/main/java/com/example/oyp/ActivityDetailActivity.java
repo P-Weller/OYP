@@ -14,6 +14,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
+
 
 public class ActivityDetailActivity extends AppCompatActivity {
 
@@ -91,14 +96,9 @@ public class ActivityDetailActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             Connection conn = null;
             Statement stmt = null;
-            System.out.println("3: "+ activityID);
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER,DATABASE_PASSWORD,DATABASE_NAME,DATABASE_IP);
 
                 stmt = conn.createStatement();
                 String sql = "SELECT AName, ADescription FROM activity WHERE activityID = '" + activityID + "'";
