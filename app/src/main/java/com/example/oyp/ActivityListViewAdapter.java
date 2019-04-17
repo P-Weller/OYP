@@ -10,17 +10,17 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ActivityAdapter extends BaseAdapter {
+public class ActivityListViewAdapter extends BaseAdapter {
 
     LayoutInflater mInflator;
     ArrayList<Integer> aImage;
     ArrayList<String> aName;
 
-    public ActivityAdapter(){
+    public ActivityListViewAdapter(){
 
     }
 
-    public ActivityAdapter(Context c, ArrayList<Integer> i, ArrayList<String> a){
+    public ActivityListViewAdapter(Context c, ArrayList<Integer> i, ArrayList<String> a){
         aImage = i;
         aName = a;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -19,6 +19,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
+
 /*********************************************************************************************+
  * Was hier noch fehlt:
  * Prüfen, ob die beiden Passwörter gleich sind
@@ -43,7 +48,6 @@ public class RegistrationActivity extends AppCompatActivity{
     ConnectionClass connectionClass;
 
     Connection conn;
-    String un,pass,db,ip;
 
     private static final String SHARED_PREF_NAME = "userdata";
     private static final String KEY_LOGINHNAME = "key_householdname";
@@ -57,12 +61,6 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
         connectionClass = new ConnectionClass();
-
-
-        ip = "192.168.1.164";
-        db = "oyp_database";
-        un = "root";
-        pass = "pass";
 
         super.onCreate(savedInstanceState);
 
@@ -159,7 +157,7 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
                 try {
-                    conn = connectionclass(un, pass, db, ip);
+                    conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     } else if(isEmail(emailET) == false) {

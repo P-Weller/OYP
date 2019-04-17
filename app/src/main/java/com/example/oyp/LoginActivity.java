@@ -27,6 +27,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.prefs.Preferences;
 
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
+
 public class LoginActivity extends AppCompatActivity {
 
     EditText mName, mPassword;
@@ -39,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
 
    Connection conn;
-    String un,pass,db,ip;
 
    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         connectionClass = new ConnectionClass();
 
         progressBar=new ProgressBar(this);
-
-        ip = "192.168.1.164";
-        db = "oyp_database";
-        un = "root";
-        pass = "pass";
 
 
         logIn2.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             else
             {
                 try {
-                    conn = connectionclass(un, pass, db, ip);
+                    conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }

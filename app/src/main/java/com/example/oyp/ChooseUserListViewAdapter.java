@@ -11,12 +11,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class ChooseUserAdapter extends BaseAdapter {
+public class ChooseUserListViewAdapter extends BaseAdapter {
     LayoutInflater mInflator;
     ArrayList<String> uNames;
     ArrayList<Integer> uImage;
 //create Constructor
-    public ChooseUserAdapter(Context c, ArrayList<Integer> i, ArrayList<String> u){
+    public ChooseUserListViewAdapter(Context c, ArrayList<Integer> i, ArrayList<String> u){
         uNames = u;
         uImage = i;
         mInflator = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

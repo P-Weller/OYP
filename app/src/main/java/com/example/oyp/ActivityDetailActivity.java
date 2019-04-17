@@ -103,12 +103,10 @@ public class ActivityDetailActivity extends AppCompatActivity {
                 stmt = conn.createStatement();
                 String sql = "SELECT AName, ADescription FROM activity WHERE activityID = '" + activityID + "'";
                 ResultSet rs = stmt.executeQuery(sql);
-                int i = 0;
 
                 while (rs.next()) {
                     aName = rs.getString("AName");
                     aDescription = rs.getString("ADescription");
-                    i++;
                 }
                 msg = "Process complete.";
                 rs.close();

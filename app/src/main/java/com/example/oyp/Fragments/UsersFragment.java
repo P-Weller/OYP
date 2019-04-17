@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.oyp.R;
-import com.example.oyp.UNamesAdapter;
+import com.example.oyp.UserListViewAdapter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +22,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class UsersFragment extends Fragment {
 
@@ -89,16 +94,12 @@ public class UsersFragment extends Fragment {
             Connection conn = null;
             Statement stmt = null;
 
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
             String householdid ="";
             String query1;
 
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
 
@@ -166,7 +167,7 @@ public class UsersFragment extends Fragment {
                 count.add(k,str);
             }
 
-            UNamesAdapter unamesAdapter = new UNamesAdapter(thisContext, uNames, uPoints, count);
+            UserListViewAdapter unamesAdapter = new UserListViewAdapter(thisContext, uNames, uPoints, count);
             myListView.setAdapter(unamesAdapter);
         }
     }

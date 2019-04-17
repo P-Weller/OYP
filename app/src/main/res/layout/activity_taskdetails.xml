@@ -199,7 +199,7 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:clickable="true"
-            android:id="@+id/logoutBtn"
+            android:id="@+id/closeTaskBtn"
             android:drawableStart="@drawable/ic_exit_to_app_white_32dp"
             android:layout_width="280dp"
             android:fontFamily="casual"

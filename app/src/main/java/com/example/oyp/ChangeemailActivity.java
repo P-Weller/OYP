@@ -24,7 +24,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
 
 
 public class ChangeemailActivity extends AppCompatActivity {
@@ -36,10 +39,6 @@ public class ChangeemailActivity extends AppCompatActivity {
     ConnectionClass connectionclass;
 
     Connection conn;
-    String un, pass, db, ip;
-
-    String oldemail;
-    String newemail;
 
     private static final String SHARED_PREF_NAME = "userdata";
     private static final String KEY_HEMAIL = "key_email";
@@ -48,11 +47,6 @@ public class ChangeemailActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState){
 
         connectionclass = new ConnectionClass();
-
-        ip = "192.168.1.164";
-        db = "oyp_database";
-        un = "root";
-        pass = "pass";
 
         super.onCreate(savedInstanceState);
 
@@ -124,7 +118,7 @@ public class ChangeemailActivity extends AppCompatActivity {
             else
             {
                 try {
-                    conn = connectionclass(un, pass, db, ip);
+                    conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -45,8 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
         changehouseholdnameBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                //Start ChangehouseholdActivity.class
-                Intent intent = new Intent(SettingsActivity.this,ChangehouseholdActivity.class);
+                //Start ChangeHouseholdActivity.class
+                Intent intent = new Intent(SettingsActivity.this, ChangeHouseholdActivity.class);
                 startActivity(intent);
 
             }
@@ -58,8 +57,8 @@ public class SettingsActivity extends AppCompatActivity {
 
             public void onClick(View v){
 
-                //Start ChangepasswordActivity.class
-                Intent intent = new Intent(SettingsActivity.this,ChangepasswordActivity.class);
+                //Start ChangePasswordActivity.class
+                Intent intent = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
                 startActivity(intent);
             }
         });

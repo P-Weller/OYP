@@ -10,18 +10,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class TasksAdapter extends BaseAdapter {
+public class TaskListViewAdapter extends BaseAdapter {
 
     LayoutInflater mInflator;
     ArrayList<Integer> tImage;
     ArrayList<String> tName;
     ArrayList<String> tUser;
 
-    public TasksAdapter(){
+    public TaskListViewAdapter(){
 
     }
 
-    public TasksAdapter(Context c, ArrayList<Integer> i, ArrayList<String> t,ArrayList<String> n){
+    public TaskListViewAdapter(Context c, ArrayList<Integer> i, ArrayList<String> t, ArrayList<String> n){
         tImage = i;
         tName = t;
         tUser =n;

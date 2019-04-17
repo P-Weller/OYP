@@ -1,11 +1,14 @@
 package com.example.oyp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.sql.Connection;
@@ -13,6 +16,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
 
 
 public class TaskDetailActivity extends AppCompatActivity {
@@ -22,6 +30,10 @@ public class TaskDetailActivity extends AppCompatActivity {
     TextView dateTimeDetailTextView;
     TextView repeatDetailTextView;
     TextView pointsDetailTextView;
+    Button closeTaskButton;
+    int taskID;
+    int tUserID;
+    String tPoints;
 
     private static final String SHARED_PREF_NAME = "userdata";
 
@@ -32,15 +44,31 @@ public class TaskDetailActivity extends AppCompatActivity {
         //Get the view from activity_taskdetails.xml
         setContentView(R.layout.activity_taskdetails);
 
+        taskID = getTask();
+        tUserID = getUser();
 
         taskDetailTextView = findViewById(R.id.taskDetailTextView);
         userDetailTextView = findViewById(R.id.userDetailTextView);
         dateTimeDetailTextView = findViewById(R.id.dateTimeDetailTextView);
         repeatDetailTextView = findViewById(R.id.repeatDetailTextView);
         pointsDetailTextView = findViewById(R.id.pointsDetailTextView);
+        closeTaskButton = findViewById(R.id.closeTaskBtn);
+
+        closeTaskButton.setOnClickListener(new View.OnClickListener(){
+
+            public void onClick(View v){
+                SetClosed setClosed = new SetClosed();
+                setClosed.execute("");
+                Intent intent = new Intent(TaskDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
 
         GetData retrieveData = new GetData();
         retrieveData.execute("");
+
+
 
         deleteTask();
     }
@@ -51,9 +79,17 @@ public class TaskDetailActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
 
         int taskID = sp.getInt("key_chosentask", 0);
-        System.out.println("2: " + taskID);
+        System.out.println("TaskID: " + taskID);
         return taskID;
+    }
 
+    private int getUser() {
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+
+        int tUserID = sp.getInt("key_chosenuser", 0);
+        System.out.println("UserID: " + tUserID);
+        return tUserID;
     }
 
     private void deleteTask() {
@@ -86,14 +122,10 @@ public class TaskDetailActivity extends AppCompatActivity {
 
     private class GetData extends AsyncTask<String, String, String> {
         String msg = "";
-        String aName = "";
-        String aDescription = "";
-        int taskID = getTask();
         String tName = "";
         String tUser = "";
         String tDateTime = "";
         String tRepeat = "";
-        String tPoints = "";
 
 
         @Override
@@ -107,10 +139,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             Connection conn = null;
             Statement stmt = null;
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
 
             int tNameID = 0;
             int tUserID = 0;
@@ -119,7 +147,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             String tTime = "";
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 stmt = conn.createStatement();
                 String sql = "SELECT * FROM task WHERE TaskID = '" + taskID + "'";
@@ -144,7 +172,6 @@ public class TaskDetailActivity extends AppCompatActivity {
                 while (rs.next()) {
                     tName = rs.getString("AName");
                 }
-
 
 
                 stmt = conn.createStatement();
@@ -211,6 +238,70 @@ public class TaskDetailActivity extends AppCompatActivity {
                 repeatDetailTextView.setText("-");
                 pointsDetailTextView.setText("-");
             }
+
+        }
+    }
+
+    private class SetClosed extends AsyncTask<String, String, String> {
+        String msg = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt2 = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                String query= "UPDATE task SET StatusID = 1 WHERE taskID = '" + taskID + "'";
+                stmt2 = conn.createStatement();
+                stmt2.executeUpdate(query);
+
+                query= "UPDATE user SET UPoints = UPoints+'" + tPoints + "' WHERE UserID = 5 ";
+                stmt2 = conn.createStatement();
+                stmt2.executeUpdate(query);
+
+                query= "UPDATE task SET UserID = '" + tUserID + "' WHERE taskID = '" + taskID + "'";
+                stmt2 = conn.createStatement();
+                stmt2.executeUpdate(query);
+
+                msg = "Update successful.";
+
+                System.out.println("");
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt2 != null) {
+                        stmt2.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
 
         }
     }

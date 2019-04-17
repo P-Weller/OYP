@@ -26,6 +26,11 @@ import java.sql.Statement;
 import com.example.oyp.Fragments.UsersFragment;
 import com.example.oyp.LoginActivity;
 
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
+
 
 /****************************************************
  * Was fehlt:
@@ -46,7 +51,6 @@ public class CreateUserActivity extends AppCompatActivity{
     ConnectionClass connectionClass;
 
     Connection conn;
-    String un,pass,db,ip;
 
     private static final String SHARED_PREF_NAME = "userdata";
     private static final String KEY_USERNAME = "key_username";
@@ -54,12 +58,6 @@ public class CreateUserActivity extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
 
         connectionClass = new ConnectionClass();
-
-
-        ip = "192.168.1.164";
-        db = "oyp_database";
-        un = "root";
-        pass = "pass";
 
         super.onCreate(savedInstanceState);
 
@@ -152,7 +150,7 @@ public class CreateUserActivity extends AppCompatActivity{
                 z = "Please enter all fields...";
             else {
                 try {
-                    conn = connectionclass(un, pass, db, ip);
+                    conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     } else {

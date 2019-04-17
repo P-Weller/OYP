@@ -3,7 +3,6 @@ package com.example.oyp.Fragments;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.app.Person;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,33 +18,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
-import com.example.oyp.ConnectionClass;
-import com.example.oyp.CreateUserActivity;
-import com.example.oyp.MainActivity;
 import com.example.oyp.PersonSpinnerAdapter;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
-import com.example.oyp.PushNotification.TimePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
-import com.example.oyp.StartActivity;
 import com.example.oyp.TaskPointsSpinnerAdapter;
-import com.example.oyp.UNamesAdapter;
 
-import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -54,9 +38,11 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
-import static com.example.oyp.R.id.createTaskEditText;
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
 
 /***********************************************+
  * Was noch fehlt:
@@ -92,15 +78,7 @@ public class CreateTaskFragment extends Fragment {
 
     public int updateTextID = 0;
 
-
-
-
     Connection conn;
-    String un, pass, db, ip;
-
-
-
-
 
     public CreateTaskFragment() {
     }
@@ -117,12 +95,6 @@ public class CreateTaskFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
         thisContext = this.getContext();
-
-        ip = "192.168.1.164";
-        db = "oyp_database";
-        un = "root";
-        pass = "pass";
-
 
         rNames.add("repeat");
         pNames.add("household member");
@@ -276,7 +248,7 @@ public class CreateTaskFragment extends Fragment {
 
 
                 try {
-                    conn = connectionclass(un, pass, db, ip);
+                    conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     } else {
@@ -366,16 +338,12 @@ public class CreateTaskFragment extends Fragment {
             Connection conn = null;
             Statement stmt30 = null;
 
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
             String query30;
             String query40;
 
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 query40 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
 
@@ -486,15 +454,11 @@ public class CreateTaskFragment extends Fragment {
             Connection conn = null;
             Statement stmt = null;
 
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
             String query25;
 
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
 
                 query25 = "SELECT * FROM `repeat`";

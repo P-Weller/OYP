@@ -9,18 +9,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class UNamesAdapter extends BaseAdapter {
+public class UserListViewAdapter extends BaseAdapter {
 
     LayoutInflater mInflator;
     ArrayList<String> uNames;
     ArrayList<String> uPoints;
     ArrayList<String> count;
 
-    public UNamesAdapter(){
+    public UserListViewAdapter(){
 
     }
 
-    public UNamesAdapter(Context c, ArrayList<String> u, ArrayList<String> p, ArrayList<String> zahl){
+    public UserListViewAdapter(Context c, ArrayList<String> u, ArrayList<String> p, ArrayList<String> zahl){
         uNames = u;
         uPoints = p;
         count = zahl;

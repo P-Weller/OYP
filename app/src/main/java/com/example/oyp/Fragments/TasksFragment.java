@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.example.oyp.R;
 import com.example.oyp.TaskDetailActivity;
-import com.example.oyp.TasksAdapter;
+import com.example.oyp.TaskListViewAdapter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,6 +28,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class TasksFragment extends Fragment {
 
@@ -163,15 +168,11 @@ public class TasksFragment extends Fragment {
             Connection conn = null;
             Statement stmt = null;
 
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
             String householdid ="";
             String query1;
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
 
@@ -246,8 +247,8 @@ public class TasksFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            TasksAdapter tasksAdapter = new TasksAdapter(thisContext, tImage, tName, tUser);
-            otasksListView.setAdapter(tasksAdapter);
+            TaskListViewAdapter taskListViewAdapter = new TaskListViewAdapter(thisContext, tImage, tName, tUser);
+            otasksListView.setAdapter(taskListViewAdapter);
         }
     }
 
@@ -268,15 +269,11 @@ public class TasksFragment extends Fragment {
             Connection conn = null;
             Statement stmt = null;
 
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
             String householdid ="";
             String query1;
 
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 query1 = "SELECT HouseholdID FROM household WHERE HName = '" + householdstr + "'";
 
@@ -350,8 +347,8 @@ public class TasksFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            TasksAdapter tasksAdapter = new TasksAdapter(thisContext, tImage, tName,tUser);
-            otasksListView.setAdapter(tasksAdapter);
+            TaskListViewAdapter taskListViewAdapter = new TaskListViewAdapter(thisContext, tImage, tName,tUser);
+            otasksListView.setAdapter(taskListViewAdapter);
         }
     }
 
@@ -374,13 +371,8 @@ public class TasksFragment extends Fragment {
             Connection conn = null;
             Statement stmt = null;
 
-            String ip = "192.168.1.164";
-            String db = "oyp_database";
-            String un = "root";
-            String pass = "pass";
-
             try {
-                conn = connectionclass(un, pass, db, ip);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 stmt = conn.createStatement();
                 String sql = "SELECT TaskID FROM activity,task WHERE task.ActivityID = activity.ActivityID AND activity.AName = '" + tName + "'";

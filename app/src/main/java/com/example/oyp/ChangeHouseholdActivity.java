@@ -8,64 +8,48 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import com.example.oyp.Fragments.MoreFragment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/*****************************************+
- * - beim initialen Login das Password mitnehmen und mit dem unter "oldpassword" eingetragenen abgleichen
- * - prüfen, ob beide neuen Passwörter gleich sind
- */
+import static com.example.oyp.DBStrings.DATABASE_IP;
+import static com.example.oyp.DBStrings.DATABASE_NAME;
+import static com.example.oyp.DBStrings.DATABASE_PASSWORD;
+import static com.example.oyp.DBStrings.DATABASE_USER;
 
 
-
-public class ChangepasswordActivity extends AppCompatActivity {
+public class ChangeHouseholdActivity extends AppCompatActivity {
 
     Button changeBtn;
-    EditText newpasswordEt;
-    EditText new2passwordEt;
+    EditText newhouseholdEt;
+    EditText new2householdEt;
 
     ConnectionClass connectionclass;
 
     Connection conn;
-    String un, pass, db, ip;
-
-    String oldpass;
-    String newpass;
 
     private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_LOGINHPASSWORD = "key_loginhpassword";
+    private static final String KEY_HOUSEHOLDNAME = "key_householdname";
+
 
 
     public void onCreate(Bundle savedInstanceState){
 
         connectionclass = new ConnectionClass();
 
-        ip = "192.168.1.164";
-        db = "oyp_database";
-        un = "root";
-        pass = "pass";
-
         super.onCreate(savedInstanceState);
 
         //Get the view from activity_changepassword.xml
-        setContentView(R.layout.activity_changepassword);
+        setContentView(R.layout.activity_changehousehold);
 
-        changeBtn = (Button) findViewById(R.id.changepasswordBtn);
-        newpasswordEt = (EditText) findViewById(R.id.newpasswordEditText);
-        new2passwordEt = (EditText) findViewById(R.id.confirmpasswordEditText);
+        changeBtn = (Button) findViewById(R.id.changeemailBtn);
+        newhouseholdEt = (EditText) findViewById(R.id.newhouseholdEdittext);
+        new2householdEt = (EditText) findViewById(R.id.confirmhouseholdEditText);
 
 
         changeBtn.setOnClickListener(new View.OnClickListener(){
@@ -73,8 +57,8 @@ public class ChangepasswordActivity extends AppCompatActivity {
             public void onClick(View v){
 
                 getHousehold();
-                Changepassword changepassword = new Changepassword();
-                changepassword.execute();
+                Changehousehold changehousehold = new Changehousehold();
+                changehousehold.execute();
                 updateSharedPref();
 
             }
@@ -92,22 +76,22 @@ public class ChangepasswordActivity extends AppCompatActivity {
     }
 
     private void updateSharedPref(){
-        String password = newpasswordEt.getText().toString();
+        String household = newhouseholdEt.getText().toString();
 
-        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sp.edit();
 
-        editor.putString(KEY_LOGINHPASSWORD, password);
+        editor.putString(KEY_HOUSEHOLDNAME, household);
 
         editor.apply();
     }
 
-    private class Changepassword extends AsyncTask<String,String,String>{
+    private class Changehousehold extends AsyncTask<String,String,String>{
 
         String hnamestr = getHousehold();
-        String newpasswordstr = newpasswordEt.getText().toString();
-        String confpasswordstr = new2passwordEt.getText().toString();
+        String newhouseholdstr = newhouseholdEt.getText().toString();
+        String confhouseholdstr = new2householdEt.getText().toString();
 
         String z="";
 
@@ -120,30 +104,25 @@ public class ChangepasswordActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
 
-            if(newpasswordstr.trim().equals("") || confpasswordstr.trim().equals("")  )
+            if(newhouseholdstr.trim().equals("") || confhouseholdstr.trim().equals("")  )
                 z = "Please enter all fields...";
 
 
-
-            else
             {
                 try {
-                    conn = connectionclass(un, pass, db, ip);
+                    conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }
-
-
                     else {
-                        String query1= "UPDATE household SET HPassword = '"+newpasswordstr+"' WHERE HName = '"+hnamestr+"' ";
+                        String query1= "UPDATE household SET HName = '"+newhouseholdstr+"' WHERE HName = '"+hnamestr+"'";
 
                         Statement stmt = conn.createStatement();
 
                         stmt.executeUpdate(query1);
 
                         isSuccess = true;
-
-                        z = "Password updated successfully";
+                        z = "Householdname updated successfully";
 
                     }
 
@@ -165,9 +144,9 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(ChangepasswordActivity.this, MainActivity.class);
+                Intent intent=new Intent(ChangeHouseholdActivity.this, MainActivity.class);
 
-                intent.putExtra("password",newpasswordstr);
+                intent.putExtra("household",newhouseholdstr);
 
                 startActivity(intent);
             }
@@ -204,5 +183,5 @@ public class ChangepasswordActivity extends AppCompatActivity {
 
 
 
-    }
+}
 
