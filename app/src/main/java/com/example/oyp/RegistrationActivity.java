@@ -20,6 +20,7 @@ import com.example.oyp.Fragments.CreateTaskFragment;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
 import static com.example.oyp.DBStrings.DATABASE_IP;
@@ -180,19 +181,30 @@ public class RegistrationActivity extends AppCompatActivity{
 
                     else {
 
-                        String query= "INSERT INTO household (HName, HEMail, HPassword) VALUES('"+householdstr+"' ,'"+emailstr+"', '"+passwordstr+"' )";
 
-                        Statement stmt = conn.createStatement();
-                        stmt.executeUpdate(query);
+                            try {
 
-                        z = "Inserting Successful";
+                                String query = "INSERT INTO household (HName, HEMail, HPassword) VALUES('" + householdstr + "' ,'" + emailstr + "', '" + passwordstr + "' )";
 
-                        Intent intent = new Intent(RegistrationActivity.this, ChooseUserActivity.class);
+                                Statement stmt = conn.createStatement();
+                                stmt.executeUpdate(query);
+
+                                z = "Inserting Successful";
+
+
+                                Intent intent = new Intent(RegistrationActivity.this, CreateUserActivity.class);
+
+
+                                startActivity(intent);
+
+                            }catch (Exception SQLIntegrityConstraintViolationException)
+                            {
+
+                                z = "The household name is already taken. Please choose a different name for your household.";
+                            }
 
 
 
-
-                        startActivity(intent);
 
                     }
 

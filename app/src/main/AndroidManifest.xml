@@ -28,13 +28,14 @@
         <activity android:name=".ChangePasswordActivity"/>
         <activity android:name=".ChooseUserActivity"/>
         <activity android:name=".CreateUserActivity"/>
-        <activity android:name=".RegistrationActivity"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".ChangeEmailActivity"/>
         <activity android:name=".ChangeHouseholdActivity"/>
         <activity android:name=".TaskDetailActivity"/>
         <activity android:name=".ActivityDetailActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".CreateActivityActivity"/>
+        <activity android:name=".RegistrationActivity"/>
+
+
 
 
         <receiver android:name=".PushNotification.AlertReceiver" />
