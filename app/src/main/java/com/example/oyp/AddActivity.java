@@ -14,11 +14,11 @@ public class AddActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        //Get the view from fragment_addactivity
-        setContentView(R.layout.fragment_addactivity);
+        //Get the view from activity_createactivity
+        setContentView(R.layout.activity_createactivity);
 
-        addActivityTextView = findViewById(R.id.addActivityTextView);
-        addDescriptionTextView = findViewById(R.id.addDescriptionTextView);
+        //addActivityTextView = findViewById(R.id.addActivityTextView);
+        //addDescriptionTextView = findViewById(R.id.addDescriptionTextView);
 
 
     }

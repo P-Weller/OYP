@@ -1,6 +1,8 @@
 package com.example.oyp.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,7 +35,8 @@ public class MoreFragment extends Fragment {
 
             public void onClick(View v){
 
-                //Start xxxxx.class
+                //Start StartActivity.class
+                clearSharedPref();
                 Intent intent = new Intent(getActivity(), StartActivity.class);
                 startActivity(intent);
 
@@ -62,6 +65,15 @@ public class MoreFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private void clearSharedPref() {
+
+        SharedPreferences sp = this.getActivity().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sp.edit();
+
+        editor.clear().apply();
     }
 
 }

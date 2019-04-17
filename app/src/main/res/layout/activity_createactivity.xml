@@ -47,8 +47,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/addActivityTextView"
+            <EditText
+                android:id="@+id/activitynameEditText"
                 style="@style/TextviewTheme"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -64,7 +64,7 @@
 
 
         <TextView
-            android:id="@+id/activityDescriptionTitleTextView"
+            android:id="@+id/descriptionEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -80,8 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/addDescriptionTextView"
+            <EditText
+                android:id="@+id/activitydescriptionEditText"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_gravity="start"
