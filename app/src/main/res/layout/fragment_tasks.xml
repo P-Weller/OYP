@@ -35,8 +35,6 @@
             android:layout_gravity="left"
             android:dividerHeight="3dp"
             android:textAlignment="gravity"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp"
             />
 
         <Button

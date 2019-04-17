@@ -38,6 +38,10 @@ public class LoginActivity extends AppCompatActivity {
 
    Connection conn;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -67,6 +71,9 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *
+     */
     private void saveUsername(){
         String name = mName.getText().toString();
         String password = mPassword.getText().toString();

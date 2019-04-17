@@ -6,39 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <Button
-        android:id="@+id/newActivityBtn"
-        style="@style/ButtonTheme"
-        android:layout_width="168dp"
-        android:layout_height="41dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-
-        android:clickable="true"
-        android:text="add new activity"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.431"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964" />
-
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="656dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="0dp">
+        tools:ignore="MissingConstraints">
 
-        <TextView
+       <TextView
             android:id="@+id/activityTextView"
             style="@style/TextviewTheme"
             android:layout_width="match_parent"
@@ -55,15 +29,28 @@
         <ListView
             android:id="@+id/activityListView"
             android:layout_width="match_parent"
-            android:layout_height="547dp"
+            android:layout_height="475dp"
             android:layout_gravity="left"
             android:dividerHeight="3dp"
             android:textAlignment="gravity"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp" />
+            />
 
+
+
+        <Button
+            android:id="@+id/newActivityBtn"
+            style="@style/ButtonTheme"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:text="Add new activity"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
 
     </LinearLayout>
+
 
 
 
