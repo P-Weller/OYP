@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.oyp.ActivityDetailActivity;
 import com.example.oyp.ActivitySpinnerAdapter;
@@ -59,8 +58,8 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class CreateTaskFragment extends Fragment {
 
-    public static TextView dateEt;
-    Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner;
+    public static EditText dateEt;
+    public static Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner;
     Button createBtn;
     Context thisContext;
 
@@ -191,18 +190,18 @@ public class CreateTaskFragment extends Fragment {
                 }
 
         });
-        /*
+
                 //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-            startAlarm();
+            startAlarm(getActivity());
 
-                Createtask createtask = new Createtask();
-                createtask.execute();
+                /*Createtask createtask = new Createtask();
+                createtask.execute();*/
             }
         });
-*/
+
         return view;
 
     }
@@ -220,9 +219,9 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        if (c.before(Calendar.getInstance())) {
+        /*if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }
+        }*/
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }

@@ -34,6 +34,14 @@ public class NotificationHelper extends ContextWrapper {
     private void createChannel() {
         NotificationChannel channel = new NotificationChannel(channelID, channelName, NotificationManager.IMPORTANCE_HIGH);
 
+        channel.enableLights(true);
+        channel.enableVibration(true);
+        channel.setVibrationPattern(new long[] {1000, 1000, 1000, 1000, 1000});
+        channel.setLightColor(Color.BLUE);
+
+
+
+
         getManager().createNotificationChannel(channel);
     }
 
@@ -53,11 +61,15 @@ public class NotificationHelper extends ContextWrapper {
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 
+        CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setAutoCancel(true)
                 .setContentTitle("New Task!")
-                .setContentText("You have a new task named:" + "Name of the Activity")
+                .setContentText("New Task for " + createTaskFragment.personSpinner.getSelectedItem().toString()+ ": " + createTaskFragment.activitySpinner.getSelectedItem().toString())
                 .setColor(Color.rgb(72,169,197))
+                .setLights(Color.BLUE, 1000, 1000)
+                .setVibrate(new long[] {1000,1000,1000,1000,1000})
                 .setSmallIcon(R.drawable.ic_event)
                 .setContentIntent(contentIntent);
     }
