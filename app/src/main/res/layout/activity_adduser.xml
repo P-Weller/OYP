@@ -106,7 +106,7 @@
             <EditText
                 android:id="@+id/addUserEditText"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -129,9 +129,9 @@
             >
 
             <Spinner
-                android:id="@+id/usercolorEditText"
+                android:id="@+id/usercolorSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="60dp"
                 android:autofillHints=""
                 android:ems="10"
                 android:inputType="textPersonName"

@@ -2,6 +2,7 @@ package com.example.oyp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -10,11 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -22,7 +25,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import com.example.oyp.Fragments.CreateTaskFragment;
 import com.example.oyp.Fragments.UsersFragment;
 import com.example.oyp.LoginActivity;
 import com.google.common.base.Strings;
@@ -44,6 +49,10 @@ public class CreateUserActivity extends AppCompatActivity{
     EditText usernameEt, householdEt;
     RadioGroup radio_g;
     RadioButton radio_b;
+    Spinner userColor;
+
+    ArrayList<Integer> colorImage = new ArrayList<>();
+    ArrayList<String> colorName = new ArrayList<>();
 
     ConnectionClass connectionClass;
 
@@ -67,7 +76,24 @@ public class CreateUserActivity extends AppCompatActivity{
         usernameEt = (EditText) findViewById(R.id.addUserEditText);
         //householdEt = (EditText) findViewById(R.id.household2EditText);
         radio_g = findViewById(R.id.radiogroup);
+        userColor = findViewById(R.id.usercolorSpinner);
 
+        colorImage.add(R.drawable.ic_color_lens_black_32dp);
+        colorName.add ("color");
+
+        GetColorData getColorData = new GetColorData();
+        getColorData.execute("");
+
+
+        userColor.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //Capture click on cancelBtn to go back to ChooseUserActivity
         cancelBtn.setOnClickListener(new View.OnClickListener(){
@@ -251,6 +277,82 @@ public class CreateUserActivity extends AppCompatActivity{
         }
     }
 
+    private class GetColorData extends AsyncTask<String, String, String> {
+        String msg = "";
+
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                stmt = conn.createStatement();
+                String sql = "SELECT * FROM color ORDER BY CName ASC";
+
+                ResultSet rs = stmt.executeQuery(sql);
+
+                while (rs.next()) {
+                    String aImageString = rs.getString("CName");
+                    String aNameString = rs.getString("CName");
+
+                    Resources res = getResources();
+                    int aImageInt = res.getIdentifier(aImageString , "drawable", getPackageName());
+
+                    colorImage.add(aImageInt);
+                    colorName.add(aNameString);
+
+                }
+
+
+                msg = "Process complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            UsercolorSpinnerAdapter usercolorSpinnerAdapter = new UsercolorSpinnerAdapter(getApplicationContext(), colorImage, colorName);
+            userColor.setAdapter(usercolorSpinnerAdapter);
+
+
+        }
+    }
 
 
 
