@@ -48,7 +48,6 @@ public class ActivityDetailActivity extends AppCompatActivity {
         int activityID = sp.getInt("key_chosenacitivity", 0);
         System.out.println("2: " + activityID);
         return activityID;
-
     }
 
     private void deleteActivity(){
