@@ -9,7 +9,7 @@ import android.support.v4.content.WakefulBroadcastReceiver;
 //AlertReceiver class
 
 //receives the Alarm from the startAlarm method
-public class AlertReceiver  extends BroadcastReceiver {
+public class AlertReceiver extends BroadcastReceiver {
 
 
 

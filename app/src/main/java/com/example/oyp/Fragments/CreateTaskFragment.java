@@ -226,6 +226,8 @@ public class CreateTaskFragment extends Fragment {
 
     public void startAlarm(Context context) {
 
+        String repeatString = repeatSpinner.getSelectedItem().toString();
+
 
         //creates Object of AlarmManager
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -239,8 +241,29 @@ public class CreateTaskFragment extends Fragment {
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
         }
+        if (repeatString.equals("Once")) {
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+
+        }else if(repeatString.equals("Monthly")) {
+
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * c.getActualMaximum(Calendar.DAY_OF_MONTH), pendingIntent);
+
+        }else if(repeatString.equals("Daily")) {
+
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        }else if(repeatString.equals("Weekly")) {
+
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+
+        }else {
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY *365, pendingIntent);
+
+
+
+        }
     }
 
     public void updateText() {

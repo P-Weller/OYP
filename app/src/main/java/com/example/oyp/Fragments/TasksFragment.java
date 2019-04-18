@@ -40,6 +40,7 @@ public class TasksFragment extends Fragment {
     ArrayList<Integer> tImage = new ArrayList<>();
     ArrayList<String> tName = new ArrayList<>();
     ArrayList<String> tUser = new ArrayList<>();
+    ArrayList<Integer> tColorID = new ArrayList<>();
     ListView otasksListView;
     int i = 0;
 
@@ -69,6 +70,7 @@ public class TasksFragment extends Fragment {
                 tImage = new ArrayList<>();
                 tName = new ArrayList<>();
                 tUser = new ArrayList<>();
+                tColorID = new ArrayList<>();
 
 
                 if(i == 0) {
@@ -193,7 +195,7 @@ public class TasksFragment extends Fragment {
                 Log.d("HouseholdID", householdid);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT AIcon,AName,UName FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
+                String sql = "SELECT AIcon,AName,UName,ColorID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -201,6 +203,7 @@ public class TasksFragment extends Fragment {
                     String aImageString = rs.getString("AIcon");
                     String aName = rs.getString("AName");
                     String aUser = rs.getString("UName");
+                    int aColorID = rs.getInt("ColorID");
 
                     Resources res = getResources();
                     int aImage = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
@@ -208,6 +211,7 @@ public class TasksFragment extends Fragment {
                     tImage.add(i, aImage);
                     tName.add(i, aName);
                     tUser.add(i, aUser);
+                    tColorID.add(i, aColorID);
                     i++;
 
                 }
@@ -250,7 +254,7 @@ public class TasksFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            TaskListViewAdapter taskListViewAdapter = new TaskListViewAdapter(thisContext, tImage, tName, tUser);
+            TaskListViewAdapter taskListViewAdapter = new TaskListViewAdapter(thisContext, tImage, tName, tUser, tColorID);
             otasksListView.setAdapter(taskListViewAdapter);
         }
     }
@@ -294,7 +298,7 @@ public class TasksFragment extends Fragment {
                 Log.d("HouseholdID", householdid);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT AIcon,AName,UName FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 1 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
+                String sql = "SELECT AIcon,AName,UName,ColorID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 1 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -302,6 +306,7 @@ public class TasksFragment extends Fragment {
                     String aImageString = rs.getString("AIcon");
                     String aName = rs.getString("AName");
                     String aUser = rs.getString("UName");
+                    int aColorID = rs.getInt("ColorID");
 
                     Resources res = getResources();
                     int aImage = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
@@ -309,6 +314,7 @@ public class TasksFragment extends Fragment {
                     tImage.add(i, aImage);
                     tName.add(i, aName);
                     tUser.add(i, aUser);
+                    tColorID.add(i,aColorID);
                     i++;
 
                 }
@@ -317,6 +323,7 @@ public class TasksFragment extends Fragment {
                 System.out.println(tImage);
                 System.out.println(tName);
                 System.out.println(tUser);
+                System.out.println(tColorID);
                 msg = "Process complete.";
                 rs.close();
                 stmt.close();
@@ -350,7 +357,7 @@ public class TasksFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
 
-            TaskListViewAdapter taskListViewAdapter = new TaskListViewAdapter(thisContext, tImage, tName,tUser);
+            TaskListViewAdapter taskListViewAdapter = new TaskListViewAdapter(thisContext, tImage, tName,tUser, tColorID);
             otasksListView.setAdapter(taskListViewAdapter);
         }
     }

@@ -264,7 +264,6 @@ public class TaskDetailActivity extends AppCompatActivity {
                 repeatDetailTextView.setText("-");
                 pointsDetailTextView.setText("-");
             }
-
         }
     }
 
