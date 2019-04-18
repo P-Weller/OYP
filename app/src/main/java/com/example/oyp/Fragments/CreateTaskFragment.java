@@ -32,6 +32,7 @@ import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
+import com.example.oyp.StartActivity;
 import com.example.oyp.TaskPointsSpinnerAdapter;
 
 import java.sql.Connection;
@@ -90,7 +91,7 @@ public class CreateTaskFragment extends Fragment {
 
     private static final String SHARED_PREF_NAME = "userdata";
 
-    int iconsRepeat[] = {R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp};
+    int iconsRepeat[] = {R.drawable.ic_loop_black_32dp,R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp};
 
 
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
@@ -122,7 +123,7 @@ public class CreateTaskFragment extends Fragment {
         aImage.add(R.drawable.ic_help_blue_32dp);
         rNames.add("Repeat");
         pNames.add("Household member");
-        pIcon.add(R.drawable.ic_baseline_people_blue_32);
+        pIcon.add(R.drawable.ic_person_add_black_24dp);
         taskPoints.add(points0);
         taskPoints.add(points10);
         taskPoints.add(points20);
@@ -244,8 +245,8 @@ public class CreateTaskFragment extends Fragment {
 
     public void updateText() {
 
-                String dateText = dateFormat.format(c.getTime());
-                String timeText = timeFormat.format(c.getTime());
+                dateText = dateFormat.format(c.getTime());
+                timeText = timeFormat.format(c.getTime());
 
             dateEt.setText(dateText + "  "+ timeText);
 }
@@ -273,16 +274,13 @@ public class CreateTaskFragment extends Fragment {
     class Createtask extends AsyncTask<String, String, String> {
 
         String activityString = activitySpinner.getSelectedItem().toString();
-        //String datestr = dateEt.getText().toString();
-        String datestr = "2019-04-25";
-        String timestr = "00:00:00";
+        String datestr = dateEt.getText().toString();
+        String dateString = dateFormat.format(c.getTime());
+        String timeString = timeFormat.format(c.getTime());
         String repeatString = repeatSpinner.getSelectedItem().toString();
         String personString = personSpinner.getSelectedItem().toString();
         String pointsString = taskpointsSpinner.getSelectedItem().toString();
         int statusID = 0;
-        int points = 100;
-
-
 
 
         String z = "";
@@ -292,36 +290,22 @@ public class CreateTaskFragment extends Fragment {
 
         boolean isSuccess = false;
 
-       /* public String captureactivity(String... params) {
-
-            taskEt.setOnClickListener(new View.OnClickListener(){
-                public void onClick(View v){
-                }
-            });
-
-            String taskEt ="";
-            return taskEt;
-        } */
-
-
-
 
         @Override
         protected String doInBackground(String... params) {
             String householdID = "";
-            Integer userID = 0 ;
+            Integer userID = 0;
             Integer repeatID = 0;
             Integer activityID = 0;
 
-            //if (test.trim().equals(""))
-                //(timestr.trim().equals("") )
-                // || datestr.trim().equals("") || activityString.trim().equals("Activity") || personString.trim().equals("Person") || repeatString.trim().equals("Repeat") || pointsString.trim().equals("Points"))
-              //  z = "Please fill in all fields";
+            System.out.println(dateString);
+            System.out.println(timeString);
+
+            if (activityString.equals("Activity") || repeatString.equals("Repeat") || personString.equals("Household member") || pointsString.equals("Points") || datestr.equals("When?"))
+                z = "Please fill in all fields";
 
 
-            //System.out.println("ifclause");
-
-           // else {
+            else {
 
 
                 try {
@@ -334,47 +318,55 @@ public class CreateTaskFragment extends Fragment {
 
                     } else {
 
+                        if (pointsString.equals("20 Points")) {
+                            pointsString = "20";
+                        } else if (pointsString.equals("30 Points")) {
+                            pointsString = "30";
+                        } else if (pointsString.equals("50 Points")) {
+                            pointsString = "50";
+                        } else
+                            pointsString = "10";
+
+
                         System.out.println("connection Steht");
-                        System.out.println(personString);
 
 
-                        String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '"+household+"'";
+                        String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '" + household + "'";
 
                         Statement stmtHouseholdID = conn.createStatement();
                         stmtHouseholdID.executeUpdate(queryhouseholdID);
                         ResultSet rsHouseholdID = stmtHouseholdID.executeQuery(queryhouseholdID);
 
                         while (rsHouseholdID.next()) {
-                    householdID = rsHouseholdID.getString(1);
+                            householdID = rsHouseholdID.getString(1);
 
-                }
-                System.out.println(householdID);
+                        }
+                        System.out.println(householdID);
 
 
-
-                        String queryUserID = "SELECT `UserID` FROM `user` WHERE `HouseholdID` = '"+householdID+"' AND `UName` = '"+personString+"'";
+                        String queryUserID = "SELECT `UserID` FROM `user` WHERE `HouseholdID` = '" + householdID + "' AND `UName` = '" + personString + "'";
                         Statement stmtUserID = conn.createStatement();
                         stmtUserID.executeUpdate(queryUserID);
                         ResultSet rsUserID = stmtUserID.executeQuery(queryUserID);
                         while (rsUserID.next()) {
-                        userID = Integer.valueOf(rsUserID.getString(1));
+                            userID = Integer.valueOf(rsUserID.getString(1));
                         }
 
                         System.out.println(userID);
 
 
-                        String queryRepeatID = "SELECT `RepeatID` FROM `repeat` WHERE `RName` = '"+repeatString+"'";
+                        String queryRepeatID = "SELECT `RepeatID` FROM `repeat` WHERE `RName` = '" + repeatString + "'";
                         Statement stmtRepeatID = conn.createStatement();
                         stmtRepeatID.executeUpdate(queryRepeatID);
                         ResultSet rsRepeatID = stmtUserID.executeQuery(queryRepeatID);
-                        while ( rsRepeatID.next()) {
-                        repeatID = Integer.valueOf(rsRepeatID.getString(1));
+                        while (rsRepeatID.next()) {
+                            repeatID = Integer.valueOf(rsRepeatID.getString(1));
                         }
 
                         System.out.println(repeatID);
 
 
-                        String queryActivityID = "SELECT `ActivityID` FROM `activity` WHERE `AName` = '"+activityString+"'";
+                        String queryActivityID = "SELECT `ActivityID` FROM `activity` WHERE `AName` = '" + activityString + "'";
                         Statement stmtActivityID = conn.createStatement();
                         stmtActivityID.executeUpdate(queryActivityID);
                         ResultSet rsActivityID = stmtUserID.executeQuery(queryActivityID);
@@ -385,15 +377,13 @@ public class CreateTaskFragment extends Fragment {
                         System.out.println(activityID);
 
 
-
-
-
                         Statement stmt = conn.createStatement();
 
-                        String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES('" + points + "' ,'" +datestr+ "','"+timestr+"','"+userID+"','"+statusID+"' , '"+repeatID+"' , '"+activityID+"')";
+                        String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES('" + pointsString + "' ,'" + dateString + "','" + timeString + "','" + userID + "','" + statusID + "' , '" + repeatID + "' , '" + activityID + "')";
 
                         stmt.executeUpdate(query);
 
+                        isSuccess = true;
                         z = "Created task successfully";
 
                         System.out.println("heyo");
@@ -404,35 +394,29 @@ public class CreateTaskFragment extends Fragment {
                     isSuccess = false;
                     z = "Exceptions" + ex;
                 }
-
+            }
 
             return z;
         }
 
+
         @Override
         protected void onPostExecute(String s) {
-          //  Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getBaseContext(), "" + z, Toast.LENGTH_LONG).show();
+
+
 
             if (isSuccess) {
-
-                //Intent intent = new Intent(CreateTaskFragment.this, MainActivity.class);
-
-             /*   intent.putExtra("task",taskstr);
-                intent.putExtra("person",personstr);
-                intent.putExtra("date",datestr);
-                intent.putExtra("repeat",repeatstr);
-                intent.putExtra("points",pointsstr);
-                intent.putExtra("time",timestr);
-                intent.putExtra("status",statusstr);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
 
 
-                startActivity(intent);*/
+                startActivity(intent);
 
+
+            }
             }
 
         }
-
-    }
 
 
     public Connection connectionclass(String user, String password, String database, String server) {
