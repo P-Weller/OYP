@@ -76,7 +76,7 @@ public class CreateUserActivity extends AppCompatActivity{
         usernameEt = (EditText) findViewById(R.id.addUserEditText);
         //householdEt = (EditText) findViewById(R.id.household2EditText);
         radio_g = findViewById(R.id.radiogroup);
-        userColor = findViewById(R.id.usercolorSpinner);
+        userColor = findViewById(R.id.userColorSpinner);
 
         colorImage.add(R.drawable.ic_color_lens_black_32dp);
         colorName.add ("color");
@@ -166,6 +166,8 @@ public class CreateUserActivity extends AppCompatActivity{
         String usernamestr=usernameEt.getText().toString();
         String householdstr = getHousehold();
         String uName;
+        String uColorStr = userColor.getSelectedItem().toString();
+        int uColorID = 0;
 
         String z="";
         String householdid;
@@ -177,7 +179,7 @@ public class CreateUserActivity extends AppCompatActivity{
             int userID = 0;
             String query1 = null;
 
-            if (usernamestr.trim().equals(""))
+            if (usernamestr.trim().equals("") || uColorStr.trim().equals(""))
                 z = "Please enter all fields...";
             else {
                 try {
@@ -191,6 +193,15 @@ public class CreateUserActivity extends AppCompatActivity{
 
                         while (rs.next()) {
                             uName = rs.getString("UName");
+
+                        }
+
+                        query4 = "SELECT ColorID FROM color WHERE CName = '" + uColorStr + "'";
+                        rs = stmt.executeQuery(query4);
+
+                        while (rs.next()) {
+                            uColorID = rs.getInt("ColorID");
+
                         }
 
                         rs.close();
@@ -215,8 +226,8 @@ public class CreateUserActivity extends AppCompatActivity{
 
                             Log.d("Householdid", householdid);
 
-                            String query2 = "INSERT INTO user (UName, GenderID, HouseholdID) VALUES" +
-                                    "('" + usernamestr + "','" + genderstr + "','" + householdid + "' )";
+                            String query2 = "INSERT INTO user (UName, GenderID, HouseholdID, ColorID) VALUES" +
+                                    "('" + usernamestr + "','" + genderstr + "','" + householdid + "','" + uColorID + "' )";
 
                             Log.d("SQL Eingabe", query2);
                             Statement stmt2 = conn.createStatement();
@@ -273,7 +284,6 @@ public class CreateUserActivity extends AppCompatActivity{
 
                 startActivity(intent);
             }
-
         }
     }
 
@@ -297,7 +307,8 @@ public class CreateUserActivity extends AppCompatActivity{
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM color ORDER BY CName ASC";
+
+                String sql = "SELECT CName FROM color WHERE CNAME NOT IN (SELECT CName FROM color,user WHERE user.HouseholdID = 4 AND user.ColorID = color.ColorID)";
 
                 ResultSet rs = stmt.executeQuery(sql);
 

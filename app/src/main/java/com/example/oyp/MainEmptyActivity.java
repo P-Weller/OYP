@@ -35,8 +35,6 @@ public class MainEmptyActivity extends AppCompatActivity {
 
         System.out.println("onCreate");
 
-
-
         DoLogin doLogin = new DoLogin();
         doLogin.execute("");
     }
@@ -73,8 +71,6 @@ public class MainEmptyActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-
-
 
             super.onPreExecute();
         }
