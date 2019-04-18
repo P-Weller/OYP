@@ -69,15 +69,15 @@
                 android:layout_height="60dp"
                 android:autofillHints=""
                 android:clickable="true"
-                android:fontFamily="casual"
-                android:textStyle="bold"
                 android:drawableStart="@drawable/ic_help_outline_black_24dp"
                 android:drawableLeft="@drawable/ic_help_outline_black_24dp"
                 android:drawablePadding="10dp"
-
                 android:ems="10"
+                android:fontFamily="casual"
+
                 android:hint="What ?"
                 android:inputType="textPersonName"
+                android:textStyle="bold"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
@@ -94,16 +94,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:autofillHints=""
-                android:drawableStart="@drawable/ic_date_range_32dp"
-                android:drawableLeft="@drawable/ic_date_range_32dp"
-                android:drawablePadding="32dp"
+                android:drawableLeft="@drawable/ic_date_range_60dp"
+                android:drawablePadding="12dp"
+                android:textSize="20sp"
+
                 android:ems="10"
                 android:focusable="false"
                 android:hint=""
+                android:textColor="#000000"
+                android:fontFamily="casual"
 
 
-                android:text="When?"
                 android:inputType="date"
+                android:text="When?"
                 tools:targetApi="o" />
 
 
@@ -122,15 +125,15 @@
                 android:layout_height="60dp"
                 android:autofillHints=""
                 android:clickable="true"
-                android:fontFamily="casual"
-                android:textStyle="bold"
                 android:drawableStart="@drawable/ic_help_outline_black_24dp"
                 android:drawableLeft="@drawable/ic_help_outline_black_24dp"
                 android:drawablePadding="10dp"
-
                 android:ems="10"
+                android:fontFamily="casual"
+
                 android:hint="What ?"
                 android:inputType="textPersonName"
+                android:textStyle="bold"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
@@ -147,15 +150,15 @@
                 android:layout_height="60dp"
                 android:autofillHints=""
                 android:clickable="true"
-                android:fontFamily="casual"
-                android:textStyle="bold"
                 android:drawableStart="@drawable/ic_help_outline_black_24dp"
                 android:drawableLeft="@drawable/ic_help_outline_black_24dp"
                 android:drawablePadding="10dp"
-
                 android:ems="10"
+                android:fontFamily="casual"
+
                 android:hint="What ?"
                 android:inputType="textPersonName"
+                android:textStyle="bold"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>

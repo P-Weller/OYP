@@ -1,5 +1,7 @@
 package com.example.oyp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -85,10 +87,32 @@ public class TaskDetailActivity extends AppCompatActivity {
         deleteTaskBtn.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                DeleteTask deleteTask = new DeleteTask();
-                deleteTask.execute("");
-                Intent intent = new Intent(TaskDetailActivity.this, MainActivity.class);
-                startActivity(intent);
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(TaskDetailActivity.this);
+                alertDialog.setMessage("Do you really want to delete this Task?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                DeleteTask deleteTask = new DeleteTask();
+                                deleteTask.execute("");
+                                Intent intent = new Intent(TaskDetailActivity.this, MainActivity.class);
+                                startActivity(intent);
+
+
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
+
+
+
 
             }
         });
