@@ -1,6 +1,7 @@
 package com.example.oyp.PushNotification;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -36,8 +37,7 @@ public class NotificationHelper extends ContextWrapper {
 
         channel.enableLights(true);
         channel.enableVibration(true);
-        channel.setVibrationPattern(new long[] {1000, 1000, 1000, 1000, 1000});
-        channel.setLightColor(Color.BLUE);
+
 
 
 
@@ -65,11 +65,18 @@ public class NotificationHelper extends ContextWrapper {
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setAutoCancel(true)
-                .setContentTitle("New Task!!!")
-                .setContentText("New Task for " + createTaskFragment.personSpinner.getSelectedItem().toString()+ ": " + createTaskFragment.activitySpinner.getSelectedItem().toString())
+                .setContentTitle("New Task!")
+                .setContentText("New Task for " + createTaskFragment.personSpinner.getSelectedItem())
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("There is a new Task for " + createTaskFragment.personSpinner.getSelectedItem().toString()
+                        + ": " + createTaskFragment.activitySpinner.getSelectedItem().toString() +"!"
+                        + " This task is worth " + createTaskFragment.taskpointsSpinner.getSelectedItem().toString() + ".")
+                        .setBigContentTitle("New Task!")
+                        .setSummaryText(createTaskFragment.activitySpinner.getSelectedItem().toString()))
                 .setColor(Color.rgb(72,169,197))
-                .setLights(Color.BLUE, 1000, 1000)
-                .setVibrate(new long[] {1000,1000,1000,1000,1000})
+                .setDefaults(Notification.DEFAULT_LIGHTS)
+                .setDefaults(Notification.DEFAULT_SOUND)
+                .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setSmallIcon(R.drawable.ic_event)
                 .setContentIntent(contentIntent);
     }
