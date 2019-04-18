@@ -64,6 +64,18 @@ public class TasksFragment extends Fragment {
 
         getHousehold();
 
+
+        clearTasksBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+
+
+            }
+        });
+
+
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +90,7 @@ public class TasksFragment extends Fragment {
                     retrieveClosedTaskData.execute("");
                     closedTaskBtn.setText("Show me open tasks");
                     opentasksTextView.setText("Closed Tasks");
+                    clearTasksBtn.setVisibility(View.VISIBLE);
                     i = 1;
                 } else if(i == 1){
                     GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
@@ -89,11 +102,14 @@ public class TasksFragment extends Fragment {
                 }
             }
         });
+
+
         if(i == 0) {
             GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
             retrieveOpenTaskData.execute("");
             clearTasksBtn.setVisibility(View.GONE);
         }
+
 
         // Creating a method to be able to click on the list rows
         otasksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
