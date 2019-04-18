@@ -22,9 +22,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.oyp.ActivityDetailActivity;
 import com.example.oyp.ActivitySpinnerAdapter;
+import com.example.oyp.MainActivity;
 import com.example.oyp.PersonSpinnerAdapter;
 import com.example.oyp.PushNotification.AlertReceiver;
 import com.example.oyp.PushNotification.DatePickerFragment;
@@ -69,11 +71,20 @@ public class CreateTaskFragment extends Fragment {
     String dateText;
     String timeText;
 
+    ArrayList<String> taskPoints = new ArrayList<>();
+
     ArrayList<String> rNames = new ArrayList<>();
     ArrayList<String> pNames = new ArrayList<>();
     ArrayList<Integer> pIcon = new ArrayList<>();
     ArrayList<Integer> aImage = new ArrayList<>();
     ArrayList<String> aName = new ArrayList<>();
+
+    String points10 = "10 Points";
+    String points20 = "20 Points";
+    String points30 = "30 Points";
+    String points50 = "50 Points";
+    String points0 = "Points";
+
     private static final String KEY_CHOSENACTIVITY = "key_chosenacitivity";
 
 
@@ -82,7 +93,6 @@ public class CreateTaskFragment extends Fragment {
     int iconsRepeat[] = {R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp, R.drawable.ic_access_time_black_32dp};
 
 
-    String [] pointsName = {"Points", "10 Points", "20 Points" , "30 Points", "50 Points"};
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
@@ -113,6 +123,11 @@ public class CreateTaskFragment extends Fragment {
         rNames.add("Repeat");
         pNames.add("Household member");
         pIcon.add(R.drawable.ic_baseline_people_blue_32);
+        taskPoints.add(points0);
+        taskPoints.add(points10);
+        taskPoints.add(points20);
+        taskPoints.add(points30);
+        taskPoints.add(points50);
 
 
         activitySpinner = view.findViewById(R.id.activitySpinner);
@@ -122,6 +137,8 @@ public class CreateTaskFragment extends Fragment {
         repeatSpinner = view.findViewById(R.id.repeatSpinner);
         personSpinner = view.findViewById(R.id.personSpinner);
 
+        TaskPointsSpinnerAdapter taskPointsSpinnerAdapter = new TaskPointsSpinnerAdapter(getActivity().getApplicationContext(), iconsPoints, taskPoints);
+        taskpointsSpinner.setAdapter(taskPointsSpinnerAdapter);
 
         getHousehold();
 
@@ -154,8 +171,7 @@ public class CreateTaskFragment extends Fragment {
 
             }
         });
-        TaskPointsSpinnerAdapter taskPointsSpinnerAdapter = new TaskPointsSpinnerAdapter(getActivity().getApplicationContext(), iconsPoints, pointsName);
-        taskpointsSpinner.setAdapter(taskPointsSpinnerAdapter);
+
 
         personSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -197,8 +213,8 @@ public class CreateTaskFragment extends Fragment {
 
             startAlarm(getActivity());
 
-                /*Createtask createtask = new Createtask();
-                createtask.execute();*/
+                Createtask createtask = new Createtask();
+                createtask.execute();
             }
         });
 
@@ -219,9 +235,9 @@ public class CreateTaskFragment extends Fragment {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
         //Compares the chosen time with the real time
-        /*if (c.before(Calendar.getInstance())) {
+        if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-        }*/
+        }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
     }
@@ -252,22 +268,32 @@ public class CreateTaskFragment extends Fragment {
 
 
 
-/*
+
 
     class Createtask extends AsyncTask<String, String, String> {
 
-        String taskstr = taskEt.getText().toString();
-        String datestr = dateEt.getText().toString();
-        String timestr;
-        String pointsString = taskpointsSpinner.getSelectedItem().toString();
+        String activityString = activitySpinner.getSelectedItem().toString();
+        //String datestr = dateEt.getText().toString();
+        String datestr = "2019-04-25";
+        String timestr = "00:00:00";
+        String repeatString = repeatSpinner.getSelectedItem().toString();
         String personString = personSpinner.getSelectedItem().toString();
+        String pointsString = taskpointsSpinner.getSelectedItem().toString();
+        int statusID = 0;
+        int points = 100;
+        int repeatID = 2;
+        int activityID = 20;
+
 
 
         String z = "";
 
+        String household = getHousehold();
+
+
         boolean isSuccess = false;
 
-        public String captureactivity(String... params) {
+       /* public String captureactivity(String... params) {
 
             taskEt.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v){
@@ -276,7 +302,7 @@ public class CreateTaskFragment extends Fragment {
 
             String taskEt ="";
             return taskEt;
-        }
+        } */
 
 
 
@@ -284,26 +310,75 @@ public class CreateTaskFragment extends Fragment {
         @Override
         protected String doInBackground(String... params) {
 
-            if (taskstr.trim().equals("") || datestr.trim().equals(""))
-                z = "Please fill in all fields";
+            //if (test.trim().equals(""))
+                //(timestr.trim().equals("") )
+                // || datestr.trim().equals("") || activityString.trim().equals("Activity") || personString.trim().equals("Person") || repeatString.trim().equals("Repeat") || pointsString.trim().equals("Points"))
+              //  z = "Please fill in all fields";
 
 
-            else {
+            //System.out.println("ifclause");
+
+           // else {
 
 
                 try {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
                     if (conn == null) {
                         z = "Please check your internet connection";
+
                     } else {
 
-                        String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES" +
-                                "('" + pointsString + "' ,'" +datestr+ "','"+timestr+"','"+personString+"',"0", '"+taskstr+"')";
+                        System.out.println("connection Steht");
+                        System.out.println(personString);
+
+
+                       /* String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '"+household+"'";
+
+                        Statement stmtHouseholdID = conn.createStatement();
+                        stmtHouseholdID.executeUpdate(queryhouseholdID);
+                        ResultSet rsHouseholdID = stmtHouseholdID.executeQuery(queryhouseholdID);
+                        int householdID = rsHouseholdID.getString(queryhouseholdID);
+                        */
+
+
+                       // String queryUserID = "SELECT `UserID` FROM `user` WHERE `HouseholdID` = '"+householdID+"' AND `UName` = '"+personString+"'";
+                        String queryUserID = "SELECT `UName` FROM `user` WHERE `UName` = '"+personString+"'";
+                        Statement stmtUserID = conn.createStatement();
+                        stmtUserID.executeUpdate(queryUserID);
+                        ResultSet rsUserID = stmtUserID.executeQuery(queryUserID);
+                        String userID = rsUserID.getString(queryUserID);
+
+                        System.out.println(activityID);
+
+
+                        /*String queryRepeatID = "SELECT `RepeatID` FROM `repeat` WHERE `RName` = '"+repeatString+"'";
+                        Statement stmtRepeatID = conn.createStatement();
+                        stmtRepeatID.executeUpdate(queryRepeatID);
+                        ResultSet rsRepeatID = stmtUserID.executeQuery(queryRepeatID);
+                        int repeatID = Integer.parseInt(rsRepeatID.getString(queryRepeatID));
+
+                       System.out.println(repeatID);
+
+                        String queryActivityID = "SELECT `ActivityID` FROM `activity` WHERE `AName` = '"+activityString+"'";
+                        Statement stmtActivityID = conn.createStatement();
+                        stmtActivityID.executeUpdate(queryActivityID);
+                        ResultSet rsActivityID = stmtUserID.executeQuery(queryActivityID);
+                        int activityID = Integer.parseInt(rsActivityID.getString(queryActivityID));
+
+                        System.out.println(activityID);
+*/
+
+
+
+                        String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES('" + points + "' ,'" +datestr+ "','"+timestr+"','"+userID+"','"+statusID+"'), '"+repeatID+"' , '"+activityID+"')";
 
                         Statement stmt = conn.createStatement();
                         stmt.executeUpdate(query);
 
                         z = "Created task successfully";
+
+                        System.out.println("heyo");
 
                     }
 
@@ -312,20 +387,19 @@ public class CreateTaskFragment extends Fragment {
                     z = "Exceptions" + ex;
                 }
 
-            }
+
             return z;
         }
 
         @Override
         protected void onPostExecute(String s) {
-            //Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
-
+          //  Toast.makeText(getBaseContext(),""+z,Toast.LENGTH_LONG).show();
 
             if (isSuccess) {
 
-                Intent intent = new Intent(CreateTaskFragment.this, MainActivity.class);
+                //Intent intent = new Intent(CreateTaskFragment.this, MainActivity.class);
 
-                intent.putExtra("task",taskstr);
+             /*   intent.putExtra("task",taskstr);
                 intent.putExtra("person",personstr);
                 intent.putExtra("date",datestr);
                 intent.putExtra("repeat",repeatstr);
@@ -334,13 +408,13 @@ public class CreateTaskFragment extends Fragment {
                 intent.putExtra("status",statusstr);
 
 
-                startActivity(intent);
+                startActivity(intent);*/
 
             }
 
         }
 
-    } **/
+    }
 
 
     public Connection connectionclass(String user, String password, String database, String server) {
@@ -583,6 +657,8 @@ public class CreateTaskFragment extends Fragment {
 
         }
     }
+
+
 
     private class GetActivityData extends AsyncTask<String, String, String> {
         String msg = "";

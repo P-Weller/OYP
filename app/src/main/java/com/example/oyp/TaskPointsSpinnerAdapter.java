@@ -16,21 +16,21 @@ import java.util.ArrayList;
 public class TaskPointsSpinnerAdapter extends BaseAdapter {
     Context context;
     int icons[];
-    String [] pointsName;
+    ArrayList<String> pointsName = new ArrayList<>();
     LayoutInflater inflter;
 
-    public TaskPointsSpinnerAdapter(Context applicationContext, int[] icons, String[] pointsName) {
+    public TaskPointsSpinnerAdapter(Context applicationContext, int[] icons, ArrayList<String> pointsName) {
         this.context = applicationContext;
         this.icons = icons;
         this.pointsName = pointsName;
         inflter = (LayoutInflater.from(applicationContext));
     }
 
-    public int getCount() {return icons.length;}
+    public int getCount() {return pointsName.size();}
 
 
     public Object getItem(int i) {
-        return null;
+        return pointsName.get(i);
     }
 
     public long getItemId(int i) {
@@ -42,9 +42,11 @@ public class TaskPointsSpinnerAdapter extends BaseAdapter {
         ImageView icon = (ImageView) view.findViewById(R.id.imageView);
         TextView names = (TextView) view.findViewById(R.id.textView);
         icon.setImageResource(icons[i]);
-        names.setText(pointsName[i]);
+        String pointsNames = pointsName.get(i);
+        names.setText(pointsNames);
         return view;
     }
+
 }
 
 
