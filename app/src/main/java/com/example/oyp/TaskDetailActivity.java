@@ -16,6 +16,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import static com.example.oyp.DBStrings.DATABASE_IP;
 import static com.example.oyp.DBStrings.DATABASE_NAME;
@@ -33,9 +37,13 @@ public class TaskDetailActivity extends AppCompatActivity {
     Button closeTaskButton;
     Button deleteTaskBtn;
     int taskID;
-    int tUserID;
     String tPoints;
     int tStatus;
+    int tNameID = 0;
+    int tUserID = 0;
+    int tRepeatID = 0;
+    String tDate = "";
+    String tTime = "";
 
     private static final String SHARED_PREF_NAME = "userdata";
 
@@ -57,11 +65,17 @@ public class TaskDetailActivity extends AppCompatActivity {
         closeTaskButton = findViewById(R.id.closeTaskBtn);
         deleteTaskBtn = findViewById(R.id.deleteTaskBtn);
 
+        System.out.println("tRepeatID: " + tRepeatID);
         closeTaskButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
                 SetClosed setClosed = new SetClosed();
                 setClosed.execute("");
+                System.out.println("tRepeatID: " + tRepeatID);
+                if(tRepeatID != 1 && tRepeatID != 0) {
+                    SetRepeat setRepeat = new SetRepeat();
+                    setRepeat.execute("");
+                }
                 Intent intent = new Intent(TaskDetailActivity.this, MainActivity.class);
                 startActivity(intent);
 
@@ -151,12 +165,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         protected String doInBackground(String... strings) {
             Connection conn = null;
             Statement stmt = null;
-
-            int tNameID = 0;
-            int tUserID = 0;
-            int tRepeatID = 0;
-            String tDate = "";
-            String tTime = "";
 
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
@@ -323,6 +331,88 @@ public class TaskDetailActivity extends AppCompatActivity {
         }
     }
 
+
+    private class SetRepeat extends AsyncTask<String, String, String> {
+        String msg = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt2 = null;
+
+            SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
+            Calendar c = Calendar.getInstance();
+            try {
+                c.setTime(dfDate.parse(tDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if(tRepeatID == 2){
+                c.add(Calendar.DATE, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+            } else if (tRepeatID == 3){
+                c.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+            } else if (tRepeatID == 4){
+                c.add(Calendar.MONTH, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+            } else if (tRepeatID == 5){
+                c.add(Calendar.YEAR, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+            }
+            //SimpleDateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
+            String newTDate = dfDate.format(c.getTime());
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES" +
+                        "('" + tPoints + "','" + newTDate + "','" + tTime + "','" + tUserID + "',0,'" + tRepeatID + "','" + tNameID + "')";
+
+                System.out.println("tDate: "+tDate);
+                System.out.println("newtDate: "+newTDate);
+
+                Log.d("SQL",query);
+                Statement stmt3 = conn.createStatement();
+                stmt3.executeUpdate(query);
+
+                msg = "Inserting successful";
+
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt2 != null) {
+                        stmt2.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return msg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+
+        }
+    }
+
     private class DeleteTask extends AsyncTask<String, String, String> {
         String msg = "";
 
@@ -376,4 +466,6 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         }
     }
+
+
 }
