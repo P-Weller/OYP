@@ -243,7 +243,6 @@ public class CreateTaskFragment extends Fragment {
         }
         if (repeatString.equals("Once")) {
 
-
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
         }else if(repeatString.equals("Monthly")) {
@@ -258,8 +257,9 @@ public class CreateTaskFragment extends Fragment {
 
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
 
-        }else {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY *365, pendingIntent);
+        }else if(repeatString.equals("Yearly")) {
+
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * c.getActualMaximum(Calendar.DAY_OF_YEAR), pendingIntent);
 
 
 
