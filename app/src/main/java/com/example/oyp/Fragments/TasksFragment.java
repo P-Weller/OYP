@@ -78,8 +78,10 @@ public class TasksFragment extends Fragment {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
-
+                                ClearTasks clearTasks = new ClearTasks();
+                                clearTasks.execute("");
+                                GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
+                                retrieveClosedTaskData.execute("");
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -465,6 +467,61 @@ public class TasksFragment extends Fragment {
             Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
             showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", taskID);
             startActivity(showDetailActivity);
+        }
+    }
+
+    private class ClearTasks extends AsyncTask<String, String, String> {
+        String msg = "";
+        String householdStr = getHousehold();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                stmt = conn.createStatement();
+                String sql = "DELETE task FROM `task`,user,household WHERE task.StatusID = 1 AND task.UserID=user.UserID AND user.HouseholdID = household.HouseholdID AND HName = '"+ householdStr +"'";
+                ResultSet rs = stmt.executeQuery(sql);
+
+                msg = "Clear complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return msg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
         }
     }
 }
