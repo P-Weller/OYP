@@ -21,27 +21,78 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
-            android:text="Help"
+            android:text="About"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold"
             android:paddingStart="15dp"
             />
 
-
-
-
-        <TextView
+                <TextView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            style="@style/TextviewTheme"
+            android:layout_height="wrap_content"
             android:id="@+id/helpTextView"
             android:layout_marginTop="100dp"
-            android:text="Version 1.2 - OYP                 all rights reserved"
+            android:text="Organise your place - OYP"
             android:layout_gravity="center"
             android:fontFamily="casual"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="created by"
+            android:layout_gravity="center"
+            android:fontFamily="casual"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Pascal, Lenio, Paul, Jojo, Julia and Sven"
+            android:layout_gravity="center"
+            android:fontFamily="casual"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="all rights reserved"
+            android:layout_gravity="center"
+            android:fontFamily="casual"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="version 1.0.5.1"
+            android:layout_gravity="center"
+            android:fontFamily="casual"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Durban, 2019"
+            android:layout_gravity="center"
+            android:fontFamily="casual"
+            android:textAlignment="center"
+            android:textSize="20sp"
             android:textStyle="bold"
             />
 

@@ -1,6 +1,8 @@
 package com.example.oyp.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -18,6 +20,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.oyp.MainActivity;
 import com.example.oyp.R;
 import com.example.oyp.TaskDetailActivity;
 import com.example.oyp.TaskListViewAdapter;
@@ -64,6 +67,36 @@ public class TasksFragment extends Fragment {
 
         getHousehold();
 
+
+        clearTasksBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setMessage("Do you really want to clear all Tasks?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ClearTasks clearTasks = new ClearTasks();
+                                clearTasks.execute("");
+                                GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
+                                retrieveClosedTaskData.execute("");
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+
+                alertDialog.show();
+
+            }
+        });
+
+
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +111,7 @@ public class TasksFragment extends Fragment {
                     retrieveClosedTaskData.execute("");
                     closedTaskBtn.setText("Show me open tasks");
                     opentasksTextView.setText("Closed Tasks");
+                    clearTasksBtn.setVisibility(View.VISIBLE);
                     i = 1;
                 } else if(i == 1){
                     GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
@@ -89,11 +123,14 @@ public class TasksFragment extends Fragment {
                 }
             }
         });
+
+
         if(i == 0) {
             GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
             retrieveOpenTaskData.execute("");
             clearTasksBtn.setVisibility(View.GONE);
         }
+
 
         // Creating a method to be able to click on the list rows
         otasksListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -430,6 +467,61 @@ public class TasksFragment extends Fragment {
             Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
             showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", taskID);
             startActivity(showDetailActivity);
+        }
+    }
+
+    private class ClearTasks extends AsyncTask<String, String, String> {
+        String msg = "";
+        String householdStr = getHousehold();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                stmt = conn.createStatement();
+                String sql = "DELETE task FROM `task`,user,household WHERE task.StatusID = 1 AND task.UserID=user.UserID AND user.HouseholdID = household.HouseholdID AND HName = '"+ householdStr +"'";
+                ResultSet rs = stmt.executeQuery(sql);
+
+                msg = "Clear complete.";
+                rs.close();
+                stmt.close();
+                conn.close();
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            return msg;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
         }
     }
 }
