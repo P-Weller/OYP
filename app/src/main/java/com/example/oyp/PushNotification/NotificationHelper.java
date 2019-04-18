@@ -65,7 +65,7 @@ public class NotificationHelper extends ContextWrapper {
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setAutoCancel(true)
-                .setContentTitle("New Task!")
+                .setContentTitle("New Task!!!")
                 .setContentText("New Task for " + createTaskFragment.personSpinner.getSelectedItem().toString()+ ": " + createTaskFragment.activitySpinner.getSelectedItem().toString())
                 .setColor(Color.rgb(72,169,197))
                 .setLights(Color.BLUE, 1000, 1000)
