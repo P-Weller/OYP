@@ -35,8 +35,6 @@ public class MainEmptyActivity extends AppCompatActivity {
 
         System.out.println("onCreate");
 
-
-
         DoLogin doLogin = new DoLogin();
         doLogin.execute("");
     }
@@ -57,12 +55,24 @@ public class MainEmptyActivity extends AppCompatActivity {
         return household;
     }
 
+    private int getUser(){
+
+        SharedPreferences sp = getSharedPreferences(SHARED_PREF_NAME,MODE_PRIVATE);
+
+        int userID = sp.getInt("key_chosenuser",0);
+        return userID;
+    }
+
+
+
+
 
 
     public class DoLogin extends AsyncTask<String,String,String> {
 
-        String nameStr=getHousehold();
+        String hNameStr=getHousehold();
         String passStr=getPassword();
+        int userID=getUser();
 
         String z="Household name or password is wrong. \n               Please try again!";
         boolean isSuccess=false;
@@ -74,20 +84,19 @@ public class MainEmptyActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-
-
             super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("DoInBackground");
-            System.out.println(nameStr);
-            System.out.println(passStr);
-            if(nameStr.trim().equals("") || passStr.trim().equals("")) {
+            if(hNameStr.trim().equals("") || passStr.trim().equals("")) {
                 System.out.println("I change to StartActivity now!");
                 Intent intent = new Intent(MainEmptyActivity.this, StartActivity.class);
-                intent.putExtra("name", nameStr);
+                intent.putExtra("name", hNameStr);
+                startActivity(intent);
+            } else if(userID == 0){
+                Intent intent = new Intent(MainEmptyActivity.this, ChooseUserActivity.class);
+                intent.putExtra("name", hNameStr);
                 startActivity(intent);
             } else {
                 try {
@@ -96,7 +105,7 @@ public class MainEmptyActivity extends AppCompatActivity {
                         z = "Please check your internet connection";
                     } else {
 
-                        String query = "SELECT HName, HPassword FROM household WHERE HName = '" + nameStr + "' AND HPassword = '" + passStr + "'";
+                        String query = "SELECT HName, HPassword FROM household WHERE HName = '" + hNameStr + "' AND HPassword = '" + passStr + "'";
 
 
                         Statement stmt = conn.createStatement();
@@ -110,18 +119,18 @@ public class MainEmptyActivity extends AppCompatActivity {
                             password = rs.getString("HPassword");
 
 
-                            if (nm.equals(nameStr) && password.equals(passStr)) {
+                            if (nm.equals(hNameStr) && password.equals(passStr)) {
                                 isSuccess = true;
                                 System.out.println("I change to MainActivity now!");
                                 Intent intent = new Intent(MainEmptyActivity.this, MainActivity.class);
-                                intent.putExtra("name", nameStr);
+                                intent.putExtra("name", hNameStr);
                                 startActivity(intent);
 
                             } else {
                                 isSuccess = false;
                                 System.out.println("I change to MainActivity now!");
                                 Intent intent = new Intent(MainEmptyActivity.this, StartActivity.class);
-                                intent.putExtra("name", nameStr);
+                                intent.putExtra("name", hNameStr);
                                 startActivity(intent);
                             }
                         }

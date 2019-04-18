@@ -59,6 +59,7 @@ public class TasksFragment extends Fragment {
         otasksListView = view.findViewById(R.id.otasksListView);
         Button closedTaskBtn = view.findViewById(R.id.closedTaskBtn);
         TextView opentasksTextView = view.findViewById(R.id.opentasksTextView);
+        Button clearTasksBtn = view.findViewById(R.id.clearTasksBtn);
 
         getHousehold();
 
@@ -81,6 +82,7 @@ public class TasksFragment extends Fragment {
                     retrieveOpenTaskData.execute("");
                     closedTaskBtn.setText("Show me closed tasks");
                     opentasksTextView.setText("Open Tasks");
+                    clearTasksBtn.setVisibility(View.GONE);
                     i = 0;
                 }
             }
@@ -88,6 +90,7 @@ public class TasksFragment extends Fragment {
         if(i == 0) {
             GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
             retrieveOpenTaskData.execute("");
+            clearTasksBtn.setVisibility(View.GONE);
         }
 
         // Creating a method to be able to click on the list rows
