@@ -91,7 +91,7 @@ public class CreateTaskFragment extends Fragment {
 
     private static final String SHARED_PREF_NAME = "userdata";
 
-    int iconsRepeat[] = {R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp};
+    int iconsRepeat[] = {R.drawable.ic_loop_black_32dp,R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp};
 
 
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
