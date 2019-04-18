@@ -39,6 +39,7 @@ public class ChooseUserActivity extends AppCompatActivity{
     Button createuserBtn;
     ArrayList<String> uNames = new ArrayList<>();
     ArrayList<Integer> uImage = new ArrayList<>();
+    ArrayList<Integer> uColorID = new ArrayList<>();
 
     private static final String SHARED_PREF_NAME = "userdata";
     private static final String KEY_CHOSENUSER = "key_chosenuser";
@@ -160,7 +161,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
                 Log.d("HouseholdID", householdid);
 
-                String sql = "SELECT UName, GIcon FROM user,gender WHERE HouseholdID = '" + householdid + "' AND user.GenderID = gender.GenderID ORDER BY UName ASC";
+                String sql = "SELECT UName, GIcon, ColorID FROM user,gender WHERE HouseholdID = '" + householdid + "' AND user.GenderID = gender.GenderID ORDER BY UName ASC";
 
                 stmt = conn.createStatement();
 
@@ -170,12 +171,14 @@ public class ChooseUserActivity extends AppCompatActivity{
                 while (rs.next()) {
                     String name = rs.getString("UName");
                     String gImageString = rs.getString("GIcon");
+                    int colorID = rs.getInt("ColorID");
 
                     Resources res = getResources();
                     int gImage = res.getIdentifier(gImageString , "drawable", getPackageName());
 
                     uImage.add(i, gImage);
                     uNames.add(i, name);
+                    uColorID.add(i, colorID);
                     i++;
                     Log.d("Uname", String.valueOf(i));
                 }
@@ -213,7 +216,7 @@ public class ChooseUserActivity extends AppCompatActivity{
 
         @Override
         protected void onPostExecute(String s) {
-            ChooseUserListViewAdapter usersAdapter = new ChooseUserListViewAdapter(thisContext,uImage, uNames);
+            ChooseUserListViewAdapter usersAdapter = new ChooseUserListViewAdapter(thisContext,uImage, uNames, uColorID);
             usersListView.setAdapter(usersAdapter);
         }
     }
