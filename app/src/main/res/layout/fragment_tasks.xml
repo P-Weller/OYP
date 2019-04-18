@@ -14,19 +14,16 @@
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal">
+
 
 
             <TextView
                 android:id="@+id/opentasksTextView"
                 style="@style/TextviewTheme"
-                android:layout_weight="2"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
+                android:layout_weight="2"
                 android:fontFamily="casual"
                 android:paddingStart="15dp"
                 android:text="Open Tasks"
@@ -34,30 +31,11 @@
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/clearTasksBtn"
-                style="@style/ButtonTheme"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:clickable="true"
-                android:text="Clear all"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:drawableRight="@drawable/ic_delete_32"
-                android:paddingRight="10dp"
-
-                />
-
-
-        </LinearLayout>
-
-
 
         <ListView
             android:id="@+id/otasksListView"
             android:layout_width="match_parent"
-            android:layout_height="475dp"
+            android:layout_height="400dp"
             android:layout_gravity="left"
             android:dividerHeight="3dp"
             android:textAlignment="gravity"
@@ -73,6 +51,23 @@
             android:text="@string/show_me_tasks"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/clearTasksBtn"
+            style="@style/ButtonTheme"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:text="Clear all"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:drawableRight="@drawable/ic_delete_32"
+            android:drawablePadding="10dp"
+
+            />
 
 
     </LinearLayout>

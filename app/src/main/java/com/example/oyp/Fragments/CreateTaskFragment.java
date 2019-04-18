@@ -281,8 +281,7 @@ public class CreateTaskFragment extends Fragment {
         String pointsString = taskpointsSpinner.getSelectedItem().toString();
         int statusID = 0;
         int points = 100;
-        int repeatID = 2;
-        int activityID = 20;
+
 
 
 
@@ -309,6 +308,10 @@ public class CreateTaskFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
+            String householdID = "";
+            Integer userID = 0 ;
+            Integer repeatID = 0;
+            Integer activityID = 0;
 
             //if (test.trim().equals(""))
                 //(timestr.trim().equals("") )
@@ -323,6 +326,8 @@ public class CreateTaskFragment extends Fragment {
 
                 try {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+                    System.out.println(personString);
+
 
                     if (conn == null) {
                         z = "Please check your internet connection";
@@ -333,47 +338,60 @@ public class CreateTaskFragment extends Fragment {
                         System.out.println(personString);
 
 
-                       /* String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '"+household+"'";
+                        String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '"+household+"'";
 
                         Statement stmtHouseholdID = conn.createStatement();
                         stmtHouseholdID.executeUpdate(queryhouseholdID);
                         ResultSet rsHouseholdID = stmtHouseholdID.executeQuery(queryhouseholdID);
-                        int householdID = rsHouseholdID.getString(queryhouseholdID);
-                        */
+
+                        while (rsHouseholdID.next()) {
+                    householdID = rsHouseholdID.getString(1);
+
+                }
+                System.out.println(householdID);
 
 
-                       // String queryUserID = "SELECT `UserID` FROM `user` WHERE `HouseholdID` = '"+householdID+"' AND `UName` = '"+personString+"'";
-                        String queryUserID = "SELECT `UName` FROM `user` WHERE `UName` = '"+personString+"'";
+
+                        String queryUserID = "SELECT `UserID` FROM `user` WHERE `HouseholdID` = '"+householdID+"' AND `UName` = '"+personString+"'";
                         Statement stmtUserID = conn.createStatement();
                         stmtUserID.executeUpdate(queryUserID);
                         ResultSet rsUserID = stmtUserID.executeQuery(queryUserID);
-                        String userID = rsUserID.getString(queryUserID);
+                        while (rsUserID.next()) {
+                        userID = Integer.valueOf(rsUserID.getString(1));
+                        }
 
-                        System.out.println(activityID);
+                        System.out.println(userID);
 
 
-                        /*String queryRepeatID = "SELECT `RepeatID` FROM `repeat` WHERE `RName` = '"+repeatString+"'";
+                        String queryRepeatID = "SELECT `RepeatID` FROM `repeat` WHERE `RName` = '"+repeatString+"'";
                         Statement stmtRepeatID = conn.createStatement();
                         stmtRepeatID.executeUpdate(queryRepeatID);
                         ResultSet rsRepeatID = stmtUserID.executeQuery(queryRepeatID);
-                        int repeatID = Integer.parseInt(rsRepeatID.getString(queryRepeatID));
+                        while ( rsRepeatID.next()) {
+                        repeatID = Integer.valueOf(rsRepeatID.getString(1));
+                        }
 
-                       System.out.println(repeatID);
+                        System.out.println(repeatID);
+
 
                         String queryActivityID = "SELECT `ActivityID` FROM `activity` WHERE `AName` = '"+activityString+"'";
                         Statement stmtActivityID = conn.createStatement();
                         stmtActivityID.executeUpdate(queryActivityID);
                         ResultSet rsActivityID = stmtUserID.executeQuery(queryActivityID);
-                        int activityID = Integer.parseInt(rsActivityID.getString(queryActivityID));
+                        while (rsActivityID.next()) {
+                            activityID = Integer.valueOf(rsActivityID.getString(1));
+                        }
 
                         System.out.println(activityID);
-*/
 
 
 
-                        String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES('" + points + "' ,'" +datestr+ "','"+timestr+"','"+userID+"','"+statusID+"'), '"+repeatID+"' , '"+activityID+"')";
+
 
                         Statement stmt = conn.createStatement();
+
+                        String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES('" + points + "' ,'" +datestr+ "','"+timestr+"','"+userID+"','"+statusID+"' , '"+repeatID+"' , '"+activityID+"')";
+
                         stmt.executeUpdate(query);
 
                         z = "Created task successfully";
