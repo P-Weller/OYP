@@ -68,10 +68,19 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         });
 
+        deleteTaskBtn.setOnClickListener(new View.OnClickListener(){
+
+            public void onClick(View v){
+                DeleteTask deleteTask = new DeleteTask();
+                deleteTask.execute("");
+                Intent intent = new Intent(TaskDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
         GetData retrieveData = new GetData();
         retrieveData.execute("");
-        System.out.println(tStatus);
-
 
         deleteTask();
     }
@@ -304,12 +313,66 @@ public class TaskDetailActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            return null;
+            return msg;
         }
 
         @Override
         protected void onPostExecute(String s) {
 
+
+        }
+    }
+
+    private class DeleteTask extends AsyncTask<String, String, String> {
+        String msg = "";
+
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+            Connection conn = null;
+            Statement stmt3 = null;
+
+            try {
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+
+                String query= "DELETE FROM task WHERE taskID = '" + taskID + "'";
+                stmt3 = conn.createStatement();
+                stmt3.executeUpdate(query);
+
+                msg = "Deletion successful.";
+
+
+
+            } catch (SQLException connError) {
+                msg = "An exception was thrown by JDBC.";
+                connError.printStackTrace();
+            } finally {
+                try {
+                    if (stmt3 != null) {
+                        stmt3.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (conn != null) {
+                        conn.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
 
         }
     }
