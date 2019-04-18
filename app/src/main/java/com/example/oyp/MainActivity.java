@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.oyp.Fragments.ActivityFragment;
@@ -64,7 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             };
-
+    @Override
+    public void onBackPressed() {
+        Log.e("#####","You can't get out!");
+    }
 
 
 }

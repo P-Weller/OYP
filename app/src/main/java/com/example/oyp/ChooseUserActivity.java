@@ -313,6 +313,10 @@ public class ChooseUserActivity extends AppCompatActivity{
         }
         return connection;
     }
+    @Override
+    public void onBackPressed() {
+        Log.e("######","You can't get out!");
+    }
 }
 
 
