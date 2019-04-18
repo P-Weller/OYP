@@ -3,6 +3,7 @@ package com.example.oyp;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -18,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -179,8 +181,9 @@ public class CreateUserActivity extends AppCompatActivity{
             int userID = 0;
             String query1 = null;
 
-            if (usernamestr.trim().equals("") || uColorStr.trim().equals(""))
+            if (usernamestr.trim().equals("") || uColorStr.trim().equals("")) {
                 z = "Please enter all fields...";
+            }
             else {
                 try {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);

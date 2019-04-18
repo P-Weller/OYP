@@ -66,7 +66,7 @@ public class TaskListViewAdapter extends BaseAdapter {
         } else if(color == 2){
             opentasksTextView.setTextColor(Color.GREEN);
         } else if(color == 3){
-            opentasksTextView.setTextColor(Color.YELLOW);
+            opentasksTextView.setTextColor(Color.rgb(255,191,0));
         } else if(color == 4){
             opentasksTextView.setTextColor(Color.rgb(238,0,238));
         } else if(color == 5){

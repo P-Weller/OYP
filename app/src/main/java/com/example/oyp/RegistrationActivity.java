@@ -160,6 +160,18 @@ public class RegistrationActivity extends AppCompatActivity{
             if (householdstr.trim().equals("") || emailstr.trim().equals("") || passwordstr.trim().equals("") || confpasswordstr.trim().equals("")
                     && !confpasswordstr.equals(passwordstr))
                 z = "Please enter all fields or check your password or accept TaC";
+                if(householdstr.trim().equals("")){
+                    householdEt.setError("Required field");
+                }
+                if(emailstr.trim().equals("")){
+                    emailET.setError("Required field");
+                }
+                if(passwordstr.trim().equals("")){
+                    passwordET.setError("Required field");
+                }
+                if(confpasswordstr.trim().equals("")){
+                    confpasswordET.setError("Required field");
+                }
 
 
 
@@ -174,9 +186,11 @@ public class RegistrationActivity extends AppCompatActivity{
                         z = "Please check your internet connection";
                     } else if(isEmail(emailET) == false) {
                         z = "Please enter a valid email address";
+                        emailET.setError("Invalid Email");
 
                     } else if(!termsCb.isChecked()) {
                         z = "Please accept the terms and conditions";
+                        termsCb.setError("Please accept!");
 
                     }else if(!confpasswordstr.equals(passwordstr)){
                         z= "Please enter two matching passwords";

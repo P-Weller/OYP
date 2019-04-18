@@ -119,8 +119,9 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
 
-            if(namestr.trim().equals("")||passstr.trim().equals(""))
+            if (namestr.trim().equals("") || passstr.trim().equals("")){
                 z = "Please enter all fields...";
+            }
             else
             {
                 try {
