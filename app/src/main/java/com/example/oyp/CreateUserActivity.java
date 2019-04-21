@@ -181,7 +181,7 @@ public class CreateUserActivity extends AppCompatActivity{
             int userID = 0;
             String query1 = null;
 
-            if (usernamestr.trim().equals("") || uColorStr.trim().equals("")) {
+            if (usernamestr.trim().equals("") || uColorStr.equals("color")) {
                 z = "Please enter all fields...";
             }
             else {
@@ -391,5 +391,9 @@ public class CreateUserActivity extends AppCompatActivity{
             Log.e("error here 3 : ", e.getMessage());
         }
         return connection;
+    }
+    @Override
+    public void onBackPressed() {
+        Log.e("######","You can't get out!");
     }
 }

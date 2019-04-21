@@ -233,7 +233,6 @@ public class RegistrationActivity extends AppCompatActivity{
                 catch (Exception ex)
                 {
                     isSuccess = false;
-                    z = "Please enter two matching passwords";
                 }
 
             }
