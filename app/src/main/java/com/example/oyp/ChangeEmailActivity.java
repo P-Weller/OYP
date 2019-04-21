@@ -6,7 +6,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +47,8 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+
+
         //Get the view from activity_changeemail.xml
         setContentView(R.layout.activity_changeemail);
 
@@ -67,6 +71,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
 
     }
+
 
     //method to get the householdname from local sharedpref file - the name will be used to verify the right household will be updated
     private String getHName(){
@@ -91,6 +96,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
         editor.apply();
     }
 
+
     //class which connects to the database and update the email in the right household
     private class Changeemail extends AsyncTask<String,String,String>{
 
@@ -112,6 +118,9 @@ public class ChangeEmailActivity extends AppCompatActivity {
             if(newemailstr.trim().equals("") || confemailstr.trim().equals("")  )
                 z = "Please enter all fields...";
 
+
+
+
             else
             {
                 try {
@@ -119,7 +128,9 @@ public class ChangeEmailActivity extends AppCompatActivity {
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }
-                    else {
+                    else if(!newemailstr.equals(confemailstr)) {
+                        z = "Please enter two matching e-mails.";
+                    } else {
                         String query1= "UPDATE household SET HEMail = '"+newemailstr+"' WHERE HName = '"+hnamestr+"' ";
 
                         Statement stmt = conn.createStatement();

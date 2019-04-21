@@ -115,13 +115,17 @@ public class ChangeHouseholdActivity extends AppCompatActivity {
                 z = "Please enter all fields...";
 
 
+else
+
             {
                 try {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }
-                    else {
+                    else if(!newhouseholdstr.equals(confhouseholdstr)) {
+                        z = "Please enter two matching household names.";
+                    }else {
                         String query1= "UPDATE household SET HName = '"+newhouseholdstr+"' WHERE HName = '"+hnamestr+"'";
 
                         Statement stmt = conn.createStatement();

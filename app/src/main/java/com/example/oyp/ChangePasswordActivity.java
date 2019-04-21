@@ -112,6 +112,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
 
 
+
             else
             {
                 try {
@@ -119,9 +120,11 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }
+                    else if(!confpasswordstr.equals(newpasswordstr)) {
+                z = "Please enter two matching passwords.";
 
 
-                    else {
+            } else {
                         String query1= "UPDATE household SET HPassword = '"+newpasswordstr+"' WHERE HName = '"+hnamestr+"' ";
 
                         Statement stmt = conn.createStatement();
