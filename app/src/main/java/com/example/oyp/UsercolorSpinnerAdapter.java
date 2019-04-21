@@ -17,15 +17,14 @@ public class UsercolorSpinnerAdapter extends BaseAdapter {
     ArrayList<String> colorName = new ArrayList<>();
     LayoutInflater inflter;
 
-    public UsercolorSpinnerAdapter(Context context, ArrayList<Integer> icons, ArrayList<String> personName) {
+    public UsercolorSpinnerAdapter(Context context, ArrayList<Integer> icons, ArrayList<String> colorName) {
         this.context = context;
         this.icons = icons;
-        this.colorName = personName;
+        this.colorName = colorName;
         inflter = (LayoutInflater.from(context));
     }
 
     public int getCount() {return colorName.size();    }
-
 
     public Object getItem(int i) {
         return colorName.get(i);

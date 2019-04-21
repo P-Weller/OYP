@@ -181,7 +181,7 @@ public class CreateUserActivity extends AppCompatActivity{
             int userID = 0;
             String query1 = null;
 
-            if (usernamestr.trim().equals("") || uColorStr.trim().equals("")) {
+            if (usernamestr.trim().equals("") || uColorStr.equals("color")) {
                 z = "Please enter all fields...";
             }
             else {
@@ -252,9 +252,9 @@ public class CreateUserActivity extends AppCompatActivity{
                             conn.close();
 
                             saveUser(userID);
-                            System.out.println("HOUSEHOLD: " + householdid);
-                            System.out.println("USERNAME: " + usernamestr);
-                            System.out.println("SAVEDUSERID: " + userID);
+                           // System.out.println("HOUSEHOLD: " + householdid);
+                           // System.out.println("USERNAME: " + usernamestr);
+                           // System.out.println("SAVEDUSERID: " + userID);
 
                             Intent intent = new Intent(CreateUserActivity.this, MainActivity.class);
                             intent.putExtra("username", usernamestr);
@@ -292,6 +292,8 @@ public class CreateUserActivity extends AppCompatActivity{
 
     private class GetColorData extends AsyncTask<String, String, String> {
         String msg = "";
+        String household = getHousehold();
+        String householdID = "";
 
 
         @Override
@@ -309,9 +311,24 @@ public class CreateUserActivity extends AppCompatActivity{
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
+                String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '" + household + "'";
+
+                Statement stmtHouseholdID = conn.createStatement();
+                stmtHouseholdID.executeUpdate(queryhouseholdID);
+                ResultSet rsHouseholdID = stmtHouseholdID.executeQuery(queryhouseholdID);
+
+                while (rsHouseholdID.next()) {
+                    householdID = rsHouseholdID.getString(1);
+
+                }
+                System.out.println(householdID);
+
                 stmt = conn.createStatement();
 
-                String sql = "SELECT CName FROM color WHERE CNAME NOT IN (SELECT CName FROM color,user WHERE user.HouseholdID = 4 AND user.ColorID = color.ColorID)";
+                System.out.println(household);
+
+
+                String sql = "SELECT CName FROM color WHERE CNAME NOT IN (SELECT CName FROM color,user WHERE user.HouseholdID = '" + householdID + "'  AND user.ColorID = color.ColorID)";
 
                 ResultSet rs = stmt.executeQuery(sql);
 
@@ -324,6 +341,7 @@ public class CreateUserActivity extends AppCompatActivity{
 
                     colorImage.add(aImageInt);
                     colorName.add(aNameString);
+
 
                 }
 
@@ -391,5 +409,10 @@ public class CreateUserActivity extends AppCompatActivity{
             Log.e("error here 3 : ", e.getMessage());
         }
         return connection;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.e("######","You can't get out!");
     }
 }

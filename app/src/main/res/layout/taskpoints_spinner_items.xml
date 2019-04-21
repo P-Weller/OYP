@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/activity_horizontal_margin"
+        android:textStyle="bold"
         android:fontFamily="casual"
         android:text="Demo"
         android:textSize="20sp"
