@@ -82,6 +82,10 @@ public class TasksFragment extends Fragment {
                                 clearTasks.execute("");
                                 GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
                                 retrieveClosedTaskData.execute("");
+                                closedTaskBtn.setText("Show me open tasks");
+                                opentasksTextView.setText("Closed Tasks");
+                                clearTasksBtn.setVisibility(View.VISIBLE);
+                                i = 1;
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -139,7 +143,7 @@ public class TasksFragment extends Fragment {
 
                 String selectedFromList =(String) (parent.getItemAtPosition(i));
 
-                GetID retrieveIDData = new GetID(selectedFromList);
+                GetID retrieveIDData = new GetID(selectedFromList, tUser.get(i));
                 retrieveIDData.execute("");
             }
         });
@@ -402,10 +406,12 @@ public class TasksFragment extends Fragment {
     private class GetID extends AsyncTask<String, String, String> {
         String msg = "";
         String tName;
+        String tUser;
         int taskID;
 
-        private GetID(String taskName){
+        private GetID(String taskName, String userName){
             tName = taskName;
+            tUser = userName;
         }
 
         @Override
@@ -417,12 +423,13 @@ public class TasksFragment extends Fragment {
         protected String doInBackground(String... strings) {
             Connection conn = null;
             Statement stmt = null;
+            System.out.println("ICH BIN WICHTIG" + tUser +", "+ tName);
 
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT TaskID FROM activity,task WHERE task.ActivityID = activity.ActivityID AND activity.AName = '" + tName + "'";
+                String sql = "SELECT TaskID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND activity.AName = '" + tName + "' AND task.UserID = user.UserID AND UName = '" + tUser + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
