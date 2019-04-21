@@ -22,7 +22,7 @@
             android:layout_gravity="start"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-            android:text="Open tasks"
+            android:text="Open Tasks"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -41,7 +41,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:text="show me closed tasks"
+            android:text="@string/show_me_tasks"
             android:textSize="18sp"
             android:textStyle="bold"
 

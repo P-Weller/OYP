@@ -2,10 +2,12 @@ package com.example.oyp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -53,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mName = (EditText) findViewById(R.id.mNameEditText);
         mPassword = (EditText) findViewById(R.id.mPasswordEditText);
+        mPassword.setTransformationMethod(new PasswordTransformationMethod());
         logIn2 = (Button) findViewById(R.id.logIn2Btn);
 
 

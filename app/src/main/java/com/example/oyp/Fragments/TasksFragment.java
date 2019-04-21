@@ -109,14 +109,14 @@ public class TasksFragment extends Fragment {
                 if(i == 0) {
                     GetClosedTaskData retrieveClosedTaskData = new GetClosedTaskData();
                     retrieveClosedTaskData.execute("");
-                    closedTaskBtn.setText("Show me open tasks");
+                    closedTaskBtn.setText("Show me open Tasks");
                     opentasksTextView.setText("Closed Tasks");
                     clearTasksBtn.setVisibility(View.VISIBLE);
                     i = 1;
                 } else if(i == 1){
                     GetOpenTaskData retrieveOpenTaskData = new GetOpenTaskData();
                     retrieveOpenTaskData.execute("");
-                    closedTaskBtn.setText("Show me closed tasks");
+                    closedTaskBtn.setText("Show me closed Tasks");
                     opentasksTextView.setText("Open Tasks");
                     clearTasksBtn.setVisibility(View.GONE);
                     i = 0;

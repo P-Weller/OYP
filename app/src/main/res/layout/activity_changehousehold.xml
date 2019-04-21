@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:fontFamily="casual"
-            android:text="Change householdname"
+            android:text="Change Household Name"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -44,7 +44,7 @@
                 android:ems="10"
                 android:inputType="text"
                 tools:targetApi="o"
-                android:hint="new householdname"
+                android:hint="New Household Name"
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -63,7 +63,7 @@
                 android:ems="10"
                 android:inputType="text"
                 tools:targetApi="o"
-                android:hint="confirm household"
+                android:hint="Confirm Household Name"
 
                 />
         </android.support.design.widget.TextInputLayout>
@@ -76,7 +76,7 @@
         <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
-            android:text="change householdname"
+            android:text="Change Household Name"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="20dp"

@@ -34,7 +34,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:clickable="true"
-            android:text="change email"
+            android:text="Change Email"
             android:textSize="18sp"
             android:textStyle="bold"
 
@@ -45,7 +45,7 @@
         <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
-            android:text="change householdname"
+            android:text="Change Household Name"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
@@ -62,7 +62,7 @@
     <Button
             android:layout_height="wrap_content"
             style="@style/ButtonTheme"
-            android:text="change password"
+            android:text="Change Password"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="20dp"
@@ -76,7 +76,7 @@
         <Button
             android:layout_height="wrap_content"
             android:layout_width="280dp"
-            android:text="Logout and change household"
+            android:text="Logout and change Household"
             android:fontFamily="casual"
             android:background="@color/cancel_background"
             android:textColor="@color/default_white"
