@@ -123,7 +123,7 @@ public class CreateTaskFragment extends Fragment {
         aName.add("Activity");
         aImage.add(R.drawable.ic_help_blue_32dp);
         rNames.add("Repeat");
-        pNames.add("Household member");
+        pNames.add("Household Member");
         pIcon.add(R.drawable.ic_person_add_black_24dp);
         taskPoints.add(points0);
         taskPoints.add(points10);
@@ -325,7 +325,7 @@ public class CreateTaskFragment extends Fragment {
             System.out.println(dateString);
             System.out.println(timeString);
 
-            if (activityString.equals("Activity") || repeatString.equals("Repeat") || personString.equals("Household member") || pointsString.equals("Points") || datestr.equals("When?"))
+            if (activityString.equals("Activity") || repeatString.equals("Repeat") || personString.equals("Household Member") || pointsString.equals("Points") || datestr.equals("When?"))
                 z = "Please fill in all fields";
 
 
@@ -335,6 +335,7 @@ public class CreateTaskFragment extends Fragment {
                 try {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     System.out.println(personString);
+
 
 
                     if (conn == null) {
