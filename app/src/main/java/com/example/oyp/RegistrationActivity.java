@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -78,7 +79,9 @@ public class RegistrationActivity extends AppCompatActivity{
         householdEt = (EditText) findViewById(R.id.HNameEditText);
         emailET = (EditText) findViewById(R.id.eMailEditText);
         passwordET = (EditText) findViewById(R.id.password2EditText);
+        passwordET.setTransformationMethod(new PasswordTransformationMethod());
         confpasswordET = (EditText) findViewById(R.id.password3EditText);
+        confpasswordET.setTransformationMethod(new PasswordTransformationMethod());
         termsCb = (CheckBox) findViewById(R.id.termsAndConditionsCheckBox);
 
 

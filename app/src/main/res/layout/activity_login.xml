@@ -71,7 +71,6 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/passwordlogin"
-                android:inputType="textPassword"
                 android:singleLine="true"
                 tools:targetApi="o" />
         </android.support.design.widget.TextInputLayout>
@@ -82,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:clickable="true"
-            android:text="@string/log_in"
+            android:text="Log In"
             android:textSize="18sp"
 
             />

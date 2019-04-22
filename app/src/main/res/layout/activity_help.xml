@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/helpTextView"
             android:layout_marginTop="100dp"
-            android:text="Organise your place - OYP"
+            android:text="Organise Your Place - OYP"
             android:layout_gravity="center"
             android:fontFamily="casual"
             android:textAlignment="center"

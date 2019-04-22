@@ -8,6 +8,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -63,21 +65,27 @@ public class NotificationHelper extends ContextWrapper {
 
         CreateTaskFragment createTaskFragment = new CreateTaskFragment();
 
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),R.drawable.ic_event);
+        String personStr = createTaskFragment.personSpinner.getSelectedItem().toString();
+        String activityStr = createTaskFragment.activitySpinner.getSelectedItem().toString();
+        String taskPointStr = createTaskFragment.taskpointsSpinner.getSelectedItem().toString();
+
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setAutoCancel(true)
-                .setContentTitle("New Task!")
-                .setContentText("New Task for " + createTaskFragment.personSpinner.getSelectedItem())
+                .setContentTitle("Reminder!")
+                .setContentText("Hi " + personStr + "! You have do the task: "
+                                + activityStr + "!" + " This task is worth " + taskPointStr + "." )
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("There is a new Task for " + createTaskFragment.personSpinner.getSelectedItem().toString()
-                        + ": " + createTaskFragment.activitySpinner.getSelectedItem().toString() +"!"
-                        + " This task is worth " + createTaskFragment.taskpointsSpinner.getSelectedItem().toString() + ".")
-                        .setBigContentTitle("New Task!")
-                        .setSummaryText(createTaskFragment.activitySpinner.getSelectedItem().toString()))
+                        .bigText("Hi " + personStr + "! You have do the task: "
+                                + activityStr + "!" + " This task is worth " + taskPointStr + "." )
+                        .setBigContentTitle("Reminder!")
+                        .setSummaryText(activityStr))
                 .setColor(Color.rgb(72,169,197))
                 .setDefaults(Notification.DEFAULT_LIGHTS)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                .setSmallIcon(R.drawable.ic_event)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setLargeIcon(largeIcon)
                 .setContentIntent(contentIntent);
     }
 }

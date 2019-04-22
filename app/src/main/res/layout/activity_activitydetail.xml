@@ -22,7 +22,7 @@
             android:layout_gravity="start"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-            android:text="Details of the activity"
+            android:text="Details of the Activity"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -50,10 +50,10 @@
             android:layout_marginRight="20dp"
             android:background="@color/background1"
             android:fontFamily="casual"
-            android:gravity="center_vertical"
+            android:gravity="fill_horizontal"
+
             android:textColor="@color/default_black"
-            android:textSize="20sp"
-            />
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/activityDescriptionTitleTextView"
@@ -71,6 +71,8 @@
 
         <TextView
             android:id="@+id/activityDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
             android:layout_gravity="start"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"
@@ -80,14 +82,12 @@
             android:fontFamily="casual"
             android:gravity="fill_horizontal"
             android:paddingStart="5dp"
-            android:textColor="@color/default_black"
-            android:textSize="20sp"
             android:singleLine="false"
 
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
 
-            />
+            android:textColor="@color/default_black"
+
+            android:textSize="20sp" />
 
 
     </LinearLayout>

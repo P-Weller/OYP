@@ -41,7 +41,7 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 
 /**
- * Activity to create a new user in a household
+ * Activfity to create a new user in a household
  */
 
 public class CreateUserActivity extends AppCompatActivity{
@@ -81,7 +81,7 @@ public class CreateUserActivity extends AppCompatActivity{
         userColor = findViewById(R.id.userColorSpinner);
 
         colorImage.add(R.drawable.ic_color_lens_black_32dp);
-        colorName.add ("color");
+        colorName.add ("User Color");
 
         GetColorData getColorData = new GetColorData();
         getColorData.execute("");

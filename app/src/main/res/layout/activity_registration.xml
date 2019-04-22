@@ -89,7 +89,6 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/password"
-                android:inputType="textPassword"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
@@ -107,7 +106,6 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/confirm_password"
-                android:inputType="textPassword"
                 tools:targetApi="o" />
 
         </android.support.design.widget.TextInputLayout>
