@@ -22,19 +22,34 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".HelpActivity"/>
-        <activity android:name=".SettingsActivity"/>
-        <activity android:name=".ChangePasswordActivity"/>
-        <activity android:name=".ChooseUserActivity"/>
-        <activity android:name=".CreateUserActivity"/>
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".ChangeEmailActivity"/>
-        <activity android:name=".ChangeHouseholdActivity"/>
-        <activity android:name=".TaskDetailActivity"/>
-        <activity android:name=".ActivityDetailActivity"/>
-        <activity android:name=".RegistrationActivity"/>
-        <activity android:name=".StartActivity"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HelpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChangePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChooseUserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CreateUserActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChangeEmailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ChangeHouseholdActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TaskDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ActivityDetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegistrationActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".StartActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CreateActivityActivity"
+            android:screenOrientation="portrait"/>
 
 
 

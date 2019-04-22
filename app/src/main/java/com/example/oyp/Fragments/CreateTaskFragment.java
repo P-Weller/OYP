@@ -73,6 +73,8 @@ public class CreateTaskFragment extends Fragment {
     String dateText;
     String timeText;
 
+
+
     ArrayList<String> taskPoints = new ArrayList<>();
 
     ArrayList<String> rNames = new ArrayList<>();
@@ -213,6 +215,10 @@ public class CreateTaskFragment extends Fragment {
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
+                System.out.println("createTaskBtn");
+
+
+
             startAlarm(getActivity());
 
                 Createtask createtask = new Createtask();
@@ -227,6 +233,8 @@ public class CreateTaskFragment extends Fragment {
 
     public void startAlarm(Context context) {
 
+        System.out.println("startAlarm");
+
         String repeatString = repeatSpinner.getSelectedItem().toString();
 
 
@@ -238,15 +246,21 @@ public class CreateTaskFragment extends Fragment {
         final int id = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
+
+
         //Compares the chosen time with the real time
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
+
         }
         if (repeatString.equals("Once")) {
+
+            System.out.println("startAlarm2");
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
         }else if(repeatString.equals("Monthly")) {
+
 
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * c.getActualMaximum(Calendar.DAY_OF_MONTH), pendingIntent);
 
@@ -353,7 +367,7 @@ public class CreateTaskFragment extends Fragment {
                             pointsString = "10";
 
 
-                        System.out.println("connection Steht");
+                        System.out.println("connection steht");
 
 
                         String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '" + household + "'";

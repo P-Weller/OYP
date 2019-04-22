@@ -24,6 +24,8 @@ public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
 
+    int numMessages;
+
     private NotificationManager mManager;
 
     public NotificationHelper(Context base) {
@@ -63,29 +65,33 @@ public class NotificationHelper extends ContextWrapper {
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 
-        CreateTaskFragment createTaskFragment = new CreateTaskFragment();
 
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),R.drawable.ic_event);
-        String personStr = createTaskFragment.personSpinner.getSelectedItem().toString();
-        String activityStr = createTaskFragment.activitySpinner.getSelectedItem().toString();
-        String taskPointStr = createTaskFragment.taskpointsSpinner.getSelectedItem().toString();
 
+
+
+
+        System.out.println("NotificationHelper");
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
                 .setAutoCancel(true)
-                .setContentTitle("Reminder!")
-                .setContentText("Hi " + personStr + "! You have do the task: "
-                                + activityStr + "!" + " This task is worth " + taskPointStr + "." )
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Hi " + personStr + "! You have do the task: "
-                                + activityStr + "!" + " This task is worth " + taskPointStr + "." )
-                        .setBigContentTitle("Reminder!")
-                        .setSummaryText(activityStr))
                 .setColor(Color.rgb(72,169,197))
+                .setContentIntent(contentIntent)
+                .setContentTitle("Reminder!")
+                .setContentText("Hey! There is something to do in your household!")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("Hey! There is something to do in your household!")
+                        .setBigContentTitle("Reminder!")
+                        .setSummaryText("New Task!"))
                 .setDefaults(Notification.DEFAULT_LIGHTS)
                 .setDefaults(Notification.DEFAULT_SOUND)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setLargeIcon(largeIcon)
                 .setContentIntent(contentIntent);
+
+
+
+
+        }
+
+
     }
-}
+
