@@ -164,7 +164,7 @@ public class RegistrationActivity extends AppCompatActivity{
                     && !confpasswordstr.equals(passwordstr))
                 z = "Please enter all fields or check your password or accept TaC";
                 if(householdstr.trim().equals("")){
-                    householdEt.setError("Required field");
+                   // householdEt.setError("Required field");
                 }
                 if(emailstr.trim().equals("")){
                     emailET.setError("Required field");
@@ -175,8 +175,6 @@ public class RegistrationActivity extends AppCompatActivity{
                 if(confpasswordstr.trim().equals("")){
                     confpasswordET.setError("Required field");
                 }
-
-
 
 
 

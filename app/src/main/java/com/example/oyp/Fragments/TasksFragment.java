@@ -44,7 +44,7 @@ public class TasksFragment extends Fragment {
     ArrayList<String> tName = new ArrayList<>();
     ArrayList<String> tUser = new ArrayList<>();
     ArrayList<Integer> tColorID = new ArrayList<>();
-    ArrayList<Integer> tUserID = new ArrayList<>();
+    ArrayList<Integer> tTaskID = new ArrayList<>();
     ListView otasksListView;
     int i = 0;
 
@@ -105,7 +105,7 @@ public class TasksFragment extends Fragment {
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tUserID = new ArrayList<>();
+                tTaskID = new ArrayList<>();
                 tImage = new ArrayList<>();
                 tName = new ArrayList<>();
                 tUser = new ArrayList<>();
@@ -145,8 +145,12 @@ public class TasksFragment extends Fragment {
 
                 String selectedFromList =(String) (parent.getItemAtPosition(i));
 
-                saveTask(tUserID.get(i));
-                System.out.println("BUGFIX ID:" + tUserID.get(i));
+                saveTask(tTaskID.get(i));
+                System.out.println("BUGFIX ID:" + tTaskID.get(i));
+                Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
+                showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", tTaskID.get(i));
+                startActivity(showDetailActivity);
+
             }
         });
 
@@ -238,7 +242,7 @@ public class TasksFragment extends Fragment {
                 Log.d("HouseholdID", householdid);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT AIcon,AName,UName,ColorID,UserID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
+                String sql = "SELECT AIcon,AName,UName,ColorID,TaskID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -247,7 +251,7 @@ public class TasksFragment extends Fragment {
                     String aName = rs.getString("AName");
                     String aUser = rs.getString("UName");
                     int aColorID = rs.getInt("ColorID");
-                    int userID = rs.getInt("UserID");
+                    int taskID = rs.getInt("TaskID");
 
                     Resources res = getResources();
                     int aImage = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
@@ -256,7 +260,7 @@ public class TasksFragment extends Fragment {
                     tName.add(i, aName);
                     tUser.add(i, aUser);
                     tColorID.add(i, aColorID);
-                    tUserID.add(i,userID);
+                    tTaskID.add(i,taskID);
                     i++;
 
                 }
@@ -343,7 +347,7 @@ public class TasksFragment extends Fragment {
                 Log.d("HouseholdID", householdid);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT AIcon,AName,UName,ColorID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 1 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
+                String sql = "SELECT AIcon,AName,UName,ColorID, TaskID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 1 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -352,6 +356,7 @@ public class TasksFragment extends Fragment {
                     String aName = rs.getString("AName");
                     String aUser = rs.getString("UName");
                     int aColorID = rs.getInt("ColorID");
+                    int taskID = rs.getInt("TaskID");
 
                     Resources res = getResources();
                     int aImage = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
@@ -360,6 +365,7 @@ public class TasksFragment extends Fragment {
                     tName.add(i, aName);
                     tUser.add(i, aUser);
                     tColorID.add(i,aColorID);
+                    tTaskID.add(i,taskID);
                     i++;
 
                 }
@@ -407,79 +413,6 @@ public class TasksFragment extends Fragment {
         }
     }
 
-    private class GetID extends AsyncTask<String, String, String> {
-        String msg = "";
-        String tName;
-        String tUser;
-        int taskID;
-
-        private GetID(String taskName, String userName){
-            tName = taskName;
-            tUser = userName;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            Connection conn = null;
-            Statement stmt = null;
-            System.out.println("ICH BIN WICHTIG" + tUser +", "+ tName);
-
-            try {
-                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
-
-                stmt = conn.createStatement();
-                String sql = "SELECT TaskID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND activity.AName = '" + tName + "' AND task.UserID = user.UserID AND UName = '" + tUser + "'";
-                ResultSet rs = stmt.executeQuery(sql);
-                int i = 0;
-
-                while (rs.next()) {
-                    taskID = rs.getInt("TaskID");
-                    i++;
-                }
-
-                msg = "Process complete.";
-                rs.close();
-                stmt.close();
-                conn.close();
-
-
-            } catch (SQLException connError) {
-                msg = "An exception was thrown by JDBC.";
-                connError.printStackTrace();
-            } finally {
-                try {
-                    if (stmt != null) {
-                        stmt.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    if (conn != null) {
-                        conn.close();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            saveTask(taskID);
-            System.out.println("1: " + taskID);
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            Intent showDetailActivity = new Intent(getActivity().getApplicationContext(), TaskDetailActivity.class);
-            showDetailActivity.putExtra("com.example.oyp.Fragments.ACTIVITY_INDEX", taskID);
-            startActivity(showDetailActivity);
-        }
-    }
 
     private class ClearTasks extends AsyncTask<String, String, String> {
         String msg = "";
