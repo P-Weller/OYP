@@ -1,6 +1,7 @@
 package com.example.oyp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +13,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.oyp.Fragments.CreateTaskFragment;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -43,9 +46,11 @@ public class TaskDetailActivity extends AppCompatActivity {
     int tStatus;
     int tNameID = 0;
     int tUserID = 0;
-    int tRepeatID = 0;
+    public static int tRepeatID = 0;
     String tDate = "";
     String tTime = "";
+
+    public static Calendar cRepeat = Calendar.getInstance();
 
     private static final String SHARED_PREF_NAME = "userdata";
 
@@ -71,10 +76,14 @@ public class TaskDetailActivity extends AppCompatActivity {
         closeTaskButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
+                CreateTaskFragment createTaskFragment = new CreateTaskFragment();
                 SetClosed setClosed = new SetClosed();
                 setClosed.execute("");
                 System.out.println("tRepeatID: " + tRepeatID);
                 if(tRepeatID != 1 && tRepeatID != 0) {
+
+                createTaskFragment.startAlarmRepeat(TaskDetailActivity.this);
+
                     SetRepeat setRepeat = new SetRepeat();
                     setRepeat.execute("");
                 }
@@ -355,7 +364,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
 
-    private class SetRepeat extends AsyncTask<String, String, String> {
+    public class SetRepeat extends AsyncTask<String, String, String> {
         String msg = "";
 
         @Override
@@ -370,25 +379,28 @@ public class TaskDetailActivity extends AppCompatActivity {
             Connection conn = null;
             Statement stmt2 = null;
 
+
+
             SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
-            Calendar c = Calendar.getInstance();
+
             try {
-                c.setTime(dfDate.parse(tDate));
+                cRepeat.setTime(dfDate.parse(tDate));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
             if(tRepeatID == 2){
-                c.add(Calendar.DATE, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                cRepeat.add(Calendar.DATE, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+
             } else if (tRepeatID == 3){
-                c.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                cRepeat.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
             } else if (tRepeatID == 4){
-                c.add(Calendar.MONTH, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                cRepeat.add(Calendar.MONTH, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
             } else if (tRepeatID == 5){
-                c.add(Calendar.YEAR, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                cRepeat.add(Calendar.YEAR, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
             }
             //SimpleDateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
-            String newTDate = dfDate.format(c.getTime());
+            String newTDate = dfDate.format(cRepeat.getTime());
 
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
