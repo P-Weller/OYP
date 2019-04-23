@@ -95,7 +95,6 @@ public class RegistrationActivity extends AppCompatActivity{
             public void onClick(View v) {
                 checkDataEntered();
 
-                saveHousehold();
                 Addhousehold addhousehold = new Addhousehold();
                 addhousehold.execute();
 
@@ -216,7 +215,7 @@ public class RegistrationActivity extends AppCompatActivity{
                                 stmt.executeUpdate(query);
 
                                 z = "Inserting Successful";
-
+                                saveHousehold();
 
                                 Intent intent = new Intent(RegistrationActivity.this, CreateUserActivity.class);
 
