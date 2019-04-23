@@ -44,6 +44,7 @@ public class TasksFragment extends Fragment {
     ArrayList<String> tName = new ArrayList<>();
     ArrayList<String> tUser = new ArrayList<>();
     ArrayList<Integer> tColorID = new ArrayList<>();
+    ArrayList<Integer> tUserID = new ArrayList<>();
     ListView otasksListView;
     int i = 0;
 
@@ -104,6 +105,7 @@ public class TasksFragment extends Fragment {
         closedTaskBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tUserID = new ArrayList<>();
                 tImage = new ArrayList<>();
                 tName = new ArrayList<>();
                 tUser = new ArrayList<>();
@@ -143,8 +145,8 @@ public class TasksFragment extends Fragment {
 
                 String selectedFromList =(String) (parent.getItemAtPosition(i));
 
-                GetID retrieveIDData = new GetID(selectedFromList, tUser.get(i));
-                retrieveIDData.execute("");
+                saveTask(tUserID.get(i));
+                System.out.println("BUGFIX ID:" + tUserID.get(i));
             }
         });
 
@@ -236,7 +238,7 @@ public class TasksFragment extends Fragment {
                 Log.d("HouseholdID", householdid);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT AIcon,AName,UName,ColorID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
+                String sql = "SELECT AIcon,AName,UName,ColorID,UserID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
@@ -245,6 +247,7 @@ public class TasksFragment extends Fragment {
                     String aName = rs.getString("AName");
                     String aUser = rs.getString("UName");
                     int aColorID = rs.getInt("ColorID");
+                    int userID = rs.getInt("UserID");
 
                     Resources res = getResources();
                     int aImage = res.getIdentifier(aImageString , "drawable", getActivity().getPackageName());
@@ -253,6 +256,7 @@ public class TasksFragment extends Fragment {
                     tName.add(i, aName);
                     tUser.add(i, aUser);
                     tColorID.add(i, aColorID);
+                    tUserID.add(i,userID);
                     i++;
 
                 }
