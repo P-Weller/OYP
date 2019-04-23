@@ -36,10 +36,10 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 public class MoreFragment extends Fragment {
 
 
-
+    //Fragment onCreateView implementation:
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-
+        // set reference to the fragment_more xml-file:
         View view = inflater.inflate(R.layout.fragment_more, container, false);
 
         TimerTask action = new TimerTask() {
@@ -52,7 +52,6 @@ public class MoreFragment extends Fragment {
         Timer caretaker = new Timer();
         caretaker.schedule(action, 1000, 5000);
 
-
         //Locate the button in fragment_more.xml
         Button mlogoutBtn = (Button) view.findViewById(R.id.logoutBtn);
         Button helpBtn =(Button) view.findViewById(R.id.helpBtn);
@@ -60,18 +59,14 @@ public class MoreFragment extends Fragment {
 
         //Capture click on button "Logout"
         mlogoutBtn.setOnClickListener(new View.OnClickListener(){
-
             public void onClick(View v){
-
                 //Start StartActivity.class
                 clearSharedPref();
                 Intent intent = new Intent(getActivity(), StartActivity.class);
                 startActivity(intent);
-
             }
-
-
         });
+
 
         //Capture click on button "Help"
         helpBtn.setOnClickListener(new View.OnClickListener() {
@@ -89,14 +84,13 @@ public class MoreFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SettingsActivity.class);
                 startActivity(intent);
-
-
             }
         });
 
         return view;
     }
 
+    // Clear all shared preferences
     private void clearSharedPref() {
 
         SharedPreferences sp = this.getActivity().getSharedPreferences("userdata", Context.MODE_PRIVATE);
@@ -106,7 +100,7 @@ public class MoreFragment extends Fragment {
         editor.clear().apply();
     }
 
-
+    // Get the TaskID because of the Activity-Name:
     private class GetID extends AsyncTask<String, String, String> {
         String msg = "";
         String tName;
@@ -168,10 +162,11 @@ public class MoreFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
-
         }
     }
 
+
+    //Connection to database
     public Connection connectionclass(String user, String password, String database, String server) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

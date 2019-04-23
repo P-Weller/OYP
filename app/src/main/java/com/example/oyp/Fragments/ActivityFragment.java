@@ -36,29 +36,36 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class ActivityFragment extends Fragment {
 
-    Button createActivityBtn;
+    // Declaration:
+
+    Button createActivityBtn; // Button to create an Activity
 
     Context thisContext;
-    ArrayList<Integer> aImage = new ArrayList<>();
-    ArrayList<String> aName = new ArrayList<>();
-    ListView activityListView;
+    ArrayList<Integer> aImage = new ArrayList<>(); // ArrayList with the Integer value of the Activity icons
+    ArrayList<String> aName = new ArrayList<>(); // ArrayList with all Activity names
+    ListView activityListView; // ListView to show all Activities with their icon
 
-    private static final String SHARED_PREF_NAME = "userdata";
-    private static final String KEY_CHOSENACTIVITY = "key_chosenacitivity";
+    private static final String SHARED_PREF_NAME = "userdata"; // Shared preferences for Username
+    private static final String KEY_CHOSENACTIVITY = "key_chosenacitivity"; // Shared preferences for the selected Activity
 
     public ActivityFragment(){
     }
 
+
+    //Fragment onCreateView implementation:
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+        // set reference to the fragment_activity xml-file:
         View view = inflater.inflate(R.layout.fragment_activity, container, false);
-        thisContext = this.getContext();
+        thisContext = this.getContext(); // Refer to ActivityFragment Context
 
 
-        activityListView = view.findViewById(R.id.activityListView);
+        activityListView = view.findViewById(R.id.activityListView); // Retrieve the ListView out of fragment_activity xml-file
 
-        GetData retrieveData = new GetData();
-        retrieveData.execute("");
+        GetData retrieveData = new GetData(); // New Object of GetData
+        retrieveData.execute(""); // Execute the new object
 
 
         // Creating a method to be able to click on the list rows
@@ -73,10 +80,9 @@ public class ActivityFragment extends Fragment {
             }
         });
 
+        createActivityBtn = view.findViewById(R.id.newActivityBtn); // Retrieve the Button out of fragment_activity xml-file
+
         // Creating a method to be able to add a new activity
-
-        createActivityBtn = view.findViewById(R.id.newActivityBtn);
-
         createActivityBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +96,7 @@ public class ActivityFragment extends Fragment {
 
     }
 
+    // Method to save the selected activity in shared preferences:
     public void saveActivity(int i){
 
         int activityID = i;
@@ -101,9 +108,9 @@ public class ActivityFragment extends Fragment {
         editor.putInt(KEY_CHOSENACTIVITY, activityID);
 
         editor.apply();
-
     }
 
+    // Connection to the Database:
     public Connection connectionclass(String user, String password, String database, String server) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -111,8 +118,8 @@ public class ActivityFragment extends Fragment {
         String ConnectionURL;
 
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
-            ConnectionURL = "jdbc:mariadb://" + server + "/" + database;
+            Class.forName("org.mariadb.jdbc.Driver"); // get JDBC-Driver
+            ConnectionURL = "jdbc:mariadb://" + server + "/" + database; // URL of the Database
             connection = DriverManager.getConnection(ConnectionURL, user, password);
         } catch (SQLException se) {
             Log.e("error here 1 : ", se.getMessage());
@@ -125,16 +132,15 @@ public class ActivityFragment extends Fragment {
     }
 
 
+    // Class to get the required Data for the fragment out of the database:
     private class GetData extends AsyncTask<String, String, String> {
         String msg = "";
 
 
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
         }
-
 
         @Override
         protected String doInBackground(String... strings) {
@@ -142,14 +148,15 @@ public class ActivityFragment extends Fragment {
             Statement stmt = null;
 
             try {
-                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
+                conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP); // Get connection to database
 
                 stmt = conn.createStatement();
-                String sql = "SELECT * FROM activity ORDER BY AName ASC";
+                String sql = "SELECT * FROM activity ORDER BY AName ASC"; // Required SQL-query
 
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
+                // Save the data out of the SQL-query in the declared ArrayLists:
                 while (rs.next()) {
                     String aImageString = rs.getString("AIcon");
                     String aNameString = rs.getString("AName");
@@ -160,7 +167,6 @@ public class ActivityFragment extends Fragment {
                     aImage.add(i, aImageInt);
                     aName.add(i, aNameString);
                     i++;
-
                 }
 
 
@@ -169,7 +175,7 @@ public class ActivityFragment extends Fragment {
                 stmt.close();
                 conn.close();
 
-
+            // Catch exceptions and close the connection:
             } catch (SQLException connError) {
                 msg = "An exception was thrown by JDBC.";
                 connError.printStackTrace();
@@ -189,19 +195,20 @@ public class ActivityFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
-
             return null;
         }
 
+        // Add the ArrayLists to the ListView-Adapter:
         @Override
         protected void onPostExecute(String s) {
-
             ActivityListViewAdapter activityListViewAdapter = new ActivityListViewAdapter(thisContext, aImage, aName);
             activityListView.setAdapter(activityListViewAdapter);
         }
     }
 
+
+
+    // Get the ActivityID because of the Activity-Name:
     private class GetID extends AsyncTask<String, String, String> {
         String msg = "";
         String aName;
@@ -216,6 +223,7 @@ public class ActivityFragment extends Fragment {
             super.onPreExecute();
         }
 
+        // Connection to database and execute query
         @Override
         protected String doInBackground(String... strings) {
             Connection conn = null;
@@ -240,6 +248,7 @@ public class ActivityFragment extends Fragment {
                 conn.close();
 
 
+                // Catch exceptions and close the connection:
             } catch (SQLException connError) {
                 msg = "An exception was thrown by JDBC.";
                 connError.printStackTrace();
@@ -259,10 +268,10 @@ public class ActivityFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
             saveActivity(activityID);
             return null;
         }
+
 
         @Override
         protected void onPostExecute(String s) {
