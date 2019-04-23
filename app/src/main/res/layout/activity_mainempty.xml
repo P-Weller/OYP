@@ -27,6 +27,20 @@
             android:text="Sorry, no internet connection !"
             android:textSize="18dp" />
 
+        <Button
+
+            android:layout_height="wrap_content"
+            style="@style/ButtonTheme"
+            android:textSize="18sp"
+            android:text="Retry"
+            android:clickable="true"
+            android:layout_marginTop="30dp"
+            android:id="@+id/RetryBtn"
+            android:layout_gravity="center"
+
+
+            />
+
     </LinearLayout>
 
 
