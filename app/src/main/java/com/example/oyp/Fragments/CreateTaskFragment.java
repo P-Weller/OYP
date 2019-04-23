@@ -34,11 +34,9 @@ import com.example.oyp.PushNotification.DatePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
 import com.example.oyp.StartActivity;
-import com.example.oyp.TaskDetailActivity;
 import com.example.oyp.TaskPointsSpinnerAdapter;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,27 +62,29 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class CreateTaskFragment extends Fragment {
 
-    public static TextView dateEt;
-    public static Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner;
-    Button createBtn;
+    // Declaration:
+
+    public static TextView dateEt; // TextView for Date and Time
+    public static Spinner repeatSpinner, taskpointsSpinner, personSpinner, activitySpinner; // All spinners required in the CreateTaskFragment
+    Button createBtn; // Button to create a Task
     Context thisContext;
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-
     String dateText;
     String timeText;
 
+    // Set time and date format:
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
 
+    // ArrayLists to save all data out of the database
     ArrayList<String> taskPoints = new ArrayList<>();
-
     ArrayList<String> rNames = new ArrayList<>();
     ArrayList<String> pNames = new ArrayList<>();
     ArrayList<Integer> pIcon = new ArrayList<>();
     ArrayList<Integer> aImage = new ArrayList<>();
     ArrayList<String> aName = new ArrayList<>();
 
+    // Set items for spinner 'points'
     String points10 = "10 Points";
     String points20 = "20 Points";
     String points30 = "30 Points";
@@ -92,19 +92,15 @@ public class CreateTaskFragment extends Fragment {
     String points0 = "Points";
 
     private static final String KEY_CHOSENACTIVITY = "key_chosenacitivity";
+    private static final String SHARED_PREF_NAME = "userdata"; // Shared preferences for Username
 
 
-    private static final String SHARED_PREF_NAME = "userdata";
-
+    // Arrays with icons for spinner ' Repeat and icons'
     int iconsRepeat[] = {R.drawable.ic_loop_black_32dp,R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp, R.drawable.ic_loop_black_32dp};
-
-
     int iconsPoints []= {R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp, R.drawable.ic_attach_money_black_32dp};
 
     //Creating public instance of Calendar to use in CreateTaskFragment, TimePickerFragment and DatePickerFragment
     public static Calendar c = Calendar.getInstance();
-
-
 
     Connection conn;
 
@@ -112,18 +108,17 @@ public class CreateTaskFragment extends Fragment {
     }
 
 
-
+    //Fragment onCreateView implementation:
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
 
-
-
-
+        // set reference to the fragment_activity xml-file:
         View view = inflater.inflate(R.layout.fragment_createtask, container, false);
         thisContext = this.getContext();
 
+        // Set default item for all spinners and add data to spinners
         aName.add("Activity");
         aImage.add(R.drawable.ic_help_blue_32dp);
         rNames.add("Repeat");
@@ -135,7 +130,7 @@ public class CreateTaskFragment extends Fragment {
         taskPoints.add(points30);
         taskPoints.add(points50);
 
-
+        // Retrieve the Spinners, Buttons and EditText from fragment_createtask xml-file
         activitySpinner = view.findViewById(R.id.activitySpinner);
         dateEt = view.findViewById(R.id.dateEditText);
         taskpointsSpinner = view.findViewById(R.id.taskpointsSpinner);
@@ -143,11 +138,13 @@ public class CreateTaskFragment extends Fragment {
         repeatSpinner = view.findViewById(R.id.repeatSpinner);
         personSpinner = view.findViewById(R.id.personSpinner);
 
+        // Add Arrays to Adapter for TaskPointsSpinner
         TaskPointsSpinnerAdapter taskPointsSpinnerAdapter = new TaskPointsSpinnerAdapter(getActivity().getApplicationContext(), iconsPoints, taskPoints);
         taskpointsSpinner.setAdapter(taskPointsSpinnerAdapter);
 
         getHousehold();
 
+        // New Objects of classes to get Repeat, Person and Activity data from the database
         GetRepeatData getRepeatData = new GetRepeatData();
         getRepeatData.execute("");
 
@@ -158,81 +155,60 @@ public class CreateTaskFragment extends Fragment {
         getActivityData.execute("");
 
 
+        // Set an Listener on all spinners to get the selected item out of them:
         repeatSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
+                                       int position, long id) {}
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+            }});
 
         taskpointsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
+                                       int position, long id) {}
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+            }});
 
         personSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
+                                       int position, long id) {}
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+            }});
 
         activitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-            }
+                                       int position, long id) {}
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+            }});
 
 
+        // Set onClickListener on DateEditText to set time and date
         dateEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 DialogFragment datePicker = new DatePickerFragment();
                 datePicker.show(getFragmentManager(), "date picker");
-
-
                 }
-
         });
 
-                //Capture click on createTaskBtn
+        //Capture click on createTaskBtn
         createBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                System.out.println("createTaskBtn");
-
-
-
             startAlarm(getActivity());
-
                 Createtask createtask = new Createtask();
                 createtask.execute();
             }
         });
 
         return view;
-
     }
 
 
+    // Method to set the push-alarm
     public void startAlarm(Context context) {
 
         System.out.println("startAlarm");
@@ -247,12 +223,9 @@ public class CreateTaskFragment extends Fragment {
         final int id = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
-
-
         //Compares the chosen time with the real time
         if (c.before(Calendar.getInstance())) {
             c.add(Calendar.DATE, 1);
-
         }
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
@@ -313,14 +286,15 @@ public class CreateTaskFragment extends Fragment {
         }
     }
 
+    // update text to selected time and date
     public void updateText() {
 
                 dateText = dateFormat.format(c.getTime());
                 timeText = timeFormat.format(c.getTime());
-
             dateEt.setText(dateText + "  "+ timeText);
 }
 
+    // Method to save the selected activity in shared preferences:
     public void saveActivity(int i){
 
         int activityID = i;
@@ -332,17 +306,12 @@ public class CreateTaskFragment extends Fragment {
         editor.putInt(KEY_CHOSENACTIVITY, activityID);
 
         editor.apply();
-
     }
-
-
-
-
-
 
 
     class Createtask extends AsyncTask<String, String, String> {
 
+        // Declaration of all Strings
         String activityString = activitySpinner.getSelectedItem().toString();
         String datestr = dateEt.getText().toString();
         String dateString = dateFormat.format(c.getTime());
@@ -352,15 +321,12 @@ public class CreateTaskFragment extends Fragment {
         String pointsString = taskpointsSpinner.getSelectedItem().toString();
         int statusID = 0;
 
-
         String z = "";
-
         String household = getHousehold();
-
-
         boolean isSuccess = false;
 
 
+        // Insert the selected items of the spinners into the database
         @Override
         protected String doInBackground(String... params) {
             String householdID = "";
@@ -376,13 +342,9 @@ public class CreateTaskFragment extends Fragment {
 
 
             else {
-
-
                 try {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     System.out.println(personString);
-
-
 
                     if (conn == null) {
                         z = "Please check your internet connection";
@@ -398,10 +360,7 @@ public class CreateTaskFragment extends Fragment {
                         } else
                             pointsString = "10";
 
-
-                        System.out.println("connection steht");
-
-
+                        // Get householdID
                         String queryhouseholdID = "SELECT `householdid` FROM `household` WHERE `household`.`HName` = '" + household + "'";
 
                         Statement stmtHouseholdID = conn.createStatement();
@@ -410,11 +369,9 @@ public class CreateTaskFragment extends Fragment {
 
                         while (rsHouseholdID.next()) {
                             householdID = rsHouseholdID.getString(1);
-
                         }
-                        System.out.println(householdID);
 
-
+                        // Get UserID
                         String queryUserID = "SELECT `UserID` FROM `user` WHERE `HouseholdID` = '" + householdID + "' AND `UName` = '" + personString + "'";
                         Statement stmtUserID = conn.createStatement();
                         stmtUserID.executeUpdate(queryUserID);
@@ -423,9 +380,7 @@ public class CreateTaskFragment extends Fragment {
                             userID = Integer.valueOf(rsUserID.getString(1));
                         }
 
-                        System.out.println(userID);
-
-
+                        // Get RepeatID
                         String queryRepeatID = "SELECT `RepeatID` FROM `repeat` WHERE `RName` = '" + repeatString + "'";
                         Statement stmtRepeatID = conn.createStatement();
                         stmtRepeatID.executeUpdate(queryRepeatID);
@@ -434,9 +389,7 @@ public class CreateTaskFragment extends Fragment {
                             repeatID = Integer.valueOf(rsRepeatID.getString(1));
                         }
 
-                        System.out.println(repeatID);
-
-
+                        // Get ActivityID
                         String queryActivityID = "SELECT `ActivityID` FROM `activity` WHERE `AName` = '" + activityString + "'";
                         Statement stmtActivityID = conn.createStatement();
                         stmtActivityID.executeUpdate(queryActivityID);
@@ -445,9 +398,8 @@ public class CreateTaskFragment extends Fragment {
                             activityID = Integer.valueOf(rsActivityID.getString(1));
                         }
 
-                        System.out.println(activityID);
 
-
+                        // Insert all Strings and Integer into the database
                         Statement stmt = conn.createStatement();
 
                         String query = "INSERT INTO task (TPoints, TDate, TTime, UserID, StatusID, RepeatID, ActivityID) VALUES('" + pointsString + "' ,'" + dateString + "','" + timeString + "','" + userID + "','" + statusID + "' , '" + repeatID + "' , '" + activityID + "')";
@@ -457,39 +409,28 @@ public class CreateTaskFragment extends Fragment {
                         isSuccess = true;
                         z = "Created task successfully";
 
-                        System.out.println("heyo");
-
                     }
-
                 } catch (Exception ex) {
                     isSuccess = false;
                     z = "Exceptions" + ex;
                 }
             }
-
             return z;
         }
 
-
+        // Jump to MainActivity
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(getActivity().getBaseContext(), "" + z, Toast.LENGTH_LONG).show();
 
-
-
             if (isSuccess) {
                 Intent intent = new Intent(getActivity(), MainActivity.class);
 
-
                 startActivity(intent);
-
-
-            }
-            }
-
+            }}
         }
 
-
+    // Connection to the Database:
     public Connection connectionclass(String user, String password, String database, String server) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -510,25 +451,24 @@ public class CreateTaskFragment extends Fragment {
         return connection;
     }
 
+
+    // get the required Data for the spinner Person out of the database
     private class GetPersonData extends AsyncTask<String, String, String> {
         String msg= "";
-
         String householdid;
         String householdstr = getHousehold();
 
 
-
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
         }
+
 
         @Override
         protected String doInBackground(String... strings) {
             Connection conn = null;
             Statement stmt30 = null;
-
             String query30;
             String query40;
 
@@ -549,10 +489,7 @@ public class CreateTaskFragment extends Fragment {
 
                 }
 
-
-
                 query30 = "SELECT UName, GIcon FROM user,gender WHERE HouseholdID = '" + householdid + "' AND user.GenderID = gender.GenderID ORDER BY UName ASC";
-
 
                 stmt30 = conn.createStatement();
                 stmt30.executeUpdate(query30);
@@ -563,6 +500,7 @@ public class CreateTaskFragment extends Fragment {
                 while (rs30.next())
 
 
+                // Save the data out of the SQL-query in the declared ArrayLists:
                 {
                     String person = rs30.getString("UName");
                     String icon = rs30.getString("GIcon");
@@ -572,15 +510,15 @@ public class CreateTaskFragment extends Fragment {
 
                     pNames.add(person);
                     pIcon.add(gImage);
-
                 }
-
 
                 msg = "Process complete.";
                 rs30.close();
                 stmt30.close();
                 conn.close();
 
+
+                // Catch exceptions and close the connection:
             } catch (SQLException connError) {
                 msg = "An exception was thrown by JDBC.";
                 connError.printStackTrace();
@@ -600,35 +538,20 @@ public class CreateTaskFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
             return null;
         }
 
+
+        //Add ArrayLists to the Adapter for Person spinner
         @Override
         protected void onPostExecute(String s) {
-
-          /*  ArrayList<String> count = new ArrayList<>();
-            for (int k = 0; k < rNames.size(); k++) {
-                String str = k + 1 + ".";
-                count.add(str);
-
-
-            }*/
-            //String[] count2 = new String[count.size()];
-            //count2 = count.toArray(count2);
-
-
             PersonSpinnerAdapter personSpinnerAdapter = new PersonSpinnerAdapter(getActivity().getApplicationContext(), pIcon, pNames);
             personSpinner.setAdapter(personSpinnerAdapter);
 
         }
     }
 
-
-
-
-
-
+    // get the required Data for the spinner Repeat out of the database
     private class GetRepeatData extends AsyncTask<String, String, String> {
         String msg = "";
 
@@ -651,36 +574,27 @@ public class CreateTaskFragment extends Fragment {
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
 
-
                 query25 = "SELECT * FROM `repeat`";
-
 
                 Statement stmt25 = conn.createStatement();
                 stmt25.executeUpdate(query25);
 
-
-                System.out.println("woSindwirDenn");
                 ResultSet rs25=stmt25.executeQuery(query25);
 
+                // Save the data out of the SQL-query in the declared ArrayLists:
                 while (rs25.next())
-
-
                 {
                     String repeat = rs25.getString("RName");
                     rNames.add(repeat);
-
-                    System.out.println("SchonHier");
                 }
-
-                System.out.println("myTag");
-                System.out.println(rNames);
-
 
                 msg = "Process complete.";
                 rs25.close();
                 stmt25.close();
                 conn.close();
 
+
+                // Catch exceptions and close the connection:
             } catch (SQLException connError) {
                 msg = "An exception was thrown by JDBC.";
                 connError.printStackTrace();
@@ -700,30 +614,13 @@ public class CreateTaskFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
-            System.out.println("es tut!");
             return null;
             }
 
 
-
-
-
-
-
+        //Add ArrayLists to the Adapter for Repeat spinner
         @Override
         protected void onPostExecute(String s) {
-
-          /*  ArrayList<String> count = new ArrayList<>();
-            for (int k = 0; k < rNames.size(); k++) {
-                String str = k + 1 + ".";
-                count.add(str);
-
-
-            }*/
-            //String[] count2 = new String[count.size()];
-            //count2 = count.toArray(count2);
-
 
             RepeatSpinnerAdapter repeatSpinnerAdapter = new RepeatSpinnerAdapter(getActivity().getApplicationContext(), iconsRepeat, rNames);
             repeatSpinner.setAdapter(repeatSpinnerAdapter);
@@ -732,17 +629,14 @@ public class CreateTaskFragment extends Fragment {
     }
 
 
-
+    // get the required Data for the spinner Activity out of the database
     private class GetActivityData extends AsyncTask<String, String, String> {
         String msg = "";
 
-
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
         }
-
 
         @Override
         protected String doInBackground(String... strings) {
@@ -751,12 +645,11 @@ public class CreateTaskFragment extends Fragment {
 
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
-
                 stmt = conn.createStatement();
                 String sql = "SELECT * FROM activity ORDER BY AName ASC";
-
                 ResultSet rs = stmt.executeQuery(sql);
 
+                // Save the data out of the SQL-query in the declared ArrayLists:
                 while (rs.next()) {
                     String aImageString = rs.getString("AIcon");
                     String aNameString = rs.getString("AName");
@@ -768,14 +661,12 @@ public class CreateTaskFragment extends Fragment {
                     aName.add(aNameString);
 
                 }
-
-
                 msg = "Process complete.";
                 rs.close();
                 stmt.close();
                 conn.close();
 
-
+                // Catch exceptions and close the connection:
             } catch (SQLException connError) {
                 msg = "An exception was thrown by JDBC.";
                 connError.printStackTrace();
@@ -795,33 +686,35 @@ public class CreateTaskFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
-
             return null;
         }
 
+
+        //Add ArrayLists to the Adapter for Activity spinner
         @Override
         protected void onPostExecute(String s) {
-
             ActivitySpinnerAdapter activitySpinnerAdapter = new ActivitySpinnerAdapter(getActivity().getApplicationContext(), aImage, aName);
             activitySpinner.setAdapter(activitySpinnerAdapter);;
         }
     }
 
+    // Get the ActivityID because of the Activity-Name:
     private class GetID extends AsyncTask<String, String, String> {
         String msg = "";
         String aName;
         int activityID;
-
         private GetID(String activityName){
             aName = activityName;
         }
+
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
+
+        // Connection to database and execute query
         @Override
         protected String doInBackground(String... strings) {
             Connection conn = null;
@@ -839,13 +732,13 @@ public class CreateTaskFragment extends Fragment {
                     activityID = rs.getInt("ActivityID");
                     i++;
                 }
-
                 msg = "Process complete.";
                 rs.close();
                 stmt.close();
                 conn.close();
 
 
+                // Catch exceptions and close the connection:
             } catch (SQLException connError) {
                 msg = "An exception was thrown by JDBC.";
                 connError.printStackTrace();
@@ -865,7 +758,6 @@ public class CreateTaskFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
-
             saveActivity(activityID);
             return null;
         }
@@ -878,15 +770,14 @@ public class CreateTaskFragment extends Fragment {
         }
     }
 
+    // Get household name from shared preferences
     public String getHousehold(){
 
         SharedPreferences sp = this.getActivity().getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
 
         String household = sp.getString("key_householdname", "");
         return household;
-
     }
-
 }
 
 
