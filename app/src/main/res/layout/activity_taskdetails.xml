@@ -55,9 +55,9 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="8dp"
             android:gravity="bottom"
-            android:textSize="30sp"
+            android:paddingStart="8dp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -87,9 +87,9 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="8dp"
             android:gravity="bottom"
-            android:textSize="30sp"
+            android:paddingStart="8dp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -119,9 +119,9 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="8dp"
             android:gravity="bottom"
-            android:textSize="30sp"
+            android:paddingStart="8dp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -151,9 +151,9 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="8dp"
             android:gravity="bottom"
-            android:textSize="30sp"
+            android:paddingStart="8dp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
         <TextView
@@ -183,9 +183,9 @@
 
             android:drawablePadding="10dp"
             android:fontFamily="casual"
-            android:paddingStart="8dp"
             android:gravity="bottom"
-            android:textSize="30sp"
+            android:paddingStart="8dp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
 
