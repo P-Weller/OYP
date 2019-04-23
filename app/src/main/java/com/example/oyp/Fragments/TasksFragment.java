@@ -236,14 +236,14 @@ public class TasksFragment extends Fragment {
                 Log.d("HouseholdID", householdid);
 
                 stmt = conn.createStatement();
-                String sql = "SELECT AIcon,AName,UName,ColorID FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "'";
+                String sql = "SELECT AIcon,AName,UName,ColorID,TDate FROM activity,task,user WHERE task.ActivityID = activity.ActivityID AND StatusID = 0 AND task.UserID = user.UserID AND user.HouseholdID = '" + householdid + "' ORDER BY TDate ASC";
                 ResultSet rs = stmt.executeQuery(sql);
                 int i = 0;
 
                 while (rs.next()) {
                     String aImageString = rs.getString("AIcon");
                     String aName = rs.getString("AName");
-                    String aUser = rs.getString("UName");
+                    String aUser = rs.getString("UName") + " - " + rs.getString("TDate");
                     int aColorID = rs.getInt("ColorID");
 
                     Resources res = getResources();
