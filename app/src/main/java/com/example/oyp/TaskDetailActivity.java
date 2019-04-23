@@ -77,13 +77,13 @@ public class TaskDetailActivity extends AppCompatActivity {
         closeTaskButton.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
-                CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
                 SetClosed setClosed = new SetClosed();
                 setClosed.execute("");
                 System.out.println("tRepeatID: " + tRepeatID);
                 if(tRepeatID != 1 && tRepeatID != 0) {
 
-                createTaskFragment.startAlarmRepeat(TaskDetailActivity.this);
+
 
                     SetRepeat setRepeat = new SetRepeat();
                     setRepeat.execute("");
@@ -394,11 +394,17 @@ public class TaskDetailActivity extends AppCompatActivity {
             Calendar c = Calendar.getInstance();
 
             SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd + HH:mm:ss");
+            SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
+
+
 
             try {
                 c.setTime(dfDate.parse(tDate));
-                cRepeat.setTime(dfDateTime.parse(tDate + tTime));
+                cRepeat.setTime(dfDateTime.parse(tDate + " " + tTime));
+
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -424,6 +430,9 @@ public class TaskDetailActivity extends AppCompatActivity {
 
                 System.out.println("tDate: "+tDate);
                 System.out.println("newtDate: "+newTDate);
+                System.out.println(dfDateTime.format(cRepeat.getTime()));
+
+
 
                 Log.d("SQL",query);
                 Statement stmt3 = conn.createStatement();
@@ -458,6 +467,9 @@ public class TaskDetailActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
 
+            CreateTaskFragment createTaskFragment = new CreateTaskFragment();
+
+            createTaskFragment.startAlarmRepeat(TaskDetailActivity.this);
 
         }
     }

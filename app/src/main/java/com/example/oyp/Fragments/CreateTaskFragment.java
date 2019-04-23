@@ -237,6 +237,7 @@ public class CreateTaskFragment extends Fragment {
     public void startAlarmRepeat(Context context) {
 
 
+        SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         System.out.println("startAlarmRepeat");
 
@@ -259,12 +260,12 @@ public class CreateTaskFragment extends Fragment {
 
         if (t.tRepeatID == 2) {
 
-            System.out.println(dateFormat.format(t.cRepeat.getTime()) + timeFormat.format(t.cRepeat.getTime()));
+            System.out.println(dfDateTime.format(t.cRepeat.getTime()));
 
             t.cRepeat.add(Calendar.DATE, 1 );
 
 
-            System.out.println(dateFormat.format(t.cRepeat.getTime()) + timeFormat.format(t.cRepeat.getTime()));
+            System.out.println(dfDateTime.format(t.cRepeat.getTime()));
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
 
@@ -274,15 +275,22 @@ public class CreateTaskFragment extends Fragment {
             t.cRepeat.add(Calendar.DATE, 7);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
 
+            System.out.println(dfDateTime.format(t.cRepeat.getTime()));
 
         } else if (t.tRepeatID == 4){
+
+            System.out.println(dfDateTime.format(t.cRepeat.getTime()));
 
             t.cRepeat.add(Calendar.MONTH, 1);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
 
+            System.out.println(dfDateTime.format(t.cRepeat.getTime()));
+
         } else if (t.tRepeatID == 5){
             t.cRepeat.add(Calendar.YEAR, 1);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
+
+            System.out.println(dfDateTime.format(t.cRepeat.getTime()));
 
         }
     }
