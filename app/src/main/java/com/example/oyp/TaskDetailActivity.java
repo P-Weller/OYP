@@ -252,10 +252,21 @@ public class TaskDetailActivity extends AppCompatActivity {
                 stmt.close();
                 conn.close();
 
-                if(tStatus == 1){
-                    closeTaskButton.setVisibility(View.GONE);
-                    deleteTaskBtn.setVisibility(View.GONE);
+
+                if(tStatus == 1) {
+
+                    runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+
+                            closeTaskButton.setVisibility(View.GONE);
+                            deleteTaskBtn.setVisibility(View.GONE);
+
+                        }
+                    });
                 }
+
 
 
             } catch (SQLException connError) {
