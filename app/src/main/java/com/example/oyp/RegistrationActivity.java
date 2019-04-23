@@ -95,7 +95,6 @@ public class RegistrationActivity extends AppCompatActivity{
             public void onClick(View v) {
                 checkDataEntered();
 
-                saveHousehold();
                 Addhousehold addhousehold = new Addhousehold();
                 addhousehold.execute();
 
@@ -161,24 +160,29 @@ public class RegistrationActivity extends AppCompatActivity{
 
 
             if (householdstr.trim().equals("") || emailstr.trim().equals("") || passwordstr.trim().equals("") || confpasswordstr.trim().equals("")
-                    && !confpasswordstr.equals(passwordstr))
+                    && !confpasswordstr.equals(passwordstr)) {
                 z = "Please enter all fields or check your password or accept TaC";
-                if(householdstr.trim().equals("")){
-                   // householdEt.setError("Required field");
-                }
-                if(emailstr.trim().equals("")){
-                    emailET.setError("Required field");
-                }
-                if(passwordstr.trim().equals("")){
-                    passwordET.setError("Required field");
-                }
-                if(confpasswordstr.trim().equals("")){
-                    confpasswordET.setError("Required field");
-                }
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (householdstr.trim().equals("")) {
+                            householdEt.setError("Required field");
+                        }
+                        if (emailstr.trim().equals("")) {
+                            emailET.setError("Required field");
+                        }
+                        if (passwordstr.trim().equals("")) {
+                            passwordET.setError("Required field");
+                        }
+                        if (confpasswordstr.trim().equals("")) {
+                            confpasswordET.setError("Required field");
+                        }
+                    }
+                });
 
 
-
-        else{
+            }else{
 
 
                 try {
@@ -211,7 +215,7 @@ public class RegistrationActivity extends AppCompatActivity{
                                 stmt.executeUpdate(query);
 
                                 z = "Inserting Successful";
-
+                                saveHousehold();
 
                                 Intent intent = new Intent(RegistrationActivity.this, CreateUserActivity.class);
 
