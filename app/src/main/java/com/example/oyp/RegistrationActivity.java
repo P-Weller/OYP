@@ -292,5 +292,9 @@ public class RegistrationActivity extends AppCompatActivity{
         }
         return connection;
     }
-
+    public void onBackPressed() {
+        Log.e("######","You can't get out!");
+    }
 }
+
+

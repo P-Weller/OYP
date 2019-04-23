@@ -44,7 +44,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:clickable="true"
-            android:text="Add new Activity"
+            android:text="Create new Activity"
             android:textSize="18sp"
             android:textStyle="bold"
             />
