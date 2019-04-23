@@ -47,8 +47,9 @@ public class TaskDetailActivity extends AppCompatActivity {
     int tNameID = 0;
     int tUserID = 0;
     public static int tRepeatID = 0;
-    String tDate = "";
-    String tTime = "";
+    static String tDate = "";
+    static String tTime = "";
+
 
     public static Calendar cRepeat = Calendar.getInstance();
 
@@ -379,28 +380,30 @@ public class TaskDetailActivity extends AppCompatActivity {
             Connection conn = null;
             Statement stmt2 = null;
 
-
+            Calendar c = Calendar.getInstance();
 
             SimpleDateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat dfDateTime = new SimpleDateFormat("yyyy-MM-dd + HH:mm:ss");
 
             try {
-                cRepeat.setTime(dfDate.parse(tDate));
+                c.setTime(dfDate.parse(tDate));
+                cRepeat.setTime(dfDateTime.parse(tDate + tTime));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
             if(tRepeatID == 2){
-                cRepeat.add(Calendar.DATE, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                c.add(Calendar.DATE, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
 
             } else if (tRepeatID == 3){
-                cRepeat.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                c.add(Calendar.DATE, 7);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
             } else if (tRepeatID == 4){
-                cRepeat.add(Calendar.MONTH, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                c.add(Calendar.MONTH, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
             } else if (tRepeatID == 5){
-                cRepeat.add(Calendar.YEAR, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
+                c.add(Calendar.YEAR, 1);  // number of days to add, can also use Calendar.DAY_OF_MONTH in place of Calendar.DATE
             }
             //SimpleDateFormat dfDate = new SimpleDateFormat("MM-dd-yyyy");
-            String newTDate = dfDate.format(cRepeat.getTime());
+            String newTDate = dfDate.format(c.getTime());
 
             try {
                 conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);

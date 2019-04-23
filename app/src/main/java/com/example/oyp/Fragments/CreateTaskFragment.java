@@ -285,16 +285,21 @@ public class CreateTaskFragment extends Fragment {
 
         if (t.tRepeatID == 2) {
 
-            System.out.println("RepeatID 2");
+            System.out.println(dateFormat.format(t.cRepeat.getTime()) + timeFormat.format(t.cRepeat.getTime()));
 
             t.cRepeat.add(Calendar.DATE, 1 );
 
+
+            System.out.println(dateFormat.format(t.cRepeat.getTime()) + timeFormat.format(t.cRepeat.getTime()));
+
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
+
 
         }else if (t.tRepeatID == 3){
 
             t.cRepeat.add(Calendar.DATE, 7);
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
+
 
         } else if (t.tRepeatID == 4){
 
