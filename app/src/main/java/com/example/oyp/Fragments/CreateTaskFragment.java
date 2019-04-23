@@ -34,9 +34,11 @@ import com.example.oyp.PushNotification.DatePickerFragment;
 import com.example.oyp.R;
 import com.example.oyp.RepeatSpinnerAdapter;
 import com.example.oyp.StartActivity;
+import com.example.oyp.TaskDetailActivity;
 import com.example.oyp.TaskPointsSpinnerAdapter;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -235,7 +237,6 @@ public class CreateTaskFragment extends Fragment {
 
         System.out.println("startAlarm");
 
-        String repeatString = repeatSpinner.getSelectedItem().toString();
 
 
         //creates Object of AlarmManager
@@ -253,30 +254,56 @@ public class CreateTaskFragment extends Fragment {
             c.add(Calendar.DATE, 1);
 
         }
-        if (repeatString.equals("Once")) {
-
-            System.out.println("startAlarm2");
 
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
 
-        }else if(repeatString.equals("Monthly")) {
+
+    }
+
+    public void startAlarmRepeat(Context context) {
 
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * c.getActualMaximum(Calendar.DAY_OF_MONTH), pendingIntent);
 
-        }else if(repeatString.equals("Daily")) {
+        System.out.println("startAlarmRepeat");
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        TaskDetailActivity t = new TaskDetailActivity();
 
-        }else if(repeatString.equals("Weekly")) {
+        //creates Object of AlarmManager
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+        //passing the Alarm to AlertReceiver Class
+        Intent intent = new Intent(context, AlertReceiver.class);
+        final int id = (int) System.currentTimeMillis();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0);
 
-        }else if(repeatString.equals("Yearly")) {
 
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), AlarmManager.INTERVAL_DAY * c.getActualMaximum(Calendar.DAY_OF_YEAR), pendingIntent);
+        //Compares the chosen time with the real time
+        if (t.cRepeat.before(Calendar.getInstance())) {
+            t.cRepeat.add(Calendar.DATE, 1);
 
+        }
 
+        if (t.tRepeatID == 2) {
+
+            System.out.println("RepeatID 2");
+
+            t.cRepeat.add(Calendar.DATE, 1 );
+
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
+
+        }else if (t.tRepeatID == 3){
+
+            t.cRepeat.add(Calendar.DATE, 7);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
+
+        } else if (t.tRepeatID == 4){
+
+            t.cRepeat.add(Calendar.MONTH, 1);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
+
+        } else if (t.tRepeatID == 5){
+            t.cRepeat.add(Calendar.YEAR, 1);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, t.cRepeat.getTimeInMillis() , pendingIntent);
 
         }
     }
