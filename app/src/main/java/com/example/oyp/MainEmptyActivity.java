@@ -38,13 +38,16 @@ public class MainEmptyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mainempty);
         noConnectionTextView = findViewById(R.id.noConnectionTextView);
         retryBtn = findViewById(R.id.retryBtn);
+        retryBtn.setVisibility(View.GONE);
+        noConnectionTextView.setVisibility(View.GONE);
+
 
         retryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(MainEmptyActivity.this, MainEmptyActivity.class);
-                startActivity(intent);
+                DoLogin doLogin = new DoLogin();
+                doLogin.execute("");
             }
 
         });
@@ -111,6 +114,7 @@ public class MainEmptyActivity extends AppCompatActivity {
                     if (conn == null) {
                         z = "Please check your internet connection";
                         noConnectionTextView.setVisibility(View.VISIBLE);
+                        retryBtn.setVisibility(View.VISIBLE);
                     } else {
 
                         if(hNameStr.trim().equals("") || passStr.trim().equals("")) {
