@@ -24,7 +24,7 @@
             android:layout_gravity="start"
             android:fontFamily="casual"
             android:paddingStart="15dp"
-            android:text="New Activity"
+            android:text="Create Activity"
             android:textAlignment="textStart"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -91,7 +91,7 @@
                 android:background="@color/default_EditText_Background"
                 android:drawablePadding="10dp"
                 android:fontFamily="casual"
-                android:gravity="center_vertical"
+                android:singleLine="false"
                 android:paddingStart="15dp"
                 android:textColor="@color/default_black"
                 android:textSize="12sp"
@@ -112,7 +112,7 @@
 
             android:layout_marginBottom="8dp"
             android:clickable="true"
-            android:text="Create Activity"
+            android:text="Create new Activity"
             android:textSize="18sp"
             android:textStyle="bold">
 

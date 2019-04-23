@@ -72,6 +72,17 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
     }
 
+    boolean isEmail(EditText text){
+        CharSequence emailET = text.getText().toString();
+        return (!TextUtils.isEmpty(emailET)) && Patterns.EMAIL_ADDRESS.matcher(emailET).matches();
+    }
+
+    void checkDataEntered(){
+        if(isEmail(newemailEt) == false) {
+            newemailEt.setError("Invalid Email");
+        }
+    }
+
 
     //method to get the householdname from local sharedpref file - the name will be used to verify the right household will be updated
     private String getHName(){
@@ -128,9 +139,16 @@ public class ChangeEmailActivity extends AppCompatActivity {
                     if (conn == null) {
                         z = "Please check your internet connection";
                     }
+                    else if(isEmail(newemailEt) == false) {
+                        z = "Please enter a valid email address";
+                        newemailEt.setError("Invalid Email");
+                    }
                     else if(!newemailstr.equals(confemailstr)) {
                         z = "Please enter two matching e-mails.";
-                    } else {
+                    }
+
+
+                     else {
                         String query1= "UPDATE household SET HEMail = '"+newemailstr+"' WHERE HName = '"+hnamestr+"' ";
 
                         Statement stmt = conn.createStatement();
@@ -163,7 +181,7 @@ public class ChangeEmailActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(ChangeEmailActivity.this, MainActivity.class);
+                Intent intent=new Intent(ChangeEmailActivity.this, SettingsActivity.class);
 
                 intent.putExtra("email",newemailstr);
 

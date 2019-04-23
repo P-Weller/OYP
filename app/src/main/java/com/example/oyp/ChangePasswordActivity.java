@@ -155,7 +155,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
             if(isSuccess) {
 
-                Intent intent=new Intent(ChangePasswordActivity.this, MainActivity.class);
+                Intent intent=new Intent(ChangePasswordActivity.this, SettingsActivity.class);
 
                 intent.putExtra("password",newpasswordstr);
 

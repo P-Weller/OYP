@@ -155,7 +155,7 @@ else
 
             if(isSuccess) {
 
-                Intent intent=new Intent(ChangeHouseholdActivity.this, MainActivity.class);
+                Intent intent=new Intent(ChangeHouseholdActivity.this, SettingsActivity.class);
 
                 intent.putExtra("household",newhouseholdstr);
 

@@ -50,10 +50,9 @@
             android:layout_marginRight="20dp"
             android:background="@color/background1"
             android:fontFamily="casual"
-            android:gravity="fill_horizontal"
-
             android:textColor="@color/default_black"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
 
         <TextView
             android:id="@+id/activityDescriptionTitleTextView"
@@ -82,12 +81,12 @@
             android:fontFamily="casual"
             android:gravity="fill_horizontal"
             android:paddingStart="5dp"
+            android:textColor="@color/default_black"
+            android:textSize="20sp"
             android:singleLine="false"
 
 
-            android:textColor="@color/default_black"
-
-            android:textSize="20sp" />
+            />
 
 
     </LinearLayout>
