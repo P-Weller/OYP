@@ -27,8 +27,6 @@ import static com.example.oyp.DBStrings.DATABASE_USER;
 
 public class MainEmptyActivity extends AppCompatActivity {
 
-    TextView noConnectionTextView;
-    Button retryBtn;
 
     private static final String SHARED_PREF_NAME = "userdata";
 
@@ -36,21 +34,7 @@ public class MainEmptyActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainempty);
-        noConnectionTextView = findViewById(R.id.noConnectionTextView);
-        retryBtn = findViewById(R.id.retryBtn);
-        retryBtn.setVisibility(View.GONE);
-        noConnectionTextView.setVisibility(View.GONE);
 
-
-        retryBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                DoLogin doLogin = new DoLogin();
-                doLogin.execute("");
-            }
-
-        });
 
         DoLogin doLogin = new DoLogin();
         doLogin.execute("");
@@ -113,8 +97,6 @@ public class MainEmptyActivity extends AppCompatActivity {
                     conn = connectionclass(DATABASE_USER, DATABASE_PASSWORD, DATABASE_NAME, DATABASE_IP);
                     if (conn == null) {
                         z = "Please check your internet connection";
-                        noConnectionTextView.setVisibility(View.VISIBLE);
-                        retryBtn.setVisibility(View.VISIBLE);
                     } else {
 
                         if(hNameStr.trim().equals("") || passStr.trim().equals("")) {
